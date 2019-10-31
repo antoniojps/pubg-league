@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import { Layout, Nav } from 'components/organisms'
 import styled from 'styled-components'
-import { Title } from 'components/atoms'
+import { Title, Spacer } from 'components/atoms'
 
 const About = () => (
   <>
@@ -12,7 +12,9 @@ const About = () => (
     </Head>
     <Nav />
     <Layout>
-      <Title>Sobre</Title>
+      <Spacer bottom="xs">
+        <Title>Sobre</Title>
+      </Spacer>
     </Layout>
   </>
 )

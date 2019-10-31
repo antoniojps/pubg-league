@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import { Layout, Nav } from 'components/organisms'
-import { Title } from 'components/atoms'
+import { Title, Spacer } from 'components/atoms'
 import styled from 'styled-components'
 
 const Calendar = () => (
@@ -12,7 +12,9 @@ const Calendar = () => (
     </Head>
     <Nav />
     <Layout>
-      <Title>Calendário</Title>
+      <Spacer bottom="xs">
+        <Title>Calendário</Title>
+      </Spacer>
       <p>
         O campeonato inicia-se com dois qualificadores que irão decorrer no dia
         11 a 14 de Novembro...

@@ -1,20 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import { Layout, Nav } from 'components/organisms'
 import styled from 'styled-components'
-import { Title } from 'components/atoms'
+import { Title, Select, Spacer } from 'components/atoms'
 
-const Home = () => (
-  <>
-    <Head>
-      <title>Liga Nacional de PUBG</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <Nav />
-    <Layout>
-      <Title>Resultados</Title>
-    </Layout>
-  </>
-)
+const seasonOptions = [
+  {
+    value: '2019',
+    label: '2019'
+  }
+]
+
+const seasonDefault = 2019
+
+const Home = () => {
+  const [season, setSeason] = useState(seasonDefault)
+
+  const handleSeasonChange = valueSelected => {
+    setSeason(valueSelected)
+  }
+
+  return (
+    <>
+      <Head>
+        <title>Liga Nacional de PUBG</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Nav />
+      <Layout>
+        <Header>
+          <Title>Resultados</Title>
+          <Select
+            options={seasonOptions}
+            value={season}
+            onSelect={handleSeasonChange}
+          />
+        </Header>
+      </Layout>
+    </>
+  )
+}
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: ${props => props.theme.spacing.xs};
+`
 
 export default Home
