@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import { Layout, Nav } from 'components/organisms'
 import styled from 'styled-components'
+import { Title } from 'components/atoms'
 
 const About = () => (
   <>
@@ -11,16 +12,9 @@ const About = () => (
     </Head>
     <Nav />
     <Layout>
-      <h1>About</h1>
+      <Title>Sobre</Title>
     </Layout>
   </>
 )
-
-const Title = styled.p`
-  font-size: ${props => props.theme.sizes.xl8};
-  padding: ${props => props.theme.spacing.s};
-  text-align: center;
-  font-weight: ${props => props.theme.weight.bold};
-`
 
 export default About
