@@ -5,14 +5,16 @@ const colors = {
   black: '#000',
   yellow: '#F5A623',
   grey: '#757575',
-  greyDarker: '#111'
+  greyDarker: '#111',
+  greyLigther: '#EAEAEA'
 }
 
 const colorsSemantic = {
   base: colors.black,
   baseInverse: colors.white,
   primary: colors.yellow,
-  bg: colors.white
+  bg: colors.white,
+  border: colors.greyLigther
 }
 
 const weight = {
