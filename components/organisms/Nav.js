@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Icon } from 'components/atoms'
-import Link from 'next/link'
+import React from 'react';
+import styled from 'styled-components';
+import { Icon } from 'components/atoms';
+import Link from 'next/link';
 
 const NavDesktop = () => (
   <>
@@ -19,7 +19,7 @@ const NavDesktop = () => (
       </Navigation.Links>
     </Navigation.Start>
     <Navigation.Logo>
-      <img src="/pubg-portugal-logo-black.png" />
+      <img src="/pubg-portugal-logo-black.png" alt="Logótipo do PUBG Portugal. Uma placa metalica rodeia o nome PUBG maior em cima, por baixo esta escrito Portugal. A preto." />
     </Navigation.Logo>
     <Navigation.End>
       <Navigation.Links>
@@ -32,7 +32,7 @@ const NavDesktop = () => (
       </Navigation.Links>
     </Navigation.End>
   </>
-)
+);
 
 const Nav = () => (
   <Navigation>
@@ -40,14 +40,14 @@ const Nav = () => (
       <NavDesktop />
     </Navigation.Inner>
   </Navigation>
-)
+);
 
 const Navigation = styled.nav`
   background-color: white;
   width: 100%;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.06);
-  padding-top: ${props => props.theme.spacing.xs3};
-`
+  padding-top: ${(props) => props.theme.spacing.xs3};
+`;
 
 Navigation.Inner = styled.div`
   display: flex;
@@ -55,35 +55,35 @@ Navigation.Inner = styled.div`
   position: relative;
   padding-top: 0;
   padding-bottom: 0;
-`
+`;
 
 Navigation.Links = styled.div`
   display: flex;
-  padding-top: ${props => props.theme.spacing.xs2};
+  padding-top: ${(props) => props.theme.spacing.xs2};
   a {
-    padding: ${props => props.theme.spacing.xs4};
+    padding: ${(props) => props.theme.spacing.xs4};
   }
-`
+`;
 
 Navigation.Start = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   a {
-    margin-right: ${props => props.theme.spacing.m};
+    margin-right: ${(props) => props.theme.spacing.m};
   }
   padding-left: 1.785714285714286rem;
-`
+`;
 
 Navigation.End = styled.div`
   position: absolute;
   top: 0;
   right: 0;
   a {
-    margin-left: ${props => props.theme.spacing.xs3};
+    margin-left: ${(props) => props.theme.spacing.xs3};
   }
   padding-right: 1.785714285714286rem;
-`
+`;
 
 Navigation.Logo = styled.div`
   text-align: center;
@@ -91,6 +91,6 @@ Navigation.Logo = styled.div`
   img {
     transform: translateY(15%);
   }
-`
+`;
 
-export default Nav
+export default Nav;

@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
-import styled, { withTheme, css } from 'styled-components'
-import PropTypes from 'prop-types'
+import React, { useMemo } from 'react';
+import styled, { withTheme, css } from 'styled-components';
+import PropTypes from 'prop-types';
 
-const spacing = {
+const spacingConstants = {
   xs4: 'xs4',
   xs3: 'xs3',
   xs2: 'xs2',
@@ -17,10 +17,10 @@ const spacing = {
   xl3: 'xl3',
   xl4: 'xl4',
   xl5: 'xl5',
-  xl6: 'xl6'
-}
+  xl6: 'xl6',
+};
 
-const spacingTypes = Object.keys(spacing)
+const spacingTypes = Object.keys(spacingConstants);
 
 const Spacer = ({
   theme,
@@ -31,34 +31,34 @@ const Spacer = ({
   spacing,
   useMargin,
   children,
-  debugMode
+  debugMode,
 }) => {
   const spacingStyles = useMemo(() => {
     // get value from theme depending on key : eg: 'xl'
-    const computeSpacing = key => {
+    const computeSpacing = (key) => {
       // if the key is false or 0 the component will remove spacing
-      if (key === false || key === 0) return 0
+      if (key === false || key === 0) return 0;
 
-      const themeSpacing = theme.spacing[key]
+      const themeSpacing = theme.spacing[key];
       if (!themeSpacing) {
         // eslint-disable-next-line no-console
-        console.error(`Invalid spacing prop: ${key}`)
-        return theme.spacing[spacing.m]
+        console.error(`Invalid spacing prop: ${key}`);
+        return theme.spacing[spacing.m];
       }
-      return themeSpacing
-    }
+      return themeSpacing;
+    };
 
-    const topSpacing = top || (spacing || false)
-    const rightSpacing = right || (spacing || false)
-    const bottomSpacing = bottom || (spacing || false)
-    const leftSpacing = left || (spacing || false)
+    const topSpacing = top || (spacing || false);
+    const rightSpacing = right || (spacing || false);
+    const bottomSpacing = bottom || (spacing || false);
+    const leftSpacing = left || (spacing || false);
 
     const computedSpacing = `${computeSpacing(topSpacing)} ${computeSpacing(
-      rightSpacing
-    )} ${computeSpacing(bottomSpacing)} ${computeSpacing(leftSpacing)}`
+      rightSpacing,
+    )} ${computeSpacing(bottomSpacing)} ${computeSpacing(leftSpacing)}`;
 
-    return computedSpacing
-  }, [theme.spacing, top, right, bottom, left, spacing])
+    return computedSpacing;
+  }, [theme.spacing, top, right, bottom, left, spacing]);
 
   return (
     <SpacingStyles
@@ -68,28 +68,27 @@ const Spacer = ({
     >
       {children}
     </SpacingStyles>
-  )
-}
+  );
+};
 
 const SpacingStyles = styled.div`
-  border: ${props => (props.addBorder ? '1px solid red' : 0)};
-  ${props =>
-    props.useMargin
-      ? css`
+  border: ${(props) => (props.addBorder ? '1px solid red' : 0)};
+  ${(props) => (props.useMargin
+    ? css`
           margin: ${props.spacing};
         `
-      : css`
+    : css`
           padding: ${props.spacing};
-        `};
-`
+        `)};
+`;
 
 const spacingPropType = PropTypes.oneOfType([
   PropTypes.oneOf(spacingTypes),
-  PropTypes.bool
-])
+  PropTypes.bool,
+]);
 
 Spacer.propTypes = {
-  theme: PropTypes.shape({}),
+  theme: PropTypes.shape({ spacing: spacingPropType }).isRequired,
   spacing: spacingPropType,
   top: spacingPropType,
   right: spacingPropType,
@@ -97,8 +96,8 @@ Spacer.propTypes = {
   left: spacingPropType,
   useMargin: PropTypes.bool,
   debugMode: PropTypes.bool,
-  children: PropTypes.node.isRequired
-}
+  children: PropTypes.node.isRequired,
+};
 
 Spacer.defaultProps = {
   spacing: false,
@@ -107,7 +106,7 @@ Spacer.defaultProps = {
   bottom: null,
   left: null,
   useMargin: false,
-  debugMode: false
-}
+  debugMode: false,
+};
 
-export default withTheme(Spacer)
+export default withTheme(Spacer);

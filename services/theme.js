@@ -1,4 +1,4 @@
-import { rem } from 'polished'
+import { rem } from 'polished';
 
 const colors = {
   white: '#fff',
@@ -6,16 +6,16 @@ const colors = {
   yellow: '#F5A623',
   grey: '#757575',
   greyDarker: '#111',
-  greyLigther: '#EAEAEA'
-}
+  greyLigther: '#EAEAEA',
+};
 
 const colorsSemantic = {
   base: colors.black,
   baseInverse: colors.white,
   primary: colors.yellow,
   bg: colors.white,
-  border: colors.greyLigther
-}
+  border: colors.greyLigther,
+};
 
 const weight = {
   xxlight: 100,
@@ -23,8 +23,8 @@ const weight = {
   light: 300,
   xbase: 400,
   base: 500,
-  bold: 600
-}
+  bold: 600,
+};
 
 const sizes = {
   base: rem('16px'),
@@ -42,16 +42,16 @@ const sizes = {
   xl6: rem('48px'),
   xl7: rem('56px'),
   xl8: rem('64px'),
-  xl9: rem('128px')
-}
+  xl9: rem('128px'),
+};
 
 const typos = {
   input: sizes.xs,
   button: sizes.xs,
   link: sizes.xs,
   text: sizes.l,
-  title: sizes.xl6
-}
+  title: sizes.xl6,
+};
 
 const spacing = {
   xs4: rem('5px'),
@@ -68,28 +68,28 @@ const spacing = {
   xl3: rem('60px'),
   xl4: rem('65px'),
   xl5: rem('100px'),
-  xl6: rem('125px')
-}
+  xl6: rem('125px'),
+};
 
 const values = {
   zIndex: {
     s: '10',
     m: '50',
     l: '100',
-    superBig: '9999'
-  }
-}
+    superBig: '9999',
+  },
+};
 
 const theme = {
   colors: {
     ...colors,
-    ...colorsSemantic
+    ...colorsSemantic,
   },
   sizes,
   typos,
   weight,
   values,
-  spacing
-}
+  spacing,
+};
 
-export default theme
+export default theme;

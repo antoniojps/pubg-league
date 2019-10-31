@@ -1,13 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import '@zeit-ui/style'
+import React from 'react';
+import PropTypes from 'prop-types';
+import '@zeit-ui/style';
+import Nav from './Nav';
 
-const Layout = ({ children }) => {
-  return <div className="zi-layout">{children}</div>
-}
+const Layout = ({ children }) => (
+  <>
+    <Nav />
+    <div className="zi-layout">{children}</div>
+  </>
+);
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
-}
+  children: PropTypes.node.isRequired,
+};
 
-export default Layout
+export default Layout;
