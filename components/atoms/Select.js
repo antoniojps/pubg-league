@@ -8,10 +8,7 @@ const Select = ({ options, value, onSelect }) => {
   return (
     <div className="zi-select-container small">
       <select className="zi-select" onChange={handleOnSelect} value={value}>
-        {options.map(({ value: optValue, label }) => {
-          const isSelected = optValue === value;
-          return <option key={optValue} selected={isSelected ? 'selected' : ''}>{label}</option>;
-        })}
+        {options.map(({ value: optValue, label }) => <option key={optValue}>{label}</option>)}
       </select>
       <i className="arrow zi-icon-up" />
     </div>
