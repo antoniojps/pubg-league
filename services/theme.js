@@ -7,6 +7,7 @@ const colors = {
   grey: '#757575',
   greyDarker: '#111',
   greyLigther: '#EAEAEA',
+  red: '#eb5757',
 };
 
 const colorsSemantic = {
