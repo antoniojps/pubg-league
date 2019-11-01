@@ -72,7 +72,7 @@ Navigation.Start = styled.div`
   a {
     margin-right: ${(props) => props.theme.spacing.m};
   }
-  padding-left: 1.785714285714286rem;
+  padding-left: 2.5rem;
 `;
 
 Navigation.End = styled.div`
@@ -82,7 +82,7 @@ Navigation.End = styled.div`
   a {
     margin-left: ${(props) => props.theme.spacing.xs3};
   }
-  padding-right: 1.785714285714286rem;
+  padding-right: 2.5rem;
 `;
 
 Navigation.Logo = styled.div`
