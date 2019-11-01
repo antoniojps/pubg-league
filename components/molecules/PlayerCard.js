@@ -1,10 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
-import { Spacer } from 'components/atoms';
 import PropTypes from 'prop-types';
+import prettyMilliseconds from 'pretty-ms';
+import { Spacer } from 'components/atoms';
 
 const PlayerCard = ({ player }) => {
   const [isExtended, setExtended] = useState(false);
+  const playerStats = useMemo(() => {
+    const {
+      kills, dbnos, damage, headshotKills, survivedTime, playerMatchStat: matches,
+    } = player;
+    const matchesPlayed = matches.length;
+    const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
+    const deaths = matchesDead.length;
+    const kd = (kills / deaths).toFixed(2);
+    const adr = Math.round(damage / matchesPlayed);
+
+    const alive = prettyMilliseconds(survivedTime * 1000, { unitCount: 2 });
+    return [
+      {
+        label: 'kills',
+        value: kills,
+      },
+      {
+        label: 'adr',
+        value: adr,
+      },
+      {
+        label: 'kd',
+        value: kd,
+      },
+      {
+        label: 'dbnos',
+        value: dbnos,
+      },
+      {
+        label: 'hs',
+        value: headshotKills,
+      },
+      {
+        label: 'alive',
+        value: alive,
+      },
+    ];
+  }, player);
+
+  const computedBtnMessage = useMemo(() => (isExtended ? 'Ver menos' : 'Ver mais...'),
+    [isExtended]);
 
   return (
     <Card className="zi-card">
@@ -14,17 +56,28 @@ const PlayerCard = ({ player }) => {
       </Player>
       {
         isExtended ? (
-          'showing more'
+          <StatGrid>
+            {
+              playerStats.map(({ label, value }) => (
+                <Stat>
+                  <Stat.Value>{value}</Stat.Value>
+                  <Stat.Description>{label}</Stat.Description>
+                </Stat>
+              ))
+            }
+          </StatGrid>
         ) : (
           <>
-            <Stat>
-              <Stat.Value>{player.kills}</Stat.Value>
-              <Stat.Description>kills</Stat.Description>
+            <Stat large>
+              <Stat.Value large>{player.kills}</Stat.Value>
+              <Stat.Description large>kills</Stat.Description>
             </Stat>
-            <button className="zi-btn mini" onClick={() => setExtended(true)} type="button">VER MAIS...</button>
           </>
         )
       }
+      <Spacer top="xs2">
+        <button className="zi-btn mini" onClick={() => setExtended(!isExtended)} type="button">{computedBtnMessage}</button>
+      </Spacer>
     </Card>
   );
 };
@@ -41,6 +94,7 @@ const Player = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  padding-bottom: ${(props) => props.theme.spacing.xs};
   .zi-avatar {
     overflow: visible;
   }
@@ -52,27 +106,32 @@ Player.Name = styled.div`
 `;
 
 PlayerCard.propTypes = {
-  player: PropTypes.shape({}),
-};
-
-PlayerCard.defaultProps = {
-  label: null,
+  player: PropTypes.shape({}).isRequired,
 };
 
 const Stat = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${(props) => props.theme.spacing.xs} 0px;
+  padding-bottom: ${(props) => (props.large ? props.theme.spacing.xs2 : 0)};
   justify-content: center;
   align-items: center;
 `;
 Stat.Value = styled.div`
-  font-size: ${(props) => props.theme.sizes.xl4};
+  font-size: ${(props) => (props.large ? props.theme.sizes.xl4 : props.theme.sizes.base)};
   font-weight: 700;
 `;
 
 Stat.Description = styled.div`
+  font-size: ${(props) => (props.large ? props.theme.sizes.base : props.theme.sizes.xs)};
+`;
+
+const StatGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 100%;
 
 `;
+
 
 export default PlayerCard;
