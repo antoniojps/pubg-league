@@ -1,23 +1,34 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { Tab } from 'components/atoms';
+import { useRouter } from 'next/router';
 
 const Tabs = ({ tabs }) => {
-  const router = useRouter();
-
+  const { asPath } = useRouter();
   return (
-    <div>
+    <>
+      <TabsList className="zi-layout">
+        {tabs.map(({ title, to }) => (
+          <Tab key={title} title={title} to={to} active={asPath === to} />
+        ))}
+      </TabsList>
       <Line />
-    </div>
+    </>
   );
 };
+
 
 const Line = styled.div`
   width: 100%;
   height: 1px;
   background-color: ${(props) => props.theme.colors.border};
+  margin-top: ${(props) => props.theme.spacing.xs4};
+`;
+
+const TabsList = styled.div`
+  display: flex;
+  padding-top: 0;
 `;
 
 Tabs.propTypes = {
