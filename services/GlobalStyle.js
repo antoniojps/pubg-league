@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px;
   }
 
+  ::selection {
+      background-color: #FFEB3B;
+  }
+
   a {
     color: ${props => props.theme.colors.grey};
     transition: color 0.2s ease;
