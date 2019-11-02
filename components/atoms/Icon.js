@@ -75,13 +75,30 @@ const Icon = ({
           </g>
         </svg>
       );
+    case 'twitch':
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={getWidth(23, 24, height)}
+          height={height}
+          viewBox="0 0 23 24"
+        >
+          <g fill="none" fillRule="evenodd">
+            <path d="M-1 0h24v24H-1z" />
+            <g fill={iconColor} fillRule="nonzero">
+              <path d="M1.895 0L0 4.499v16.343h5.684V24h3.158L12 20.842h4.421l6.316-6.316V0H1.895zM20.21 13.263l-3.158 3.158h-5.685L8.211 19.58v-3.16H4.42V2.526h15.79v10.737z" />
+              <path d="M16.421 12.632h-3.158V6.316h3.158v6.316zm-5.053 0H8.211V6.316h3.157v6.316z" />
+            </g>
+          </g>
+        </svg>
+      );
     default:
       return 'Invalid Icon';
   }
 };
 
 Icon.propTypes = {
-  icon: PropTypes.oneOf(['expand-more', 'expand-less', 'twitter', 'discord'])
+  icon: PropTypes.oneOf(['expand-more', 'expand-less', 'twitter', 'discord', 'twitch'])
     .isRequired,
   color: PropTypes.string,
   height: PropTypes.number,
