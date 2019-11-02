@@ -12,7 +12,9 @@ const filters = {
   teams: 'teams',
 };
 
-const Leaderboard = ({ teamStats, playerSummaries, filter }) => {
+const Leaderboard = ({
+  teamStats, playerSummaries, filter, qualified,
+}) => {
   const router = useRouter();
 
   const handleFilterChange = (newFilter) => {
@@ -39,7 +41,7 @@ const Leaderboard = ({ teamStats, playerSummaries, filter }) => {
             Equipas
         </Table.Title>
       </Table.Tabs>
-      { filter === filters.table && <LeaderboardTeams teamStats={teamStats} />}
+      { filter === filters.table && <LeaderboardTeams teamStats={teamStats} qualified={qualified} />}
       { filter === filters.players && <LeaderboardPlayers playerSummaries={playerSummaries} />}
     </>
   );
@@ -67,13 +69,15 @@ Table.Title = styled.div`
 `;
 
 Leaderboard.propTypes = {
-  teamStats: PropTypes.shape({}).isRequired,
-  playerSummaries: PropTypes.shape({}).isRequired,
+  teamStats: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  playerSummaries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   filter: PropTypes.oneOf(['table', 'players', 'teams']),
+  qualified: PropTypes.number,
 };
 
 Leaderboard.defaultProps = {
   filter: 'table',
+  qualified: null,
 };
 
 export default Leaderboard;

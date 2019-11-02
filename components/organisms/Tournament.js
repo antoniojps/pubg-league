@@ -18,7 +18,9 @@ const tabs = [
   },
 ];
 
-const Tournament = ({ tournament, playerSummaries, teamStats }) => {
+const Tournament = ({
+  tournament, playerSummaries, teamStats, children, qualified,
+}) => {
   const computedPlayerSummaries = useMemo(() => playerSummaries.map((player) => {
     const {
       kills, damage, survivedTime, playerMatchStat: matches, playerName,
@@ -58,15 +60,16 @@ const Tournament = ({ tournament, playerSummaries, teamStats }) => {
       <Layout>
         <Header>
           <Title>Resultados</Title>
-          <span className="zi-tag danger">EM DIRECTO!</span>
+          <a target="_blank" rel="noopener noreferrer" href="https://battlefy.com/" className="zi-btn mini warning">Inscrever</a>
         </Header>
       </Layout>
       <Tabs tabs={tabs} />
+      {children}
       <div className="zi-layout">
         <Spacer bottom="m">
           <PlayerHighlights playerSummaries={computedPlayerSummaries} filter={topFilter} />
         </Spacer>
-        <Leaderboard filter={tableFilter} playerSummaries={computedPlayerSummaries} teamStats={teamStats} />
+        <Leaderboard filter={tableFilter} playerSummaries={computedPlayerSummaries} teamStats={teamStats} qualified={qualified} />
       </div>
     </Wrapper>
   );
@@ -76,12 +79,16 @@ Tournament.propTypes = {
   tournament: PropTypes.shape({}),
   playerSummaries: PropTypes.arrayOf(PropTypes.shape({})),
   teamStats: PropTypes.arrayOf(PropTypes.shape({})),
+  children: PropTypes.node,
+  qualified: PropTypes.number,
 };
 
 Tournament.defaultProps = {
   tournament: null,
   playerSummaries: [],
   teamStats: [],
+  children: null,
+  qualified: null,
 };
 
 const Header = styled.div`

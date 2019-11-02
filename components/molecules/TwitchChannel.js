@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Icon } from 'components/atoms';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const TwitchChannel = () => {
+const TwitchChannel = ({ channelId }) => {
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
     const requestTwitch = async () => {
       const result = await fetch(
-        'https://api.twitch.tv/helix/streams?user_id=26490481',
+        `https://api.twitch.tv/helix/streams?user_id=${channelId}`,
         {
           headers: {
             'Client-ID': '4v47fovd21ldzwyhyme2bsgmlthmzt',
@@ -73,5 +74,14 @@ Live.Warning = styled.div`
 const TwitchAnchor = styled.a`
   display: flex;
 `;
+
+TwitchChannel.propTypes = {
+  channelId: PropTypes.string,
+};
+
+// defaults to shootsgud
+TwitchChannel.defaultProps = {
+  channelId: '36698412',
+};
 
 export default TwitchChannel;

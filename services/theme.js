@@ -17,6 +17,7 @@ const colorsSemantic = {
   primary: colors.yellow,
   bg: colors.white,
   bgInverse: colors.black,
+  bgDarker: colors.grey,
   border: colors.greyLigther,
 };
 
