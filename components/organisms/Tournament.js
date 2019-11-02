@@ -14,7 +14,7 @@ const tabs = [
   },
   {
     title: 'Qualificadores',
-    to: '/t/qualificadores',
+    to: '/qualificadores',
   },
 ];
 

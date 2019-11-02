@@ -5,12 +5,12 @@ import { Tab } from 'components/atoms';
 import { useRouter } from 'next/router';
 
 const Tabs = ({ tabs }) => {
-  const { asPath } = useRouter();
+  const { pathname } = useRouter();
   return (
     <>
       <TabsList className="zi-layout">
         {tabs.map(({ title, to }) => (
-          <Tab key={title} title={title} to={to} active={asPath === to} />
+          <Tab key={title} title={title} to={to} active={pathname === to} />
         ))}
       </TabsList>
       <Line />

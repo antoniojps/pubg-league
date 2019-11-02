@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { Tournament } from 'components/organisms';
 import PropTypes from 'prop-types';
-import dummyData from '../../data/league-data.json';
+import dummyData from '../data/league-data.json';
 // import fetch from 'isomorphic-unfetch';
 
 const TournementDetail = ({ tournament, playerSummaries, teamStats }) => (
