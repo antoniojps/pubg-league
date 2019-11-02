@@ -51,11 +51,12 @@ const PlayerHighlights = ({ playerSummaries, filter }) => {
 
   const router = useRouter();
 
-  const handleFilterChange = (topFilter) => {
+  const handleFilterChange = (newFilter) => {
+    if (newFilter === filter) return;
     const { query, pathname, push } = router;
     const newQuery = {
       ...query,
-      top: topFilter,
+      top: newFilter,
     };
     const to = `${pathname}?${queryString.stringify(newQuery)}`;
     push(to);

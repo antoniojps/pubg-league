@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Title, Spacer } from 'components/atoms';
 import { Tabs } from 'components/molecules';
@@ -6,7 +6,6 @@ import { Layout, PlayerHighlights, Leaderboard } from 'components/organisms';
 import styled from 'styled-components';
 import prettyMilliseconds from 'pretty-ms';
 import { useRouter } from 'next/router';
-
 
 const tabs = [
   {
@@ -22,8 +21,10 @@ const tabs = [
 const Tournament = ({ tournament, playerSummaries, teamStats }) => {
   const computedPlayerSummaries = useMemo(() => playerSummaries.map((player) => {
     const {
-      kills, damage, survivedTime, playerMatchStat: matches,
+      kills, damage, survivedTime, playerMatchStat: matches, playerName,
     } = player;
+    // add team name and image here to the team object
+    const team = teamStats.find(({ teamMember }) => teamMember.includes(playerName));
     const matchesPlayed = matches.length;
     const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
     const wins = matches.filter(({ participant: { winPlace } }) => winPlace === 1).length;
@@ -43,13 +44,14 @@ const Tournament = ({ tournament, playerSummaries, teamStats }) => {
         kd,
         adr,
         alive,
+        team,
       },
       ...player,
     };
   }),
   [playerSummaries]);
 
-  const { query: { table: tableFilter, top: topFilter = 'kills' } } = useRouter();
+  const { query: { table: tableFilter = 'table', top: topFilter = 'kills' } } = useRouter();
 
   return (
     <Wrapper>
@@ -64,7 +66,7 @@ const Tournament = ({ tournament, playerSummaries, teamStats }) => {
         <Spacer bottom="m">
           <PlayerHighlights playerSummaries={computedPlayerSummaries} filter={topFilter} />
         </Spacer>
-        <Leaderboard filter={tableFilter} teamStats={teamStats} />
+        <Leaderboard filter={tableFilter} playerSummaries={computedPlayerSummaries} teamStats={teamStats} />
       </div>
     </Wrapper>
   );

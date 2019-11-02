@@ -2,99 +2,50 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
+import { useRouter } from 'next/router';
+import queryString from 'query-string';
+import { LeaderboardTeams, LeaderboardPlayers } from 'components/molecules';
 
-const Leaderboard = ({ teamStats }) => {
-  console.log({ teamStats });
+const filters = {
+  table: 'table',
+  players: 'players',
+  teams: 'teams',
+};
+
+const Leaderboard = ({ teamStats, playerSummaries, filter }) => {
+  const router = useRouter();
+
+  const handleFilterChange = (newFilter) => {
+    if (newFilter === filter) return;
+    const { query, pathname, push } = router;
+    const newQuery = {
+      ...query,
+      table: newFilter,
+    };
+    const to = `${pathname}?${queryString.stringify(newQuery)}`;
+    push(to);
+  };
+
   return (
     <>
       <Table.Tabs>
-        <Table.Title active>
+        <Table.Title active={filter === filters.table} onClick={() => handleFilterChange(filters.table)}>
             Tabela
         </Table.Title>
-        <Table.Title>
+        <Table.Title active={filter === filters.players} onClick={() => handleFilterChange(filters.players)}>
             Jogadores
         </Table.Title>
-        <Table.Title>
+        <Table.Title active={filter === filters.teams} onClick={() => handleFilterChange(filters.teams)}>
             Equipas
         </Table.Title>
       </Table.Tabs>
-      <Table className="zi-table">
-        <thead>
-          <tr>
-            <th>Lugar</th>
-            <th className="team">Equipa</th>
-            <th>PTS Colocação</th>
-            <th>PTS Kills</th>
-            <th>PTS Totais</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            teamStats.map(({
-              rank, teamMember, teamId, rankPoints, killPoints,
-            }) => (
-              <tr key={teamId}>
-                <td>
-                    #
-                  {rank}
-                </td>
-                <td className="team">
-                  {teamMember.join(', ')}
-                </td>
-                <td>{rankPoints}</td>
-                <td>{killPoints}</td>
-                <td className="points">{rankPoints + killPoints}</td>
-              </tr>
-            ))
-            }
-        </tbody>
-      </Table>
+      { filter === filters.table && <LeaderboardTeams teamStats={teamStats} />}
+      { filter === filters.players && <LeaderboardPlayers playerSummaries={playerSummaries} />}
     </>
   );
 };
 
 const Table = styled.table`
-  th, td {
-    text-align: center;
-    border: 0;
-  }
-  th {
-    font-size: ${(props) => props.theme.sizes.xs};
-    text-transform: uppercase;
-    border: 0 !important;
-  }
-  th.team {
-    width: 50%;
-    text-align: left;
-  }
-  td {
-    font-size: ${(props) => props.theme.sizes.xl};
-    color: ${(props) => props.theme.colors.base};
-    font-weight: ${(props) => props.theme.weight.base};
-    &.team {
-      display: flex;
-      align-items: center;
-      text-align: left;
-      font-size: ${(props) => props.theme.sizes.base};
-    }
-    &.points {
-      color: ${(props) => props.theme.colors.orange};
-    }
-  }
-  tbody tr {
-    &:first-child {
-      background-color: ${(props) => lighten(0.35, props.theme.colors.yellow)};
-    }
-    &:nth-child(2){
-      background-color: ${(props) => lighten(0.4, props.theme.colors.yellow)} !important;
-    }
-    &:nth-child(3){
-      background-color: ${(props) => lighten(0.42, props.theme.colors.yellow)};
-    }
-    &:nth-child(n+9){
-      background-color: #f2f2f2;
-    }
-  }
 `;
 
 Table.Tabs = styled.div`
@@ -117,7 +68,12 @@ Table.Title = styled.div`
 
 Leaderboard.propTypes = {
   teamStats: PropTypes.shape({}).isRequired,
+  playerSummaries: PropTypes.shape({}).isRequired,
+  filter: PropTypes.oneOf(['table', 'players', 'teams']),
 };
 
+Leaderboard.defaultProps = {
+  filter: 'table',
+};
 
 export default Leaderboard;
