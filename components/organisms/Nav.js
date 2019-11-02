@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'components/atoms';
+import { TwitchChannel } from 'components/molecules';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -22,7 +23,7 @@ const NavDesktop = () => {
         </Navigation.Links>
       </Navigation.Start>
       <Navigation.Logo onClick={() => push('/')}>
-        <img src="/pubg-portugal-logo-black.png" alt="Logótipo do PUBG Portugal. Uma placa metalica rodeia o nome PUBG maior em cima, por baixo esta escrito Portugal. A preto." />
+        <img src="/sml_header.png" alt="Logótipo da Shootsgud Major League. Rectângulo amarelo a esquerda e preto a direito, no meio está uma cara com capacete de metal e barba." />
       </Navigation.Logo>
       <Navigation.End>
         <Navigation.Links>
@@ -32,6 +33,7 @@ const NavDesktop = () => {
           <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
             <Icon icon="discord" color="#7289DA" />
           </a>
+          <TwitchChannel />
         </Navigation.Links>
       </Navigation.End>
     </>
