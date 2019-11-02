@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Title, Select } from 'components/atoms';
+import { Title } from 'components/atoms';
 import { Tabs } from 'components/molecules';
 import { Layout, PlayerHighlights } from 'components/organisms';
 import styled from 'styled-components';
+import prettyMilliseconds from 'pretty-ms';
 
-const seasonOptions = [
-  {
-    value: '2019',
-    label: '2019',
-  },
-];
 
 const tabs = [
   {
@@ -23,34 +18,48 @@ const tabs = [
   },
 ];
 
-const seasonDefault = '2019';
-
 const Tournament = ({ tournament, playerSummaries, teamStats }) => {
-  const [season, setSeason] = useState(seasonDefault);
+  const computedPlayerSummaries = useMemo(() => playerSummaries.map((player) => {
+    const {
+      kills, damage, survivedTime, playerMatchStat: matches,
+    } = player;
+    const matchesPlayed = matches.length;
+    const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
+    const wins = matches.filter(({ participant: { winPlace } }) => winPlace === 1).length;
+    const deaths = matchesDead.length;
+    const kd = Number((kills / deaths).toFixed(2));
+    const adr = Math.round(damage / matchesPlayed);
 
-  const handleSeasonChange = (valueSelected) => {
-    setSeason(valueSelected);
-  };
-
-  useEffect(() => {
-    console.log({ tournament, playerSummaries, teamStats });
-  }, [tournament, playerSummaries, teamStats]);
+    const aliveRounded = prettyMilliseconds(survivedTime * 1000, { unitCount: 2 });
+    // remove ugly tilt added by pretty-ms
+    const aliveArr = aliveRounded.split('~');
+    const alive = aliveArr.length > 1 ? aliveArr[1] : aliveArr[0];
+    return {
+      computed: {
+        matchesPlayed,
+        deaths,
+        wins,
+        kd,
+        adr,
+        alive,
+      },
+      ...player,
+    };
+  }),
+  [playerSummaries]);
 
   return (
     <Wrapper>
       <Layout>
         <Header>
           <Title>Resultados</Title>
-          <Select
-            options={seasonOptions}
-            value={season}
-            onSelect={handleSeasonChange}
-          />
+          <span className="zi-tag success">Inscrições abertas</span>
+
         </Header>
       </Layout>
       <Tabs tabs={tabs} />
       <div className="zi-layout">
-        <PlayerHighlights playerSummaries={playerSummaries} />
+        <PlayerHighlights playerSummaries={computedPlayerSummaries} />
       </div>
     </Wrapper>
   );
