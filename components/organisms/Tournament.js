@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Title } from 'components/atoms';
+import { Title, Spacer } from 'components/atoms';
 import { Tabs } from 'components/molecules';
-import { Layout, PlayerHighlights } from 'components/organisms';
+import { Layout, PlayerHighlights, Leaderboard } from 'components/organisms';
 import styled from 'styled-components';
 import prettyMilliseconds from 'pretty-ms';
+import { useRouter } from 'next/router';
 
 
 const tabs = [
@@ -48,18 +49,22 @@ const Tournament = ({ tournament, playerSummaries, teamStats }) => {
   }),
   [playerSummaries]);
 
+  const { query: { table: tableFilter, top: topFilter = 'kills' } } = useRouter();
+
   return (
     <Wrapper>
       <Layout>
         <Header>
           <Title>Resultados</Title>
-          <span className="zi-tag success">Inscrições abertas</span>
-
+          <span className="zi-tag danger">EM DIRECTO!</span>
         </Header>
       </Layout>
       <Tabs tabs={tabs} />
       <div className="zi-layout">
-        <PlayerHighlights playerSummaries={computedPlayerSummaries} />
+        <Spacer bottom="m">
+          <PlayerHighlights playerSummaries={computedPlayerSummaries} filter={topFilter} />
+        </Spacer>
+        <Leaderboard filter={tableFilter} teamStats={teamStats} />
       </div>
     </Wrapper>
   );

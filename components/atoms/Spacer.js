@@ -88,7 +88,7 @@ const spacingPropType = PropTypes.oneOfType([
 ]);
 
 Spacer.propTypes = {
-  theme: PropTypes.shape({ spacing: spacingPropType }).isRequired,
+  theme: PropTypes.shape().isRequired,
   spacing: spacingPropType,
   top: spacingPropType,
   right: spacingPropType,

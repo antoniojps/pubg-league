@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { PlayerCard } from 'components/molecules';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
+import queryString from 'query-string';
 
 const filters = {
   kills: 'kills',
@@ -10,9 +12,7 @@ const filters = {
   adr: 'adr',
 };
 
-const PlayerHighlights = ({ playerSummaries }) => {
-  const [filter, setFilter] = useState(filters.kills);
-
+const PlayerHighlights = ({ playerSummaries, filter }) => {
   const topPlayers = useMemo(() => {
     const orderedByFilterTopPlayers = playerSummaries.sort((playerA, playerB) => {
       let statA = playerA[filter];
@@ -49,6 +49,17 @@ const PlayerHighlights = ({ playerSummaries }) => {
 
   const [topOnePlayer, ...restTopPlayers] = topFivePlayers;
 
+  const router = useRouter();
+
+  const handleFilterChange = (topFilter) => {
+    const { query, pathname, push } = router;
+    const newQuery = {
+      ...query,
+      top: topFilter,
+    };
+    const to = `${pathname}?${queryString.stringify(newQuery)}`;
+    push(to);
+  };
 
   return (
     <Wrapper>
@@ -58,13 +69,13 @@ const PlayerHighlights = ({ playerSummaries }) => {
       <PlayerEnd>
         <h3>Melhores jogadores</h3>
         <div className="zi-switcher">
-          <a className={filter === filters.kills ? 'active' : ''} onClick={() => setFilter(filters.kills)}>Kills</a>
-          <a className={filter === filters.damage ? 'active' : ''} onClick={() => setFilter(filters.damage)}>Damage</a>
-          <a className={filter === filters.kd ? 'active' : ''} onClick={() => setFilter(filters.kd)}>K/D</a>
-          <a className={filter === filters.adr ? 'active' : ''} onClick={() => setFilter(filters.adr)}>ADR</a>
+          <a className={filter === filters.kills ? 'active' : ''} onClick={() => handleFilterChange(filters.kills)}>Kills</a>
+          <a className={filter === filters.damage ? 'active' : ''} onClick={() => handleFilterChange(filters.damage)}>Damage</a>
+          <a className={filter === filters.kd ? 'active' : ''} onClick={() => handleFilterChange(filters.kd)}>K/D</a>
+          <a className={filter === filters.adr ? 'active' : ''} onClick={() => handleFilterChange(filters.adr)}>ADR</a>
         </div>
         <PlayerList>
-          {restTopPlayers.map((player) => <PlayerCard className="card" player={player} filter={filter} small />)}
+          {restTopPlayers.map((player) => <PlayerCard key={player.playerName} className="card" player={player} filter={filter} small />)}
         </PlayerList>
       </PlayerEnd>
     </Wrapper>
@@ -112,10 +123,12 @@ const PlayerList = styled.div`
 
 PlayerHighlights.propTypes = {
   playerSummaries: PropTypes.arrayOf(PropTypes.shape({})),
+  filter: PropTypes.oneOf([...Object.keys(filters)]),
 };
 
 PlayerHighlights.defaultProps = {
   playerSummaries: null,
+  filter: filters.kills,
 };
 
 export default PlayerHighlights;

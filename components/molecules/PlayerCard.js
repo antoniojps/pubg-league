@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Spacer, Icon } from 'components/atoms';
@@ -74,7 +74,7 @@ const PlayerCard = ({
               playerStats.map(({
                 label, value, good, great,
               }) => (
-                <Stat>
+                <Stat key={label}>
                   <Stat.Value good={good} great={great} small={small}>{value}</Stat.Value>
                   <Stat.Description>{label}</Stat.Description>
                 </Stat>
