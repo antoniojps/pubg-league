@@ -8,7 +8,7 @@ import dummyData from '../data/league-data.json';
 const Home = ({ tournament, playerSummaries, teamStats }) => (
   <>
     <Head>
-      <title>Liga Nacional de PUBG</title>
+      <title>Shootsgud Major League</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} />

@@ -2,37 +2,41 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'components/atoms';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const NavDesktop = () => (
-  <>
-    <Navigation.Start>
-      <Navigation.Links>
-        <Link href="/">
-          <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
-        </Link>
-        <Link href="/calendario">
-          <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
-        </Link>
-        <Link href="/sobre">
-          <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
-        </Link>
-      </Navigation.Links>
-    </Navigation.Start>
-    <Navigation.Logo>
-      <img src="/pubg-portugal-logo-black.png" alt="Logótipo do PUBG Portugal. Uma placa metalica rodeia o nome PUBG maior em cima, por baixo esta escrito Portugal. A preto." />
-    </Navigation.Logo>
-    <Navigation.End>
-      <Navigation.Links>
-        <a>
-          <Icon icon="twitter" color="#1DA1F2" />
-        </a>
-        <a>
-          <Icon icon="discord" color="#7289DA" />
-        </a>
-      </Navigation.Links>
-    </Navigation.End>
-  </>
-);
+const NavDesktop = () => {
+  const { push } = useRouter();
+  return (
+    <>
+      <Navigation.Start>
+        <Navigation.Links>
+          <Link href="/">
+            <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
+          </Link>
+          <Link href="/calendario">
+            <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
+          </Link>
+          <Link href="/sobre">
+            <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
+          </Link>
+        </Navigation.Links>
+      </Navigation.Start>
+      <Navigation.Logo onClick={() => push('/')}>
+        <img src="/pubg-portugal-logo-black.png" alt="Logótipo do PUBG Portugal. Uma placa metalica rodeia o nome PUBG maior em cima, por baixo esta escrito Portugal. A preto." />
+      </Navigation.Logo>
+      <Navigation.End>
+        <Navigation.Links>
+          <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/shootsgud">
+            <Icon icon="twitter" color="#1DA1F2" />
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
+            <Icon icon="discord" color="#7289DA" />
+          </a>
+        </Navigation.Links>
+      </Navigation.End>
+    </>
+  );
+};
 
 const Nav = () => (
   <Navigation>
@@ -87,6 +91,7 @@ Navigation.End = styled.div`
 
 Navigation.Logo = styled.div`
   text-align: center;
+  cursor: pointer;
   width: 100%;
   img {
     transform: translateY(15%);
