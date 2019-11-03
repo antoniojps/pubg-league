@@ -3,9 +3,16 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import { Table } from 'components/atoms';
+import dataPlaceholder from 'data/leaderboard-teams-placeholder.json';
 
 const LeaderboardTeams = ({ teamStats, qualified }) => {
   const isQualifier = useMemo(() => typeof qualified === 'number', [qualified]);
+
+  const teamsStatsComputed = useMemo(() => {
+    if (teamStats.length > 0) return teamStats;
+    return dataPlaceholder;
+  }, [teamStats]);
+
   return (
     <TableTeams isQualifier={isQualifier} qualified={qualified}>
       <Table className="zi-table">
@@ -20,7 +27,7 @@ const LeaderboardTeams = ({ teamStats, qualified }) => {
         </thead>
         <tbody>
           {
-              teamStats.map(({
+              teamsStatsComputed.map(({
                 rank, teamMember, teamId, rankPoints, killPoints,
               }) => (
                 <tr key={teamId}>
@@ -86,11 +93,12 @@ const TableTeams = styled.div`
 `;
 
 LeaderboardTeams.propTypes = {
-  teamStats: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  teamStats: PropTypes.arrayOf(PropTypes.shape({})),
   qualified: PropTypes.number,
 };
 
 LeaderboardTeams.defaultProps = {
+  teamStats: dataPlaceholder,
   qualified: false,
 };
 

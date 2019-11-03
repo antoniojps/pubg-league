@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { PlayerCard } from 'components/molecules';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import placeholderData from 'data/top-players-placeholder.json';
 
 const filters = {
   kills: 'kills',
@@ -47,16 +48,17 @@ const PlayerHighlights = ({ playerSummaries, filter, onFilterChange }) => {
 
   const [topOnePlayer, ...restTopPlayers] = topFivePlayers;
 
-
   const handleFilterChange = (newFilter) => {
     if (newFilter === filter) return;
     onFilterChange(newFilter);
   };
 
+  const hasData = useMemo(() => playerSummaries.length > 0, [playerSummaries]);
+
   return (
     <Wrapper>
       <PlayerStart>
-        <PlayerCard className="stretch" player={playerSummaries ? topOnePlayer : null} filter={filter} stretch />
+        <PlayerCard className="stretch" player={hasData ? topOnePlayer : null} filter={filter} stretch />
       </PlayerStart>
       <PlayerEnd>
         <h3>Melhores jogadores</h3>
@@ -67,8 +69,13 @@ const PlayerHighlights = ({ playerSummaries, filter, onFilterChange }) => {
           <a className={filter === filters.adr ? 'active' : ''} onClick={() => handleFilterChange(filters.adr)}>ADR</a>
         </div>
         <PlayerList>
-          {restTopPlayers.map((player) => <PlayerCard key={player.playerName} className="card" player={player} filter={filter} small />)}
+          {hasData
+            ? restTopPlayers.map((player) => <PlayerCard key={player.playerName} className="card" player={player} filter={filter} small />)
+            : placeholderData.map((player) => <PlayerCard key={player.playerName} className="card" player={player} filter={filter} small />)}
         </PlayerList>
+        {!hasData && (
+          <p className="zi-comment">Dados disponíveis após um jogo.</p>
+        )}
       </PlayerEnd>
     </Wrapper>
   );
@@ -101,6 +108,9 @@ const PlayerEnd = styled.div`
       }
     }
   }
+  .zi-comment {
+    margin-bottom: 0;
+  }
 `;
 
 const PlayerList = styled.div`
@@ -120,7 +130,7 @@ PlayerHighlights.propTypes = {
 };
 
 PlayerHighlights.defaultProps = {
-  playerSummaries: null,
+  playerSummaries: [],
   filter: filters.kills,
   onFilterChange: () => null,
 };

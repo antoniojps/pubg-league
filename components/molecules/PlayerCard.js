@@ -9,6 +9,43 @@ const PlayerCard = ({
   const [isExtended, setExtended] = useState(false);
 
   const playerStats = useMemo(() => {
+    if (!player) {
+      return [{
+        label: 'kills',
+        value: 0,
+        key: 'kills',
+      },
+      {
+        label: 'k/d',
+        value: 0,
+        highlight: 0 > 1.5,
+        good: 0 > 1,
+        great: 0 > 1.5,
+        key: 'kd',
+      },
+      {
+        label: 'damage',
+        value: Math.round(0),
+        key: 'damage',
+      },
+      {
+        label: 'adr',
+        value: 0,
+        good: 0 > 200,
+        great: 0 > 300,
+        key: 'adr',
+      },
+      {
+        label: 'wins',
+        value: 0,
+        key: 'wins',
+      },
+      {
+        label: 'dbnos',
+        value: 0,
+        key: 'dbnos',
+      }];
+    }
     const {
       kills, dbnos, damage, computed: {
         adr, kd, wins, alive,
@@ -57,14 +94,23 @@ const PlayerCard = ({
     [isExtended]);
 
   const highlighted = useMemo(
-    () => playerStats.find((stat) => stat.key === filter),
+    () => {
+      const highlightedStat = playerStats.find((stat) => stat.key === filter);
+      if (!highlightedStat) {
+        return {
+          value: 0,
+          label: 'kills',
+        };
+      }
+      return highlightedStat;
+    },
     [filter, playerStats],
   );
 
   return (
     <Card className={`zi-card ${className}`} small={small}>
       <Player small={small}>
-        <Player.Name small={small}>{player.playerName}</Player.Name>
+        <Player.Name small={small}>{(player && player.playerName) || 'TBD' }</Player.Name>
       </Player>
       <StatWrapper>
         {

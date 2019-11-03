@@ -14,7 +14,7 @@ const Home = ({ tournament, playerSummaries, teamStats }) => (
 
 Home.getInitialProps = async () => {
   const res = await fetch(
-    'https://api.cgs.gg/mono-service/api/v2/tournament/eu-pro-scrims-l/summary',
+    'https://api.cgs.gg/mono-service/api/v2/tournament/sml-qualifier-a/summary',
   );
   const data = await res.json();
   // const data = dummyData;

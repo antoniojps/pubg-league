@@ -6,7 +6,6 @@ import { LeaderboardTeams, LeaderboardPlayers } from 'components/molecules';
 const filters = {
   table: 'table',
   players: 'players',
-  teams: 'teams',
 };
 
 const Leaderboard = ({
@@ -33,12 +32,11 @@ const Leaderboard = ({
           <Table.Title active={filter === filters.table} onClick={() => handleFilterChange(filters.table)}>
             Tabela
           </Table.Title>
+          {playerSummaries.length > 0 && (
           <Table.Title active={filter === filters.players} onClick={() => handleFilterChange(filters.players)}>
-            Jogadores
+          Jogadores
           </Table.Title>
-          <Table.Title active={filter === filters.teams} onClick={() => handleFilterChange(filters.teams)}>
-            Equipas
-          </Table.Title>
+          )}
         </Table.Tabs>
 
         <GamesCounter>
