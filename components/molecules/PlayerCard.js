@@ -46,9 +46,9 @@ const PlayerCard = ({
         key: 'wins',
       },
       {
-        label: 'alive',
-        value: alive,
-        key: 'alive',
+        label: 'dbnos',
+        value: dbnos,
+        key: 'dbnos',
       },
     ];
   }, [player]);
@@ -149,6 +149,7 @@ Stat.Value = styled.div`
   font-size: ${(props) => (props.small && props.theme.sizes.xs)};
   font-weight: 700;
   color: ${(props) => (props.great && props.theme.colors.red) || (props.good && props.theme.colors.orange)};
+  text-align: center;
 `;
 
 Stat.Description = styled.div`
