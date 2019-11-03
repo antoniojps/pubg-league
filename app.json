@@ -3,5 +3,232 @@
   "title": "Shootsgud Major League",
   "description": "A liga portuguesa de PUBG",
   "keywords": ["shootsgud major league", "shootsgud", "sml", "pubg"],
-  "image": { "src": "/seo.jpg", "width": 1200, "height": 630 }
+  "image": { "src": "/seo.jpg", "width": 1200, "height": 630 },
+  "teams": {
+    "major": [
+      {
+        "teamId": 2,
+        "logo": "/team-22.png",
+        "title": "22 esports"
+      },
+      {
+        "teamId": 3,
+        "logo": "/team-22.png",
+        "title": "ORO esports"
+      },
+      {
+        "teamId": 4,
+        "logo": "/team-22.png",
+        "title": "Cucuruu"
+      },
+      {
+        "teamId": 5,
+        "logo": "/team-22.png",
+        "title": "Team Satire"
+      },
+      {
+        "teamId": 6,
+        "logo": "/team-22.png",
+        "title": "BaeconGG"
+      },
+      {
+        "teamId": 7,
+        "logo": "/team-22.png",
+        "title": "GTZ BULLS"
+      },
+      {
+        "teamId": 8,
+        "logo": "/team-22.png",
+        "title": "Wild Alliance EVO"
+      },
+      {
+        "teamId": 9,
+        "logo": "/team-22.png",
+        "title": "ORO Esports EVO"
+      },
+      {
+        "teamId": 10,
+        "logo": "/team-22.png",
+        "title": "Team White"
+      },
+      {
+        "teamId": 11,
+        "title": "Riders on The Road"
+      },
+      {
+        "teamId": 12,
+        "title": "AVE"
+      },
+      {
+        "teamId": 13,
+        "logo": "/team-22.png",
+        "title": "INNERVISION"
+      },
+      {
+        "teamId": 14,
+        "logo": "/team-22.png",
+        "title": "P.I.D.E"
+      },
+      {
+        "teamId": 15,
+        "logo": "/team-22.png",
+        "title": "SAM CLAN"
+      },
+      {
+        "teamId": 16,
+        "logo": "/team-22.png",
+        "title": "HeHeXD"
+      }
+    ],
+    "qualifier-a": [
+      {
+        "teamId": 2,
+        "logo": "/team-22.png",
+        "title": "22 esports"
+      },
+      {
+        "teamId": 3,
+        "logo": "/team-22.png",
+        "title": "ORO esports"
+      },
+      {
+        "teamId": 4,
+        "logo": "/team-22.png",
+        "title": "Cucuruu"
+      },
+      {
+        "teamId": 5,
+        "logo": "/team-22.png",
+        "title": "Team Satire"
+      },
+      {
+        "teamId": 6,
+        "logo": "/team-22.png",
+        "title": "BaeconGG"
+      },
+      {
+        "teamId": 7,
+        "logo": "/team-22.png",
+        "title": "GTZ BULLS"
+      },
+      {
+        "teamId": 8,
+        "logo": "/team-22.png",
+        "title": "Wild Alliance EVO"
+      },
+      {
+        "teamId": 9,
+        "logo": "/team-22.png",
+        "title": "ORO Esports EVO"
+      },
+      {
+        "teamId": 10,
+        "logo": "/team-22.png",
+        "title": "Team White"
+      },
+      {
+        "teamId": 11,
+        "title": "Riders on The Road"
+      },
+      {
+        "teamId": 12,
+        "title": "AVE"
+      },
+      {
+        "teamId": 13,
+        "logo": "/team-22.png",
+        "title": "INNERVISION"
+      },
+      {
+        "teamId": 14,
+        "logo": "/team-22.png",
+        "title": "P.I.D.E"
+      },
+      {
+        "teamId": 15,
+        "logo": "/team-22.png",
+        "title": "SAM CLAN"
+      },
+      {
+        "teamId": 16,
+        "logo": "/team-22.png",
+        "title": "HeHeXD"
+      }
+    ],
+    "qualifier-b": [
+      {
+        "teamId": 2,
+        "logo": "/team-22.png",
+        "title": "22 esports"
+      },
+      {
+        "teamId": 3,
+        "logo": "/team-22.png",
+        "title": "ORO esports"
+      },
+      {
+        "teamId": 4,
+        "logo": "/team-22.png",
+        "title": "Cucuruu"
+      },
+      {
+        "teamId": 5,
+        "logo": "/team-22.png",
+        "title": "Team Satire"
+      },
+      {
+        "teamId": 6,
+        "logo": "/team-22.png",
+        "title": "BaeconGG"
+      },
+      {
+        "teamId": 7,
+        "logo": "/team-22.png",
+        "title": "GTZ BULLS"
+      },
+      {
+        "teamId": 8,
+        "logo": "/team-22.png",
+        "title": "Wild Alliance EVO"
+      },
+      {
+        "teamId": 9,
+        "logo": "/team-22.png",
+        "title": "ORO Esports EVO"
+      },
+      {
+        "teamId": 10,
+        "logo": "/team-22.png",
+        "title": "Team White"
+      },
+      {
+        "teamId": 11,
+        "title": "Riders on The Road"
+      },
+      {
+        "teamId": 12,
+        "title": "AVE"
+      },
+      {
+        "teamId": 13,
+        "logo": "/team-22.png",
+        "title": "INNERVISION"
+      },
+      {
+        "teamId": 14,
+        "logo": "/team-22.png",
+        "title": "P.I.D.E"
+      },
+      {
+        "teamId": 15,
+        "logo": "/team-22.png",
+        "title": "SAM CLAN"
+      },
+      {
+        "teamId": 16,
+        "logo": "/team-22.png",
+        "title": "HeHeXD"
+      }
+    ]
+  }
 }
