@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Seo } from 'containers';
 import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import APP_DATA from '../../app.json';
 
 const TournementDetail = ({ tournament, playerSummaries, teamStats }) => {
@@ -35,7 +35,7 @@ const TournementDetail = ({ tournament, playerSummaries, teamStats }) => {
   return (
     <>
       <Seo
-        title="Qualificadores"
+        title={qualifierActive.title}
       />
       <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8}>
         <TournamentMenu className="zi-layout">
