@@ -1,16 +1,13 @@
 import React from 'react';
-import Head from 'next/head';
 import { Tournament } from 'components/organisms';
 import PropTypes from 'prop-types';
+import { Seo } from 'containers';
 import dummyData from '../data/league-data.json';
 // import fetch from 'isomorphic-unfetch';
 
 const Home = ({ tournament, playerSummaries, teamStats }) => (
   <>
-    <Head>
-      <title>Shootsgud Major League</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    <Seo />
     <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} />
   </>
 );

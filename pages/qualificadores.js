@@ -5,14 +5,14 @@ import { Select } from 'components/atoms';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import dummyData from '../data/league-data.json';
+import { Seo } from 'containers';
 // import fetch from 'isomorphic-unfetch';
 
 const TournementDetail = ({ tournament, playerSummaries, teamStats }) => (
   <>
-    <Head>
-      <title>Liga Nacional de PUBG</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    <Seo
+      title="Qualificadores"
+    />
     <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8}>
       <TournamentMenu className="zi-layout">
         <h2>Qualificadores A</h2>
