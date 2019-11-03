@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Seo } from 'containers';
 import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
+import { useRouter } from 'next/router'
 import APP_DATA from '../../app.json';
 
 const TournementDetail = ({ tournament, playerSummaries, teamStats }) => {
