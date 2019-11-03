@@ -14,10 +14,10 @@ const NavDesktop = () => {
           <Link href="/">
             <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
           </Link>
-          <Link href="/calendario">
+          <Link href="/p/calendario">
             <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
           </Link>
-          <Link href="/sobre">
+          <Link href="/p/sobre">
             <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
           </Link>
         </Navigation.Links>
