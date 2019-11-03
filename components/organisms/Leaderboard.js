@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { lighten } from 'polished';
-import { useRouter } from 'next/router';
-import queryString from 'query-string';
 import { LeaderboardTeams, LeaderboardPlayers } from 'components/molecules';
 
 const filters = {
@@ -13,34 +10,41 @@ const filters = {
 };
 
 const Leaderboard = ({
-  teamStats, playerSummaries, filter, qualified,
+  teamStats, playerSummaries, tournament, filter, qualified, onFilterChange,
 }) => {
-  const router = useRouter();
-
   const handleFilterChange = (newFilter) => {
     if (newFilter === filter) return;
-    const { query, pathname, push } = router;
-    const newQuery = {
-      ...query,
-      table: newFilter,
-    };
-    const to = `${pathname}?${queryString.stringify(newQuery)}`;
-    push(to);
+    onFilterChange(newFilter);
   };
+
+  const computedGamesCounterMessage = useMemo(() => {
+    if (!tournament) return '...';
+    const playedMatches = tournament.tournamentMatches.length;
+    if (tournament.planedGamesCount) {
+      return `${playedMatches}/${tournament.planedGamesCount} Jogos`;
+    }
+    return `${playedMatches} Jogo(s)`;
+  }, [tournament]);
 
   return (
     <>
-      <Table.Tabs>
-        <Table.Title active={filter === filters.table} onClick={() => handleFilterChange(filters.table)}>
+      <TableHeader>
+        <Table.Tabs>
+          <Table.Title active={filter === filters.table} onClick={() => handleFilterChange(filters.table)}>
             Tabela
-        </Table.Title>
-        <Table.Title active={filter === filters.players} onClick={() => handleFilterChange(filters.players)}>
+          </Table.Title>
+          <Table.Title active={filter === filters.players} onClick={() => handleFilterChange(filters.players)}>
             Jogadores
-        </Table.Title>
-        <Table.Title active={filter === filters.teams} onClick={() => handleFilterChange(filters.teams)}>
+          </Table.Title>
+          <Table.Title active={filter === filters.teams} onClick={() => handleFilterChange(filters.teams)}>
             Equipas
-        </Table.Title>
-      </Table.Tabs>
+          </Table.Title>
+        </Table.Tabs>
+
+        <GamesCounter>
+          {computedGamesCounterMessage}
+        </GamesCounter>
+      </TableHeader>
       { filter === filters.table && <LeaderboardTeams teamStats={teamStats} qualified={qualified} />}
       { filter === filters.players && <LeaderboardPlayers playerSummaries={playerSummaries} />}
     </>
@@ -50,9 +54,21 @@ const Leaderboard = ({
 const Table = styled.table`
 `;
 
+const TableHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${(props) => props.theme.spacing.xs};
+`;
+
+const GamesCounter = styled.div`
+  font-size: ${(props) => props.theme.sizes.xl};
+  color: ${(props) => props.theme.colors.base};
+  font-weight: ${(props) => props.theme.weight.base};
+`;
+
 Table.Tabs = styled.div`
   display: flex;
-  margin-bottom: ${(props) => props.theme.spacing.xs};
 `;
 
 Table.Title = styled.div`
@@ -73,11 +89,15 @@ Leaderboard.propTypes = {
   playerSummaries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   filter: PropTypes.oneOf(['table', 'players', 'teams']),
   qualified: PropTypes.number,
+  onFilterChange: PropTypes.func,
+  tournament: PropTypes.shape({}),
 };
 
 Leaderboard.defaultProps = {
   filter: 'table',
   qualified: null,
+  onFilterChange: () => null,
+  tournament: null,
 };
 
 export default Leaderboard;

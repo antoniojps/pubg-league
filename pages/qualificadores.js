@@ -1,11 +1,10 @@
 import React from 'react';
-import Head from 'next/head';
 import { Tournament } from 'components/organisms';
 import { Select } from 'components/atoms';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import dummyData from '../data/league-data.json';
 import { Seo } from 'containers';
+import dummyData from '../data/league-data.json';
 // import fetch from 'isomorphic-unfetch';
 
 const TournementDetail = ({ tournament, playerSummaries, teamStats }) => (
@@ -15,7 +14,6 @@ const TournementDetail = ({ tournament, playerSummaries, teamStats }) => (
     />
     <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8}>
       <TournamentMenu className="zi-layout">
-        <h2>Qualificadores A</h2>
         <Select options={[{ label: 'Qualificador A', value: 'a' }, { label: 'Qualificador B', value: 'b' }]} value="a" onSelect={(value) => null} />
       </TournamentMenu>
     </Tournament>
@@ -48,10 +46,6 @@ TournementDetail.defaultProps = {
 
 const TournamentMenu = styled.div`
   display: flex;
-  justify-content: space-between;
-  h2 {
-    margin: 0;
-  }
 `;
 
 

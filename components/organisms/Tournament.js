@@ -1,11 +1,12 @@
-import React, { useMemo } from 'react';
+import React, {
+  useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Title, Spacer } from 'components/atoms';
 import { Tabs } from 'components/molecules';
 import { Layout, PlayerHighlights, Leaderboard } from 'components/organisms';
 import styled from 'styled-components';
 import prettyMilliseconds from 'pretty-ms';
-import { useRouter } from 'next/router';
 
 const tabs = [
   {
@@ -21,7 +22,9 @@ const tabs = [
 const Tournament = ({
   tournament, playerSummaries, teamStats, children, qualified,
 }) => {
-  const computedPlayerSummaries = useMemo(() => playerSummaries.map((player) => {
+  const [topFilter, setTopFilter] = useState('kills');
+  const [tableFilter, setTableFilter] = useState('table');
+  const computedPlayerSummariesHighlights = useMemo(() => playerSummaries.map((player) => {
     const {
       kills, damage, survivedTime, playerMatchStat: matches, playerName,
     } = player;
@@ -53,7 +56,37 @@ const Tournament = ({
   }),
   [playerSummaries]);
 
-  const { query: { table: tableFilter = 'table', top: topFilter = 'kills' } } = useRouter();
+  const computedPlayerSummariesTable = useMemo(() => playerSummaries.map((player) => {
+    const {
+      kills, damage, survivedTime, playerMatchStat: matches, playerName,
+    } = player;
+      // add team name and image here to the team object
+    const team = teamStats.find(({ teamMember }) => teamMember.includes(playerName));
+    const matchesPlayed = matches.length;
+    const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
+    const wins = matches.filter(({ participant: { winPlace } }) => winPlace === 1).length;
+    const deaths = matchesDead.length;
+    const kd = Number((kills / deaths).toFixed(2));
+    const adr = Math.round(damage / matchesPlayed);
+
+    const aliveRounded = prettyMilliseconds(survivedTime * 1000, { unitCount: 2 });
+    // remove ugly tilt added by pretty-ms
+    const aliveArr = aliveRounded.split('~');
+    const alive = aliveArr.length > 1 ? aliveArr[1] : aliveArr[0];
+    return {
+      computed: {
+        matchesPlayed,
+        deaths,
+        wins,
+        kd,
+        adr,
+        alive,
+        team,
+      },
+      ...player,
+    };
+  }),
+  [playerSummaries]);
 
   return (
     <Wrapper>
@@ -67,9 +100,11 @@ const Tournament = ({
       {children}
       <div className="zi-layout">
         <Spacer bottom="m">
-          <PlayerHighlights playerSummaries={computedPlayerSummaries} filter={topFilter} />
+          <PlayerHighlights playerSummaries={computedPlayerSummariesHighlights} filter={topFilter} onFilterChange={(newFilter) => setTopFilter(newFilter)} />
         </Spacer>
-        <Leaderboard filter={tableFilter} playerSummaries={computedPlayerSummaries} teamStats={teamStats} qualified={qualified} />
+        <Spacer bottom="xl4">
+          <Leaderboard filter={tableFilter} tournament={tournament} playerSummaries={computedPlayerSummariesTable} teamStats={teamStats} qualified={qualified} onFilterChange={(newFilter) => setTableFilter(newFilter)} />
+        </Spacer>
       </div>
     </Wrapper>
   );

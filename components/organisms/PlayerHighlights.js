@@ -1,9 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { PlayerCard } from 'components/molecules';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
-import queryString from 'query-string';
 
 const filters = {
   kills: 'kills',
@@ -12,7 +10,7 @@ const filters = {
   adr: 'adr',
 };
 
-const PlayerHighlights = ({ playerSummaries, filter }) => {
+const PlayerHighlights = ({ playerSummaries, filter, onFilterChange }) => {
   const topPlayers = useMemo(() => {
     const orderedByFilterTopPlayers = playerSummaries.sort((playerA, playerB) => {
       let statA = playerA[filter];
@@ -49,17 +47,10 @@ const PlayerHighlights = ({ playerSummaries, filter }) => {
 
   const [topOnePlayer, ...restTopPlayers] = topFivePlayers;
 
-  const router = useRouter();
 
   const handleFilterChange = (newFilter) => {
     if (newFilter === filter) return;
-    const { query, pathname, push } = router;
-    const newQuery = {
-      ...query,
-      top: newFilter,
-    };
-    const to = `${pathname}?${queryString.stringify(newQuery)}`;
-    push(to);
+    onFilterChange(newFilter);
   };
 
   return (
@@ -125,11 +116,13 @@ const PlayerList = styled.div`
 PlayerHighlights.propTypes = {
   playerSummaries: PropTypes.arrayOf(PropTypes.shape({})),
   filter: PropTypes.oneOf([...Object.keys(filters)]),
+  onFilterChange: PropTypes.func,
 };
 
 PlayerHighlights.defaultProps = {
   playerSummaries: null,
   filter: filters.kills,
+  onFilterChange: () => null,
 };
 
 export default PlayerHighlights;

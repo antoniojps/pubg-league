@@ -2,8 +2,8 @@ import React from 'react';
 import { Tournament } from 'components/organisms';
 import PropTypes from 'prop-types';
 import { Seo } from 'containers';
+import fetch from 'isomorphic-unfetch';
 import dummyData from '../data/league-data.json';
-// import fetch from 'isomorphic-unfetch';
 
 const Home = ({ tournament, playerSummaries, teamStats }) => (
   <>
@@ -12,12 +12,13 @@ const Home = ({ tournament, playerSummaries, teamStats }) => (
   </>
 );
 
-Home.getInitialProps = () => {
-  // const res = await fetch(
-  //   'https://api.cgs.gg/mono-service/api/v2/tournament/dreamcup-portugal-temporada-2-split-3/summary'
-  // )
-  // const data = await res.json()
-  const data = dummyData;
+Home.getInitialProps = async () => {
+  const res = await fetch(
+    'https://api.cgs.gg/mono-service/api/v2/tournament/eu-pro-scrims-l/summary',
+  );
+  const data = await res.json();
+  // const data = dummyData;
+
   return {
     ...data,
   };
