@@ -95,6 +95,7 @@ Navigation.Logo = styled.div`
   text-align: center;
   cursor: pointer;
   width: 100%;
+  min-height: 55px;
   img {
     transform: translateY(15%);
   }
