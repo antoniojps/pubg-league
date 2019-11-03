@@ -85,7 +85,7 @@
   "qualifiers": [
     {
       "cgs": "sml-qualifier-a",
-      "id": "a",
+      "slug": "qualificador-a",
       "title": "Qualificador A",
       "teams": [
         {
@@ -165,7 +165,7 @@
     },
     {
       "cgs": "sml-qualifier-b",
-      "id": "b",
+      "slug": "qualificador-b",
       "title": "Qualificador B",
       "teams": [
         {

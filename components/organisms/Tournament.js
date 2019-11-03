@@ -15,7 +15,8 @@ const tabs = [
   },
   {
     title: 'Qualificadores',
-    to: '/qualificadores',
+    pathname: '/t/[slug]',
+    to: '/t/qualificador-a',
   },
 ];
 

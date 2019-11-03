@@ -6,14 +6,15 @@ const Select = ({ options, value, onSelect }) => {
     onSelect(e.target.value);
   };
   return (
-    <div className="zi-select-container small">
+    <div className="zi-select-container">
       <select className="zi-select" onChange={handleOnSelect} value={value}>
-        {options.map(({ value: optValue, label }) => <option key={optValue}>{label}</option>)}
+        {options.map(({ value: optValue, label }) => <option key={optValue} value={optValue}>{label}</option>)}
       </select>
       <i className="arrow zi-icon-up" />
     </div>
   );
 };
+
 
 Select.propTypes = {
   options: PropTypes.arrayOf(

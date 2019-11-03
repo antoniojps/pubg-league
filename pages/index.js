@@ -3,7 +3,8 @@ import { Tournament } from 'components/organisms';
 import PropTypes from 'prop-types';
 import { Seo } from 'containers';
 import fetch from 'isomorphic-unfetch';
-import dummyData from '../data/league-data.json';
+import APP_DATA from '../app.json';
+
 
 const Home = ({ tournament, playerSummaries, teamStats }) => (
   <>
@@ -14,10 +15,9 @@ const Home = ({ tournament, playerSummaries, teamStats }) => (
 
 Home.getInitialProps = async () => {
   const res = await fetch(
-    'https://api.cgs.gg/mono-service/api/v2/tournament/sml-qualifier-a/summary',
+    `https://api.cgs.gg/mono-service/api/v2/tournament/${APP_DATA.major.cgs}/summary`,
   );
   const data = await res.json();
-  // const data = dummyData;
 
   return {
     ...data,
