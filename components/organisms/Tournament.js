@@ -96,7 +96,7 @@ const Tournament = ({
       <Layout header={() => <Sponsors />}>
         <Header>
           <Title>Resultados</Title>
-          <a target="_blank" rel="noopener noreferrer" href="https://battlefy.com/" className="zi-btn mini warning">Inscrever</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info" className="zi-btn mini warning">Inscrever</a>
         </Header>
       </Layout>
       <Tabs tabs={tabs} />
