@@ -8,6 +8,7 @@ module.exports = withCSS({
     config.resolve.alias['services'] = path.join(__dirname, 'services');
     config.resolve.alias['data'] = path.join(__dirname, 'data');
     config.resolve.alias['containers'] = path.join(__dirname, 'containers');
+    config.resolve.alias['hooks'] = path.join(__dirname, 'hooks');
     return config;
   },
 });

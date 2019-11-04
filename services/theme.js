@@ -7,6 +7,7 @@ const colors = {
   grey: '#757575',
   greyDarker: '#111',
   greyLigther: '#EAEAEA',
+  greyLighterAlt: '#f6f6f6',
   red: '#c8311e',
   orange: '#ed7900',
 };
@@ -16,6 +17,7 @@ const colorsSemantic = {
   baseInverse: colors.white,
   primary: colors.yellow,
   bg: colors.white,
+  bgDarkerS: colors.greyLighterAlt,
   bgInverse: colors.black,
   bgDarker: colors.grey,
   border: colors.greyLigther,
