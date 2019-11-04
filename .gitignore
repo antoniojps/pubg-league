@@ -26,7 +26,6 @@ yarn-error.log*
 
 .idea/
 vendor/
-data/
 composer.lock
 node_modules/
 dist/
