@@ -3,6 +3,7 @@ import { PlayerCard } from 'components/molecules';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import placeholderData from 'data/top-players-placeholder.json';
+import { below } from 'services/breakpoints';
 
 const filters = {
   kills: 'kills',
@@ -86,6 +87,10 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 70%;
   grid-template-rows: 1fr;
   grid-column-gap: ${(props) => props.theme.spacing.m};
+  ${below.md`
+    display: flex;
+    flex-direction: column;
+  `}
 `;
 
 const PlayerStart = styled.div`
@@ -97,9 +102,17 @@ const PlayerStart = styled.div`
 const PlayerEnd = styled.div`
   h3 {
     margin-top: ${(props) => props.theme.spacing.xs4};
+    ${below.md`
+      margin-top: ${(props) => props.theme.spacing.xs};
+      margin-bottom: ${(props) => props.theme.spacing.xs};
+    `}
   }
   .zi-switcher {
     margin-bottom: ${(props) => props.theme.spacing.xs2};
+    ${below.md`
+      overflow-x: scroll;
+      max-width: 100%;
+    `}
     a.active {
       background-color: ${(props) => props.theme.colors.bgInverse};
       color: ${(props) => props.theme.colors.baseInverse};
@@ -121,6 +134,13 @@ const PlayerList = styled.div`
       margin-right: 0;
     }
   }
+  ${below.md`
+    justify-content: center;
+    flex-wrap: wrap;
+    .card {
+      margin: ${(props) => props.theme.spacing.xs3};
+    }
+  `}
 `;
 
 PlayerHighlights.propTypes = {

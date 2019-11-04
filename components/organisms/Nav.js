@@ -47,7 +47,7 @@ const NavDesktop = () => {
 
 
 const Navigation = styled.nav`
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.bg};
   width: 100%;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.06);
   padding-top: ${(props) => props.theme.spacing.xs3};
@@ -60,6 +60,7 @@ const Navigation = styled.nav`
 Navigation.Inner = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 0;
   ${below.md`
     width: 100% !important;
     padding: 0 !important;
@@ -70,6 +71,11 @@ Navigation.Links = styled.div`
   display: flex;
   padding-top: ${(props) => props.theme.spacing.xs2};
   margin-left: ${(props) => props.theme.spacing.m};
+  ${below.md`
+     margin-left: 0;
+     padding-top: 0;
+     align-items: center;
+  `}
   a {
     padding: ${(props) => props.theme.spacing.xs4};
     line-height: 1;
@@ -92,9 +98,12 @@ Navigation.End = styled.div`
 Navigation.Logo = styled.div`
   cursor: pointer;
   height: 55px;
-  width: 84px;
+  min-width: 84px;
   display: flex;
   align-items: center;
+  ${below.md`
+      margin-right: 15px;
+  `}
 `;
 
 
@@ -106,19 +115,6 @@ const NavMobile = () => {
         <Navigation.Logo onClick={() => push('/')}>
           <img src="/sml_header.png" alt="Logótipo da Shootsgud Major League. Rectângulo amarelo a esquerda e preto a direito, no meio está uma cara com capacete de metal e barba." />
         </Navigation.Logo>
-        <Navigation.Links>
-          <Link href="/">
-            <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
-          </Link>
-          <Link href="/p/calendario">
-            <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
-          </Link>
-          <Link href="/p/sobre">
-            <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
-          </Link>
-        </Navigation.Links>
-      </NavMob.Top>
-      <NavMob.Bottom>
         <NavMob.Links>
           <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
             <Icon icon="facebook" color="#1778F2" />
@@ -131,6 +127,22 @@ const NavMobile = () => {
           </a>
           <TwitchChannel />
         </NavMob.Links>
+      </NavMob.Top>
+      <NavMob.Bottom>
+        <NavMob.Categories>
+          <Link href="/">
+            <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
+          </Link>
+          <Link href="/p/calendario">
+            <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
+          </Link>
+          <Link href="/p/sobre">
+            <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
+          </Link>
+          <Link href="/p/info">
+            <a title="Sobre a Liga Nacional de PUBG">Info</a>
+          </Link>
+        </NavMob.Categories>
       </NavMob.Bottom>
     </NavMob>
   );
@@ -142,20 +154,39 @@ const NavMob = styled.div`
 `;
 NavMob.Links = styled(Navigation.Links)`
   margin-left: 0;
+  max-width: 100%;
+  overflow-x: scroll;
+`;
+
+NavMob.Categories = styled.div`
+  display: flex;
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: space-between;
+  max-width: 100%;
+  overflow-x: scroll;
+  padding-top: ${(props) => props.theme.spacing.xs2};
+  a {
+    padding: ${(props) => props.theme.spacing.xs4};
+    line-height: 1;
+  }
+  font-size: ${(props) => props.theme.sizes.s};
+  font-weight: ${(props) => props.theme.weight.base};
 `;
 
 NavMob.Top = styled.div`
   display: flex;
   padding: 0 ${(props) => props.theme.spacing.xs3};
+  justify-content: space-between;
 `;
 NavMob.Bottom = styled.div`
   margin-left: 0;
-  background-color: ${(props) => props.theme.colors.bgDarkerS};
   width: 100%;
   margin-top: ${(props) => props.theme.spacing.xs3};
   padding: 0 ${(props) => props.theme.spacing.xs3};
   padding-bottom: ${(props) => props.theme.spacing.xs3};
-
+  overflow-x: scroll;
 `;
 
 
