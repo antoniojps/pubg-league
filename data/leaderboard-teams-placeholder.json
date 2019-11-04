@@ -1,0 +1,29 @@
+[
+  {
+    "teamId": 1,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 1,
+    "rankPoints": 0,
+    "teamMember": ["..."]
+  },
+  {
+    "teamId": 2,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 2,
+    "rankPoints": 0,
+    "teamMember": ["..."]
+  },
+  {
+    "teamId": 3,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 3,
+    "rankPoints": 0,
+    "teamMember": ["..."]
+  }
+]

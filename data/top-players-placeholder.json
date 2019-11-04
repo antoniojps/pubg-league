@@ -1,0 +1,74 @@
+[
+  {
+    "computed": {
+      "matchesPlayed": 5,
+      "deaths": 5,
+      "wins": 0,
+      "kd": 0,
+      "adr": 0,
+      "team": {
+        "teamId": 1
+      }
+    },
+    "playerName": "TBD",
+    "kills": 0,
+    "damage": 0,
+    "survivedTime": 0,
+    "dbnos": 0,
+    "headshotKills": 0
+  },
+  {
+    "computed": {
+      "matchesPlayed": 5,
+      "deaths": 5,
+      "wins": 0,
+      "kd": 0,
+      "adr": 0,
+      "team": {
+        "teamId": 1
+      }
+    },
+    "playerName": "TBD",
+    "kills": 0,
+    "damage": 0,
+    "survivedTime": 0,
+    "dbnos": 0,
+    "headshotKills": 0
+  },
+  {
+    "computed": {
+      "matchesPlayed": 5,
+      "deaths": 5,
+      "wins": 0,
+      "kd": 0,
+      "adr": 0,
+      "team": {
+        "teamId": 1
+      }
+    },
+    "playerName": "TBD",
+    "kills": 0,
+    "damage": 0,
+    "survivedTime": 0,
+    "dbnos": 0,
+    "headshotKills": 0
+  },
+  {
+    "computed": {
+      "matchesPlayed": 5,
+      "deaths": 5,
+      "wins": 0,
+      "kd": 0,
+      "adr": 0,
+      "team": {
+        "teamId": 1
+      }
+    },
+    "playerName": "TBD",
+    "kills": 0,
+    "damage": 0,
+    "survivedTime": 0,
+    "dbnos": 0,
+    "headshotKills": 0
+  }
+]
