@@ -4,7 +4,9 @@ import React, {
 import PropTypes from 'prop-types';
 import { Title, Spacer } from 'components/atoms';
 import { Tabs } from 'components/molecules';
-import { Layout, PlayerHighlights, Leaderboard } from 'components/organisms';
+import {
+  Layout, PlayerHighlights, Leaderboard, Sponsors,
+} from 'components/organisms';
 import styled from 'styled-components';
 import prettyMilliseconds from 'pretty-ms';
 
@@ -91,7 +93,7 @@ const Tournament = ({
 
   return (
     <Wrapper>
-      <Layout>
+      <Layout header={() => <Sponsors />}>
         <Header>
           <Title>Resultados</Title>
           <a target="_blank" rel="noopener noreferrer" href="https://battlefy.com/" className="zi-btn mini warning">Inscrever</a>

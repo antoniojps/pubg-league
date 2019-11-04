@@ -2,7 +2,7 @@ import { rem } from 'polished';
 
 const colors = {
   white: '#fff',
-  black: '#000',
+  black: '#111',
   yellow: '#F5A623',
   grey: '#757575',
   greyDarker: '#111',
@@ -20,6 +20,7 @@ const colorsSemantic = {
   bgDarkerS: colors.greyLighterAlt,
   bgInverse: colors.black,
   bgDarker: colors.grey,
+  bgDarkerGradient: 'linear-gradient(180deg, #031B23 0%, #041D25 42%, #041D25 100%)',
   border: colors.greyLigther,
 };
 

@@ -111,7 +111,7 @@ const Icon = ({
 };
 
 Icon.propTypes = {
-  icon: PropTypes.oneOf(['expand-more', 'expand-less', 'twitter', 'discord', 'twitch'])
+  icon: PropTypes.oneOf(['expand-more', 'expand-less', 'twitter', 'discord', 'twitch', 'facebook'])
     .isRequired,
   color: PropTypes.string,
   height: PropTypes.number,

@@ -4,13 +4,12 @@ import { Icon } from 'components/atoms';
 import { TwitchChannel } from 'components/molecules';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { below } from 'services/breakpoints';
-import useBreakpoints from 'hooks/useBreakpoints';
+import { below, above } from 'services/breakpoints';
 
 const NavDesktop = () => {
   const { push } = useRouter();
   return (
-    <>
+    <NavigationDesktop>
       <Navigation.Start>
         <Navigation.Logo onClick={() => push('/')}>
           <img src="/sml_header.png" alt="Logótipo da Shootsgud Major League. Rectângulo amarelo a esquerda e preto a direito, no meio está uma cara com capacete de metal e barba." />
@@ -28,23 +27,20 @@ const NavDesktop = () => {
         </Navigation.Links>
       </Navigation.Start>
       <Navigation.End>
-        <Navigation.Links>
-          <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
-            <Icon icon="facebook" color="#1778F2" />
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/shootsgud">
-            <Icon icon="twitter" color="#1DA1F2" />
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
-            <Icon icon="discord" color="#7289DA" />
-          </a>
-          <TwitchChannel />
-        </Navigation.Links>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/Shootsgud/">
+          <Icon icon="facebook" color="#1778F2" />
+        </a>
+        <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/shootsgud">
+          <Icon icon="twitter" color="#1DA1F2" />
+        </a>
+        <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
+          <Icon icon="discord" color="#7289DA" />
+        </a>
+        <TwitchChannel />
       </Navigation.End>
-    </>
+    </NavigationDesktop>
   );
 };
-
 
 const Navigation = styled.nav`
   background-color: ${(props) => props.theme.colors.bg};
@@ -52,6 +48,7 @@ const Navigation = styled.nav`
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.06);
   padding-top: ${(props) => props.theme.spacing.xs3};
   padding-bottom: ${(props) => props.theme.spacing.xs3};
+
   ${below.md`
     padding-bottom: 0;
   `};
@@ -61,6 +58,8 @@ Navigation.Inner = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 0;
+  padding-bottom: 0;
+
   ${below.md`
     width: 100% !important;
     padding: 0 !important;
@@ -71,15 +70,15 @@ Navigation.Links = styled.div`
   display: flex;
   padding-top: ${(props) => props.theme.spacing.xs2};
   margin-left: ${(props) => props.theme.spacing.m};
+  a {
+    padding: ${(props) => props.theme.spacing.xs4};
+    line-height: 1;
+  }
   ${below.md`
      margin-left: 0;
      padding-top: 0;
      align-items: center;
   `}
-  a {
-    padding: ${(props) => props.theme.spacing.xs4};
-    line-height: 1;
-  }
 `;
 
 Navigation.Start = styled.div`
@@ -92,7 +91,19 @@ Navigation.Start = styled.div`
 Navigation.End = styled.div`
   a {
     margin-left: ${(props) => props.theme.spacing.xs3};
+    padding: ${(props) => props.theme.spacing.xs4};
+    line-height: 1;
   }
+
+  display: flex;
+  padding-top: ${(props) => props.theme.spacing.xs2};
+  margin-left: ${(props) => props.theme.spacing.m};
+
+  ${below.md`
+     margin-left: 0;
+     padding-top: 0;
+     align-items: center;
+  `}
 `;
 
 Navigation.Logo = styled.div`
@@ -116,7 +127,7 @@ const NavMobile = () => {
           <img src="/sml_header.png" alt="Logótipo da Shootsgud Major League. Rectângulo amarelo a esquerda e preto a direito, no meio está uma cara com capacete de metal e barba." />
         </Navigation.Logo>
         <NavMob.Links>
-          <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/Shootsgud/">
             <Icon icon="facebook" color="#1778F2" />
           </a>
           <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/shootsgud">
@@ -148,11 +159,37 @@ const NavMobile = () => {
   );
 };
 
+const NavigationDesktop = styled.div`
+  display: none;
+  ${above.md`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  `}
+`;
+
 const NavMob = styled.div`
   padding-top: 0.625rem;
   width: 100%;
+  display: none;
+  ${below.md`
+    display: flex;
+    flex-direction: column;
+  `};
 `;
-NavMob.Links = styled(Navigation.Links)`
+NavMob.Links = styled.div`
+  display: flex;
+  padding-top: ${(props) => props.theme.spacing.xs2};
+  a {
+    padding: ${(props) => props.theme.spacing.xs4};
+    line-height: 1;
+  }
+  ${below.md`
+     margin-left: 0;
+     padding-top: 0;
+     align-items: center;
+  `}
+
   margin-left: 0;
   max-width: 100%;
   overflow-x: scroll;
@@ -190,15 +227,13 @@ NavMob.Bottom = styled.div`
 `;
 
 
-const Nav = () => {
-  const { md } = useBreakpoints();
-  return (
-    <Navigation>
-      <Navigation.Inner className="zi-layout">
-        { md ? <NavDesktop /> : <NavMobile />}
-      </Navigation.Inner>
-    </Navigation>
-  );
-};
+const Nav = () => (
+  <Navigation>
+    <Navigation.Inner className="zi-layout">
+      <NavMobile />
+      <NavDesktop />
+    </Navigation.Inner>
+  </Navigation>
+);
 
 export default Nav;
