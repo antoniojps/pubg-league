@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     height: 100%;
     font-size: 16px;
+    min-width: 320px;
   }
   body {
     text-rendering: optimizeLegibility;

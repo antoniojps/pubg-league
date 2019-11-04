@@ -102,6 +102,7 @@ const PlayerStart = styled.div`
 const PlayerEnd = styled.div`
   h3 {
     margin-top: ${(props) => props.theme.spacing.xs4};
+    margin-bottom: ${(props) => props.theme.spacing.xs};
     ${below.md`
       margin-top: ${(props) => props.theme.spacing.xs};
       margin-bottom: ${(props) => props.theme.spacing.xs};
@@ -134,6 +135,16 @@ const PlayerList = styled.div`
       margin-right: 0;
     }
   }
+  ${below.lg`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: ${(props) => props.theme.spacing.xs4};
+    grid-row-gap: ${(props) => props.theme.spacing.xs4};
+    .card {
+      margin-right: 0;
+    }
+  `}
   ${below.md`
     justify-content: center;
     flex-wrap: wrap;

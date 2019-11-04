@@ -7,6 +7,7 @@ import { Seo } from 'containers';
 import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
+import { below } from 'services/breakpoints'
 import APP_DATA from '../../app.json';
 
 const TournementDetail = ({ tournament, playerSummaries, teamStats }) => {
@@ -91,6 +92,12 @@ const TournamentMenu = styled.div`
   h3 {
     margin: 0;
   }
+
+  ${below.md`
+    h3 {
+      display: none;
+    }
+  `}
 `;
 
 

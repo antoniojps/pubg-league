@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Spacer, Icon } from 'components/atoms';
+import { below } from 'services/breakpoints';
 
 const PlayerCard = ({
   player, filter, small, className,
@@ -128,18 +129,17 @@ const PlayerCard = ({
             }
           </StatGrid>
         ) : (
-          <>
-            <Stat large={!small}>
-              <Stat.Value large={!small} medium={!!small}>{highlighted.value}</Stat.Value>
-              <Stat.Description large={!small}>{highlighted.label}</Stat.Description>
-            </Stat>
-          </>
+
+          <Stat large={!small}>
+            <Stat.Value large={!small} medium={!!small}>{highlighted.value}</Stat.Value>
+            <Stat.Description large={!small}>{highlighted.label}</Stat.Description>
+          </Stat>
         )
         }
+        <Spacer top="xs2">
+          <button className="zi-btn mini" onClick={() => setExtended(!isExtended)} type="button">{computedBtnMessage}</button>
+        </Spacer>
       </StatWrapper>
-      <Spacer top="xs2">
-        <button className="zi-btn mini" onClick={() => setExtended(!isExtended)} type="button">{computedBtnMessage}</button>
-      </Spacer>
     </Card>
   );
 };
@@ -151,6 +151,10 @@ const Card = styled.div`
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
+
+  .zi-btn mini {
+    padding: 0;
+  }
 `;
 
 const Player = styled.div`
@@ -213,6 +217,13 @@ const StatGrid = styled.div`
 
 const StatWrapper = styled.div`
   min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${below.md`
+    margin-right: ${(props) => props.theme.spacing.xs};
+    margin-left: ${(props) => props.theme.spacing.xs};
+  `}
 `;
 
 
