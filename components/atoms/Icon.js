@@ -92,6 +92,19 @@ const Icon = ({
           </g>
         </svg>
       );
+    case 'facebook':
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={getWidth(24, 24, height)}
+          height={height}
+        >
+          <path
+            fill={iconColor}
+            d="M22.575 0H1.319C.59 0 0 .59 0 1.32v21.255c0 .73.591 1.32 1.319 1.32h11.443v-9.253H9.65v-3.607h3.113v-2.66c0-3.086 1.885-4.767 4.638-4.767 1.32 0 2.452.099 2.782.142v3.225l-1.91.001c-1.497 0-1.786.712-1.786 1.756v2.302h3.572l-.467 3.606h-3.105v9.254h6.089a1.32 1.32 0 001.32-1.319V1.318A1.32 1.32 0 0022.575 0z"
+          />
+        </svg>
+      );
     default:
       return 'Invalid Icon';
   }
