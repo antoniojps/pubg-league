@@ -5,6 +5,11 @@
   "keywords": ["shootsgud major league", "shootsgud", "sml", "pubg"],
   "image": { "src": "/seo.jpg", "width": 1200, "height": 630 },
   "major": {
+    "action": {
+      "style": "warning",
+      "text": "Inscrever",
+      "href": "https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info"
+    },
     "cgs": "sml-major",
     "teams": [
       {
@@ -84,9 +89,14 @@
   },
   "qualifiers": [
     {
+      "action": {
+        "style": "warning",
+        "text": "Inscrever",
+        "href": "https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info"
+      },
       "cgs": "sml-qualifier-a",
       "slug": "qualificador-a",
-      "title": "Qualificador A",
+      "title": "Qualificador 1",
       "teams": [
         {
           "teamId": 2,
@@ -164,9 +174,14 @@
       ]
     },
     {
+      "action": {
+        "style": "warning",
+        "text": "Inscrever",
+        "href": "https://battlefy.com/hypedgg/shootsgud-major-league-q2/5dbf2953c19872732b8067db/info"
+      },
       "cgs": "sml-qualifier-b",
       "slug": "qualificador-b",
-      "title": "Qualificador B",
+      "title": "Qualificador 2",
       "teams": [
         {
           "teamId": 2,

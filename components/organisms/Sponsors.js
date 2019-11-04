@@ -63,8 +63,9 @@ const Character = styled.div`
 const Inner = styled.div`
   .zi-layout {
     padding-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 0 !important;
   }
+  padding-bottom: 0;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -80,6 +81,10 @@ const Sponsor = styled.a`
   ${below.sm`
     padding: ${(props) => props.theme.spacing.xs4};
   `}
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.015);
+  }
 `;
 const SponsorList = styled.div`
   display: flex;

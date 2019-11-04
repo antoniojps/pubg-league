@@ -9,6 +9,7 @@ import {
 } from 'components/organisms';
 import styled from 'styled-components';
 import prettyMilliseconds from 'pretty-ms';
+import { actionType } from 'types';
 
 const tabs = [
   {
@@ -23,7 +24,7 @@ const tabs = [
 ];
 
 const Tournament = ({
-  tournament, playerSummaries, teamStats, children, qualified,
+  tournament, playerSummaries, teamStats, children, qualified, action,
 }) => {
   const [topFilter, setTopFilter] = useState('kills');
   const [tableFilter, setTableFilter] = useState('table');
@@ -96,7 +97,7 @@ const Tournament = ({
       <Layout header={() => <Sponsors />}>
         <Header>
           <Title>Resultados</Title>
-          <a target="_blank" rel="noopener noreferrer" href="https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info" className="zi-btn mini warning">Inscrever</a>
+          <a target="_blank" rel="noopener noreferrer" href={action.href} className={`zi-btn mini ${action.style}`}>{action.text}</a>
         </Header>
       </Layout>
       <Tabs tabs={tabs} />
@@ -119,6 +120,7 @@ Tournament.propTypes = {
   teamStats: PropTypes.arrayOf(PropTypes.shape({})),
   children: PropTypes.node,
   qualified: PropTypes.number,
+  action: actionType,
 };
 
 Tournament.defaultProps = {
@@ -127,6 +129,11 @@ Tournament.defaultProps = {
   teamStats: [],
   children: null,
   qualified: null,
+  action: {
+    style: 'warning',
+    text: 'Inscrever',
+    href: 'https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info?infoTab=details',
+  },
 };
 
 const Header = styled.div`

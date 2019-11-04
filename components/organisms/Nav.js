@@ -24,6 +24,9 @@ const NavDesktop = () => {
           <Link href="/p/sobre">
             <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
           </Link>
+          <Link href="/p/info">
+            <a title="Informação">Info</a>
+          </Link>
         </Navigation.Links>
       </Navigation.Start>
       <Navigation.End>

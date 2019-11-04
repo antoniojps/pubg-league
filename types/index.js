@@ -9,6 +9,14 @@ const {
   string,
   oneOfType,
   arrayOf,
+  shape,
+  oneOf,
 } = PropTypes;
 
 export const modifiersType = oneOfType([string, arrayOf(string)]);
+
+export const actionType = shape({
+  style: oneOf(['success', '', 'warning', 'danger']),
+  text: string,
+  href: string,
+});

@@ -9,7 +9,7 @@ import APP_DATA from '../app.json';
 const Home = ({ tournament, playerSummaries, teamStats }) => (
   <>
     <Seo />
-    <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} />
+    <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} action={APP_DATA.major.action} />
   </>
 );
 

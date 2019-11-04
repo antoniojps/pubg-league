@@ -7,10 +7,13 @@ import { Seo } from 'containers';
 import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
-import { below } from 'services/breakpoints'
+import { below } from 'services/breakpoints';
+import { actionType } from 'types'
 import APP_DATA from '../../app.json';
 
-const TournementDetail = ({ tournament, playerSummaries, teamStats }) => {
+const TournementDetail = ({
+  tournament, playerSummaries, teamStats, action,
+}) => {
   const { push, query: { slug } } = useRouter();
   const [qualifier, setQualifier] = useState(slug);
 
@@ -38,7 +41,7 @@ const TournementDetail = ({ tournament, playerSummaries, teamStats }) => {
       <Seo
         title={qualifierActive.title}
       />
-      <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8}>
+      <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8} action={action}>
         <TournamentMenu className="zi-layout">
           <h3>{qualifierActive.title}</h3>
           <Select
@@ -62,13 +65,14 @@ TournementDetail.getInitialProps = async (context) => {
     };
   }
 
-  const { cgs } = qualifier;
+  const { cgs, action } = qualifier;
 
   const res = await fetch(
     `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,
   );
   const data = await res.json();
   return {
+    action,
     ...data,
   };
 };
@@ -78,12 +82,18 @@ TournementDetail.propTypes = {
   tournament: PropTypes.shape({}),
   playerSummaries: PropTypes.arrayOf(PropTypes.shape({})),
   teamStats: PropTypes.arrayOf(PropTypes.shape({})),
+  action: actionType,
 };
 
 TournementDetail.defaultProps = {
   tournament: null,
   playerSummaries: [],
   teamStats: [],
+  action: {
+    style: 'warning',
+    text: 'Inscrever',
+    href: 'https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info?infoTab=details',
+  },
 };
 
 const TournamentMenu = styled.div`
