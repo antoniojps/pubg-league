@@ -134,6 +134,9 @@ const PlayerList = styled.div`
     &:last-child {
       margin-right: 0;
     }
+    ${below.md`
+      width: 100%;
+    `}
   }
   ${below.lg`
     display: grid;
@@ -146,6 +149,7 @@ const PlayerList = styled.div`
     }
   `}
   ${below.md`
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
     .card {

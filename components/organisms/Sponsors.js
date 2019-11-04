@@ -8,7 +8,7 @@ const Sponsors = () => {
   return (
     <Wrapper>
       <Inner className="zi-layout zi-dark-theme">
-        <p>
+        <p className="title">
           sponsors
         </p>
         <SponsorList>
@@ -64,6 +64,11 @@ const Inner = styled.div`
   .zi-layout {
     padding-top: 0;
     padding-bottom: 0 !important;
+  }
+  p.title {
+    ${below.sm`
+      display: none;
+    `}
   }
   padding-bottom: 0;
   height: 100%;
