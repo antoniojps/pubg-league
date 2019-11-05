@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Seo } from 'containers';
 import fetch from 'isomorphic-unfetch';
 import APP_DATA from '../app.json';
-
+import CGS_DATA_PLACEHOLDER from '../data/cgs-placeholder.json';
 
 const Home = ({ tournament, playerSummaries, teamStats }) => (
   <>
@@ -14,11 +14,15 @@ const Home = ({ tournament, playerSummaries, teamStats }) => (
 );
 
 Home.getInitialProps = async () => {
-  const res = await fetch(
-    `https://api.cgs.gg/mono-service/api/v2/tournament/${APP_DATA.major.cgs}/summary`,
-  );
-  const data = await res.json();
-
+  let data = {};
+  try {
+    const res = await fetch(
+      `https://api.cgs.gg/mono-service/api/v2/tournament/${APP_DATA.major.cgs}/summary`,
+    );
+    data = await res.json();
+  } catch (err) {
+    data = CGS_DATA_PLACEHOLDER;
+  }
   return {
     ...data,
   };

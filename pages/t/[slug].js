@@ -8,8 +8,9 @@ import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { below } from 'services/breakpoints';
-import { actionType } from 'types'
+import { actionType } from 'types';
 import APP_DATA from '../../app.json';
+import CGS_DATA_PLACEHOLDER from '../../data/cgs-placeholder.json';
 
 const TournementDetail = ({
   tournament, playerSummaries, teamStats, action,
@@ -64,13 +65,16 @@ TournementDetail.getInitialProps = async (context) => {
       tournament: null,
     };
   }
-
   const { cgs, action } = qualifier;
-
-  const res = await fetch(
-    `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,
-  );
-  const data = await res.json();
+  let data = {};
+  try {
+    const res = await fetch(
+      `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,
+    );
+    data = await res.json();
+  } catch (err) {
+    data = CGS_DATA_PLACEHOLDER;
+  }
   return {
     action,
     ...data,

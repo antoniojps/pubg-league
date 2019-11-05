@@ -36,7 +36,7 @@ const NavDesktop = () => {
         <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/shootsgud">
           <Icon icon="twitter" color="#1DA1F2" />
         </a>
-        <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
+        <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/HCn4FvT">
           <Icon icon="discord" color="#7289DA" />
         </a>
         <TwitchChannel />
@@ -136,7 +136,7 @@ const NavMobile = () => {
           <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/shootsgud">
             <Icon icon="twitter" color="#1DA1F2" />
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Jnr2wfC">
+          <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/HCn4FvT">
             <Icon icon="discord" color="#7289DA" />
           </a>
           <TwitchChannel />
