@@ -22,7 +22,7 @@ export const actionType = shape({
   href: string,
 });
 
-export const teamsType = arrayOf([shape({
+export const teamsType = arrayOf(shape({
   slot: number,
   team: shape({
     logo: shape({
@@ -33,7 +33,7 @@ export const teamsType = arrayOf([shape({
     name: string,
     tag: string,
   }),
-})]);
+}));
 
 export const contentType = shape({
   title: string,

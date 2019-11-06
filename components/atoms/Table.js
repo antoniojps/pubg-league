@@ -12,7 +12,7 @@ th {
   border: 0 !important;
 }
 th.team {
-  width: 50%;
+  min-width: 400px;
   text-align: left;
 }
 td {

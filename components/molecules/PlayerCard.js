@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Spacer, Icon } from 'components/atoms';
-import { below } from 'services/breakpoints';
+import { Spacer, Icon, TeamLogo } from 'components/atoms';
+import { below, above } from 'services/breakpoints';
 
 const PlayerCard = ({
   player, filter, small, className,
@@ -108,9 +108,27 @@ const PlayerCard = ({
     [filter, playerStats],
   );
 
+  const team = useMemo(() => {
+    if (player && player.computed && player.computed.team) {
+      const { ref } = player.computed.team;
+
+      return {
+        ...ref,
+      };
+    }
+    return {
+      logo: null,
+      name: '',
+      tag: '',
+    };
+  }, [player]);
+
   return (
     <Card className={`zi-card ${className}`} small={small}>
       <Player small={small}>
+        <div className="logo">
+          <TeamLogo src={team.logo} name={team.name} tag={team.tag} />
+        </div>
         <Player.Name small={small}>{(player && player.playerName) || 'TBD' }</Player.Name>
       </Player>
       <StatWrapper>
@@ -166,6 +184,11 @@ const Player = styled.div`
   .zi-avatar {
     overflow: visible;
   }
+  ${above.md((props) => css`
+    .logo {
+      padding-bottom: ${props.small ? props.theme.spacing.xs3 : 0};
+    }
+  `)}
 `;
 Player.Name = styled.div`
   font-size: ${(props) => (props.small ? props.theme.sizes.l : props.theme.sizes.xl3)};

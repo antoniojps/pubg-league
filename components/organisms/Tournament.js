@@ -32,9 +32,22 @@ const Tournament = ({
     const {
       kills, damage, survivedTime, playerMatchStat: matches, playerName,
     } = player;
-    // add team name and image here to the team object
 
+
+    // get team reference from cms
     const team = teamStats.find(({ teamMember }) => teamMember.includes(playerName));
+    const { teamId } = team;
+    const teamReference = teams.find(({ slot }) => teamId === slot);
+    let teamData = {};
+    let restTeamData = {};
+    let teamLogo = null;
+    if (teamReference) {
+      teamData = teamReference.team;
+      const { logo, ...rest } = teamData;
+      if (logo && logo.asset && logo.asset.url) teamLogo = logo.asset.url;
+      restTeamData = rest;
+    }
+
     const matchesPlayed = matches.length;
     const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
     const wins = matches.filter(({ participant: { winPlace } }) => winPlace === 1).length;
@@ -54,7 +67,13 @@ const Tournament = ({
         kd,
         adr,
         alive,
-        team,
+        team: {
+          ...team,
+          ref: {
+            ...restTeamData,
+            logo: teamLogo,
+          },
+        },
       },
       ...player,
     };
@@ -65,7 +84,21 @@ const Tournament = ({
     const {
       kills, damage, survivedTime, playerMatchStat: matches, playerName,
     } = player;
+
+    // get team reference from cms
     const team = teamStats.find(({ teamMember }) => teamMember.includes(playerName));
+    const { teamId } = team;
+    const teamReference = teams.find(({ slot }) => teamId === slot);
+    let teamData = {};
+    let restTeamData = {};
+    let teamLogo = null;
+    if (teamReference) {
+      teamData = teamReference.team;
+      const { logo, ...rest } = teamData;
+      if (logo && logo.asset && logo.asset.url) teamLogo = logo.asset.url;
+      restTeamData = rest;
+    }
+
     const matchesPlayed = matches.length;
     const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
     const wins = matches.filter(({ participant: { winPlace } }) => winPlace === 1).length;
@@ -85,7 +118,13 @@ const Tournament = ({
         kd,
         adr,
         alive,
-        team,
+        team: {
+          ...team,
+          ref: {
+            ...restTeamData,
+            logo: teamLogo,
+          },
+        },
       },
       ...player,
     };
@@ -107,7 +146,7 @@ const Tournament = ({
           <PlayerHighlights playerSummaries={computedPlayerSummariesHighlights} filter={topFilter} onFilterChange={(newFilter) => setTopFilter(newFilter)} />
         </Spacer>
         <Spacer bottom="xl4">
-          <Leaderboard filter={tableFilter} tournament={tournament} playerSummaries={computedPlayerSummariesTable} teamStats={teamStats} qualified={qualified} onFilterChange={(newFilter) => setTableFilter(newFilter)} />
+          <Leaderboard teams={teams} filter={tableFilter} tournament={tournament} playerSummaries={computedPlayerSummariesTable} teamStats={teamStats} qualified={qualified} onFilterChange={(newFilter) => setTableFilter(newFilter)} />
         </Spacer>
       </div>
     </Wrapper>
