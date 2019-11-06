@@ -9,7 +9,7 @@ import {
 } from 'components/organisms';
 import styled from 'styled-components';
 import prettyMilliseconds from 'pretty-ms';
-import { actionType } from 'types';
+import { actionType, teamsType } from 'types';
 
 const tabs = [
   {
@@ -24,7 +24,7 @@ const tabs = [
 ];
 
 const Tournament = ({
-  tournament, playerSummaries, teamStats, children, qualified, action,
+  tournament, playerSummaries, teamStats, children, qualified, action, teams,
 }) => {
   const [topFilter, setTopFilter] = useState('kills');
   const [tableFilter, setTableFilter] = useState('table');
@@ -33,6 +33,7 @@ const Tournament = ({
       kills, damage, survivedTime, playerMatchStat: matches, playerName,
     } = player;
     // add team name and image here to the team object
+
     const team = teamStats.find(({ teamMember }) => teamMember.includes(playerName));
     const matchesPlayed = matches.length;
     const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
@@ -64,7 +65,6 @@ const Tournament = ({
     const {
       kills, damage, survivedTime, playerMatchStat: matches, playerName,
     } = player;
-      // add team name and image here to the team object
     const team = teamStats.find(({ teamMember }) => teamMember.includes(playerName));
     const matchesPlayed = matches.length;
     const matchesDead = matches.filter(({ participant: { deathType } }) => deathType !== 'alive');
@@ -97,7 +97,7 @@ const Tournament = ({
       <Layout header={() => <Sponsors />}>
         <Header>
           <Title>Resultados</Title>
-          <a target="_blank" rel="noopener noreferrer" href={action.href} className={`zi-btn mini ${action.style}`}>{action.text}</a>
+          <a target="_blank" rel="noopener noreferrer" href={action.href} className={`zi-btn mini ${action.style || 'warning'}`}>{action.title}</a>
         </Header>
       </Layout>
       <Tabs tabs={tabs} />
@@ -121,6 +121,7 @@ Tournament.propTypes = {
   children: PropTypes.node,
   qualified: PropTypes.number,
   action: actionType,
+  teams: teamsType,
 };
 
 Tournament.defaultProps = {
@@ -131,9 +132,10 @@ Tournament.defaultProps = {
   qualified: null,
   action: {
     style: 'warning',
-    text: 'Inscrever',
+    title: 'Inscrever',
     href: 'https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info?infoTab=details',
   },
+  teams: [],
 };
 
 const Header = styled.div`

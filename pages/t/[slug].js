@@ -8,12 +8,15 @@ import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { below } from 'services/breakpoints';
-import { actionType } from 'types';
+import { contentType, contentDefaults } from 'types';
 import APP_DATA from '../../app.json';
 import CGS_DATA_PLACEHOLDER from '../../data/cgs-placeholder.json';
+import sanity from '../../services/sanity';
 
 const TournementDetail = ({
-  tournament, playerSummaries, teamStats, action,
+  tournament, playerSummaries, teamStats, content: {
+    teams, action, title,
+  },
 }) => {
   const { push, query: { slug } } = useRouter();
   const [qualifier, setQualifier] = useState(slug);
@@ -28,23 +31,22 @@ const TournementDetail = ({
 
   const options = useMemo(() => {
     const { qualifiers } = APP_DATA;
-    return qualifiers.map(({ slug: qualifierSlug, title }) => ({
-      label: title,
+    return qualifiers.map(({ slug: qualifierSlug, title: label }) => ({
+      label,
       value: qualifierSlug,
     }));
   }, []);
 
-  const qualifierActive = useMemo(() => APP_DATA.qualifiers.find((quali) => slug === quali.slug), [options, slug]);
-
   if (!tournament) return <Error statusCode={404} />;
+
   return (
     <>
       <Seo
-        title={qualifierActive.title}
+        title={title}
       />
-      <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8} action={action}>
+      <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8} action={action} teams={teams} title={title}>
         <TournamentMenu className="zi-layout">
-          <h3>{qualifierActive.title}</h3>
+          <h3>{title}</h3>
           <Select
             options={options}
             value={qualifier}
@@ -58,27 +60,45 @@ const TournementDetail = ({
 
 TournementDetail.getInitialProps = async (context) => {
   const { slug: slugQuery } = context.query;
-  const { qualifiers } = APP_DATA;
-  const qualifier = qualifiers.find(({ slug }) => slug === slugQuery);
-  if (!qualifier) {
-    return {
-      tournament: null,
-    };
-  }
-  const { cgs, action } = qualifier;
-  let data = {};
+
   try {
-    const res = await fetch(
-      `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,
-    );
-    data = await res.json();
+    const content = await sanity.fetch(`
+    *[_type == "tournament" && slug.current == $slug][0]{
+      _id,
+      title,
+      cgs,
+      action,
+      teams[]{
+        slot,
+        team->{slot,name,tag,logo{asset->{url}}}
+      }
+    }
+  `, { slug: slugQuery });
+
+    const { cgs, _id } = content;
+
+    if (!_id) {
+      return {
+        tournament: null,
+      };
+    }
+
+    let data = {};
+    try {
+      const res = await fetch(
+        `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,
+      );
+      data = await res.json();
+    } catch (err) {
+      data = CGS_DATA_PLACEHOLDER;
+    }
+    return {
+      content,
+      ...data,
+    };
   } catch (err) {
-    data = CGS_DATA_PLACEHOLDER;
+    return {};
   }
-  return {
-    action,
-    ...data,
-  };
 };
 
 
@@ -86,18 +106,15 @@ TournementDetail.propTypes = {
   tournament: PropTypes.shape({}),
   playerSummaries: PropTypes.arrayOf(PropTypes.shape({})),
   teamStats: PropTypes.arrayOf(PropTypes.shape({})),
-  action: actionType,
+  content: contentType,
 };
 
 TournementDetail.defaultProps = {
   tournament: null,
   playerSummaries: [],
   teamStats: [],
-  action: {
-    style: 'warning',
-    text: 'Inscrever',
-    href: 'https://battlefy.com/hypedgg/shootsgud-major-league-q1/5dbf28e43a111776867837b2/info?infoTab=details',
-  },
+  content: contentDefaults,
+
 };
 
 const TournamentMenu = styled.div`

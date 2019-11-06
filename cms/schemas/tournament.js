@@ -23,16 +23,16 @@ export default {
     {
       name: 'cgs',
       title: 'CGS ',
-      type: 'slug',
+      type: 'string',
       description: 'Para obter os dados do torneio. O ID no url do CGS. https://cgs.gg/tournament/{CGS}',
       options: {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().lowercase(),
     },
     {
-      name: 'calltoaction',
+      name: 'action',
       title: 'Call to action',
       description: 'Botão que aparece no topo de um torneio',
       type: 'object',
@@ -69,7 +69,7 @@ export default {
         type: 'object',
         fields: [
           {
-            title: 'Slot', name: 'Slot', type: 'number', validation: (Rule) => Rule.required().positive().integer(),
+            title: 'Slot', name: 'slot', type: 'number', validation: (Rule) => Rule.required().positive().integer(),
           },
           {
             title: 'Team',
@@ -94,7 +94,7 @@ export default {
     },
   ],
   initialValue: {
-    calltoaction: {
+    action: {
       _type: 'object',
       title: 'Ver Stream',
       style: 'success',
