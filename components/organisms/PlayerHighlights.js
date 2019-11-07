@@ -63,7 +63,7 @@ const PlayerHighlights = ({
       <PlayerStart>
         <PlayerCard
           className="stretch"
-          player={hasData ? topOnePlayer : null}
+          player={hasData ? topOnePlayer : placeholderData[0]}
           filter={filter}
           loading={loading}
           placeholder={playerSummaries.length === 0}

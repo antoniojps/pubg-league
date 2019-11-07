@@ -185,6 +185,11 @@ const Player = styled.div`
   .zi-avatar {
     overflow: visible;
   }
+  ${above.lg((props) => css`
+    ${props.small && css`
+        flex-direction: column;
+    `}
+  `)};
   ${above.md((props) => css`
     .logo {
       padding-bottom: ${props.theme.spacing.xs3};
@@ -202,7 +207,9 @@ Player.Name = styled.div((props) => css`
     border-radius: ${props.theme.values.radius};
     background-color: ${props.theme.colors.border};
     color: ${props.theme.colors.border};
-
+    ${above.lg(css`
+      margin-left: 0;
+    `)};
   `}
 `);
 
@@ -279,6 +286,9 @@ const StatWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
   ${below.md`
     margin-right: ${(props) => props.theme.spacing.xs};
     margin-left: ${(props) => props.theme.spacing.xs};

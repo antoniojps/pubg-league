@@ -56,10 +56,10 @@ const TeamTableRow = ({
                 {playerName}
               </td>
               <td className="small">
-                <BadgeStat value={kd} great={kd >= 2} good={kd >= 1.5} />
+                <BadgeStat value={kd} great={kd >= 2.5} good={kd >= 1.5} />
               </td>
               <td className="small">
-                <BadgeStat value={adr} great={adr >= 200} good={adr >= 300} />
+                <BadgeStat value={adr} great={adr >= 300} good={adr >= 200} />
               </td>
               <td className="small">
                 <BadgeStat value={kills} />
