@@ -1,17 +1,38 @@
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
-import { Table } from 'components/atoms';
+import { Table, TeamLogo, Spacer } from 'components/atoms';
 import dataPlaceholder from 'data/leaderboard-teams-placeholder.json';
+import { teamsType } from 'types';
 
-const LeaderboardTeams = ({ teamStats, qualified }) => {
+const LeaderboardTeams = ({ teamStats, qualified, teams }) => {
   const isQualifier = useMemo(() => typeof qualified === 'number', [qualified]);
 
   const teamsStatsComputed = useMemo(() => {
-    if (teamStats.length > 0) return teamStats;
+    if (teamStats.length > 0) {
+      return teamStats.map((team) => {
+        const teamReference = teams.find(({ slot }) => team.teamId === slot);
+        let teamData = {};
+        let restTeamData = {};
+        let teamLogo = null;
+        if (teamReference) {
+          teamData = teamReference.team;
+          const { logo, ...rest } = teamData;
+          if (logo && logo.asset && logo.asset.url) teamLogo = logo.asset.url;
+          restTeamData = rest;
+        }
+        return {
+          ...team,
+          ref: {
+            ...restTeamData,
+            logo: teamLogo,
+          },
+        };
+      });
+    }
     return dataPlaceholder;
-  }, [teamStats]);
+  }, [teamStats, teams]);
 
   return (
     <TableTeams isQualifier={isQualifier} qualified={qualified}>
@@ -28,15 +49,27 @@ const LeaderboardTeams = ({ teamStats, qualified }) => {
         <tbody>
           {
               teamsStatsComputed.map(({
-                rank, teamMember, teamId, rankPoints, killPoints,
+                rank, ref, teamId, rankPoints, killPoints, teamMember,
               }) => (
                 <tr key={teamId}>
                   <td>
                       #
                     {rank}
                   </td>
-                  <td className="team small">
-                    {teamMember.join(', ')}
+                  <td className="team">
+                    {ref && ref.name ? (
+                      <>
+                        <Spacer right="xs3">
+                          <TeamLogo src={ref.logo} name={ref.name} tag={ref.tag} />
+                        </Spacer>
+                        {ref.name}
+                      </>
+                    ) : (
+                      <TeamMembers>
+                        {teamMember.join(', ')}
+                      </TeamMembers>
+                    )}
+
                   </td>
                   <td>{rankPoints}</td>
                   <td>{killPoints}</td>
@@ -59,6 +92,7 @@ Qualificam-se as equipas a partir do
 };
 
 const TableTeams = styled.div`
+  overflow-x: auto;
   table {
     tbody tr {
       &:first-child {
@@ -83,7 +117,6 @@ const TableTeams = styled.div`
         display: flex;
         align-items: center;
         text-align: left;
-        font-size: ${(props) => props.theme.sizes.base};
       }
       &.points {
         color: ${(props) => props.theme.colors.orange};
@@ -92,14 +125,23 @@ const TableTeams = styled.div`
   }
 `;
 
+const TeamMembers = styled.div((props) => css`
+  font-size: ${props.theme.sizes.xs};
+  font-weight: ${props.theme.weight.light};
+  display: flex;
+  align-items: center;
+`);
+
 LeaderboardTeams.propTypes = {
   teamStats: PropTypes.arrayOf(PropTypes.shape({})),
   qualified: PropTypes.number,
+  teams: teamsType,
 };
 
 LeaderboardTeams.defaultProps = {
   teamStats: dataPlaceholder,
   qualified: false,
+  teams: [],
 };
 
 export default LeaderboardTeams;

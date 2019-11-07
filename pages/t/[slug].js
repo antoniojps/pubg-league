@@ -7,8 +7,18 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { below } from 'services/breakpoints';
 import { contentType, contentDefaults } from 'types';
-import APP_DATA from '../../app.json';
 import sanity from '../../services/sanity';
+
+const qualifiers = [
+  {
+    slug: 'qualificador-a',
+    title: 'Qualificador 1',
+  },
+  {
+    slug: 'qualificador-b',
+    title: 'Qualificador 2',
+  },
+];
 
 const TournementDetail = ({
   content: {
@@ -26,13 +36,10 @@ const TournementDetail = ({
     }, `/t/${value}`);
   };
 
-  const options = useMemo(() => {
-    const { qualifiers } = APP_DATA;
-    return qualifiers.map(({ slug: qualifierSlug, title: label }) => ({
-      label,
-      value: qualifierSlug,
-    }));
-  }, []);
+  const options = useMemo(() => qualifiers.map(({ slug: qualifierSlug, title: label }) => ({
+    label,
+    value: qualifierSlug,
+  })), []);
 
   if (!_id) return <Error statusCode={404} />;
 
@@ -40,6 +47,7 @@ const TournementDetail = ({
     <>
       <Seo
         title={title}
+        generateImgFromTitle
       />
       <Tournament cgs={cgs} action={action} teams={teams} title={title}>
         <TournamentMenu className="zi-layout">

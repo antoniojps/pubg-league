@@ -195,7 +195,7 @@ NavMob.Links = styled.div`
 
   margin-left: 0;
   max-width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 
 NavMob.Categories = styled.div`
@@ -205,7 +205,7 @@ NavMob.Categories = styled.div`
   flex-shrink: 0;
   justify-content: space-between;
   max-width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   padding-top: ${(props) => props.theme.spacing.xs2};
   a {
     padding: ${(props) => props.theme.spacing.xs4};
@@ -226,7 +226,6 @@ NavMob.Bottom = styled.div`
   margin-top: ${(props) => props.theme.spacing.xs3};
   padding: 0 ${(props) => props.theme.spacing.xs3};
   padding-bottom: ${(props) => props.theme.spacing.xs3};
-  overflow-x: scroll;
 `;
 
 

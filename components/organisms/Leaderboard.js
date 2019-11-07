@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { LeaderboardTeams, LeaderboardPlayers } from 'components/molecules';
+import { teamsType } from 'types';
 
 const filters = {
   table: 'table',
@@ -9,7 +10,7 @@ const filters = {
 };
 
 const Leaderboard = ({
-  teamStats, playerSummaries, tournament, filter, qualified, onFilterChange,
+  teamStats, playerSummaries, tournament, filter, qualified, onFilterChange, teams,
 }) => {
   const handleFilterChange = (newFilter) => {
     if (newFilter === filter) return;
@@ -43,7 +44,7 @@ const Leaderboard = ({
           {computedGamesCounterMessage}
         </GamesCounter>
       </TableHeader>
-      { filter === filters.table && <LeaderboardTeams teamStats={teamStats} qualified={qualified} />}
+      {filter === filters.table && <LeaderboardTeams teams={teams} teamStats={teamStats} qualified={qualified} />}
       { filter === filters.players && <LeaderboardPlayers playerSummaries={playerSummaries} />}
     </>
   );
@@ -89,6 +90,7 @@ Leaderboard.propTypes = {
   qualified: PropTypes.number,
   onFilterChange: PropTypes.func,
   tournament: PropTypes.shape({}),
+  teams: teamsType,
 };
 
 Leaderboard.defaultProps = {
@@ -96,6 +98,7 @@ Leaderboard.defaultProps = {
   qualified: null,
   onFilterChange: () => null,
   tournament: null,
+  teams: [],
 };
 
 export default Leaderboard;

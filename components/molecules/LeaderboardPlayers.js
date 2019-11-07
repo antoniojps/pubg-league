@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
-import { Table } from 'components/atoms';
+import { Table, TeamLogo, Spacer } from 'components/atoms';
 
 const filters = {
   kills: 'kills',
@@ -48,7 +48,7 @@ const LeaderboardPlayers = ({ playerSummaries }) => {
         <thead>
           <tr>
             <th>Lugar</th>
-            <th className="left">Jogador</th>
+            <th className="team">Jogador</th>
             <th>Equipa</th>
             <th>Kills</th>
             <th>Damage</th>
@@ -65,6 +65,9 @@ const LeaderboardPlayers = ({ playerSummaries }) => {
                   {index + 1}
                 </td>
                 <td className="player">
+                  <Spacer right="xs3">
+                    <TeamLogo src={player.computed.team.ref.logo} name={player.computed.team.ref.name} tag={player.computed.team.ref.tag} />
+                  </Spacer>
                   {player.playerName}
                 </td>
                 <td className="small">
@@ -88,6 +91,7 @@ const LeaderboardPlayers = ({ playerSummaries }) => {
 
 
 const TablePlayers = styled.div`
+  overflow-x: auto;
   table {
     tbody tr {
       &:first-child {

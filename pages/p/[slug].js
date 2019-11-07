@@ -27,13 +27,12 @@ const Post = ({
 
   return (
     <>
-      <Seo title={title} />
+      <Seo title={title} generateImgFromTitle />
       <Layout header={() => <Sponsors />}>
         <Aside>
           <Aside.Inner>
             <h1>{title}</h1>
             <p className="zi-caption">{date}</p>
-
           </Aside.Inner>
         </Aside>
         <ReadingContainer>

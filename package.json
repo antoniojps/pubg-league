@@ -13,6 +13,7 @@
     "@zeit-ui/style": "^0.9.3",
     "@zeit/next-css": "^1.0.1",
     "date-fns": "^2.6.0",
+    "dotenv": "^8.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.1.2",
     "nprogress": "^0.2.0",
@@ -22,6 +23,7 @@
     "query-string": "^6.8.3",
     "react": "16.11.0",
     "react-dom": "16.11.0",
+    "react-ga": "^2.7.0",
     "styled-components": "^4.4.1",
     "styled-components-modifiers": "^1.2.5"
   },
