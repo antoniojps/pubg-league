@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayerItem, Spacer, TeamLogo } from 'components/atoms';
+import { BadgeStat, Spacer, TeamLogo } from 'components/atoms';
 import styled, { css } from 'styled-components';
 import useToggle from 'hooks/useToggle';
 
@@ -9,13 +9,12 @@ const TeamTableRow = ({
   const [isOpen, toggle] = useToggle();
 
   const handleRowClick = () => {
-    console.log('row click');
     toggle();
   };
 
   return (
     <>
-      <tr key={teamId} onClick={handleRowClick}>
+      <tr key={teamId} onClick={handleRowClick} className="team-row">
         <td>
                         #
           {rank}
@@ -41,14 +40,33 @@ const TeamTableRow = ({
         <td>{loading ? <Points /> : killPoints}</td>
         <td className="points">{loading ? <Points /> : rankPoints + killPoints}</td>
       </tr>
-      {true && teamMemberStats && teamMemberStats.length > 0 && (
-        <tr>
-          <Players colSpan="6">
-            {teamMemberStats.map((player) => (
-              <PlayerItem player={player} />
-            ))}
-          </Players>
-        </tr>
+      {(teamMemberStats && teamMemberStats.length > 0 && isOpen) && (
+        <>
+          <tr>
+            <td />
+            <td className="left header">Nome</td>
+            <td className="header">K/D</td>
+            <td className="header">ADR</td>
+            <td className="header">KILLS</td>
+          </tr>
+          {teamMemberStats.map(({ playerName, computed: { kd, adr }, kills }) => (
+            <tr key={playerName}>
+              <td className="small" />
+              <td className="small left">
+                {playerName}
+              </td>
+              <td className="small">
+                <BadgeStat value={kd} great={kd >= 2} good={kd >= 1.5} />
+              </td>
+              <td className="small">
+                <BadgeStat value={adr} great={adr >= 200} good={adr >= 300} />
+              </td>
+              <td className="small">
+                <BadgeStat value={kills} />
+              </td>
+            </tr>
+          ))}
+        </>
       )}
     </>
   );
@@ -56,7 +74,6 @@ const TeamTableRow = ({
 
 const Players = styled.td((props) => css`
   width: 100%;
-  padding: ${props.theme.spacing.xs};
   text-align: left !important;
 `);
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { lighten } from 'polished';
+import { lighten, transparentize } from 'polished';
 import {
   Table,
 } from 'components/atoms';
@@ -11,6 +11,7 @@ import {
 import dataPlaceholder from 'data/leaderboard-teams-placeholder.json';
 import { teamsType } from 'types';
 import { findTeamIndividualStatsFromSummaries } from 'services/generators';
+
 
 const LeaderboardTeams = ({
   teamStats, qualified, teams, loading, playerSummaries,
@@ -62,6 +63,7 @@ const LeaderboardTeams = ({
               rank, ref, teamId, rankPoints, killPoints, teamMember, teamMemberStats,
             }) => (
               <TeamTableRow
+                key={teamId}
                 rank={rank}
                 teamRef={ref}
                 teamId={teamId}
@@ -90,23 +92,21 @@ Qualificam-se as equipas a partir do
 
 const TableTeams = styled.div`
   overflow-x: auto;
-  table {
-    tbody tr {
-      &:first-child {
+  .team-row {
+    cursor: pointer;
+    &:hover {
+      background-color: ${(props) => transparentize(0.9, props.theme.colors.bgInverse)} !important;
+    }
+    &:first-child {
         background-color: ${(props) => lighten(0.35, props.theme.colors.yellow)};
       }
-      &:nth-child(2){
-        background-color: ${(props) => lighten(0.4, props.theme.colors.yellow)} !important;
-      }
-      &:nth-child(3){
-        background-color: ${(props) => lighten(0.42, props.theme.colors.yellow)};
-      }
-      &:nth-child(even){
-        background-color: #f2f2f2;
-      }
-      &:nth-child(${(props) => `n+${props.qualified + 1}`}){
-        ${(props) => props.isQualifier && 'background-color: #ffe2e2'};
-      }
+    &:nth-child(even){
+      background-color: #f2f2f2;
+    }
+  }
+
+  table {
+    tbody tr {
     }
 
     td {

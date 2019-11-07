@@ -207,7 +207,7 @@ Player.Name = styled.div((props) => css`
 `);
 
 PlayerCard.propTypes = {
-  player: PropTypes.shape({}).isRequired,
+  player: PropTypes.shape({}),
   filter: PropTypes.oneOf(['kd', 'kills', 'damage', 'adr', 'dbnos', 'wins', 'alive']),
   small: PropTypes.bool,
   loading: PropTypes.bool,
@@ -216,6 +216,7 @@ PlayerCard.propTypes = {
 };
 
 PlayerCard.defaultProps = {
+  player: null,
   filter: 'kills',
   small: false,
   loading: false,
