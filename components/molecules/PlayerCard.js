@@ -190,7 +190,7 @@ const Player = styled.div`
         flex-direction: column;
     `}
   `)};
-  ${above.md((props) => css`
+  ${above.lg((props) => css`
     .logo {
       padding-bottom: ${props.theme.spacing.xs3};
     }
