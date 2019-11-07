@@ -128,7 +128,7 @@ const PlayerCard = ({
     <Card className={`zi-card ${className}`} small={small}>
       <Player small={small}>
         <div className="logo">
-          <TeamLogo src={team.logo} name={team.name} tag={team.tag && (loading ? '...' : null)} />
+          <TeamLogo src={team.logo} name={team.name} tag={team.tag && (loading ? '...' : (team.tag || null))} />
         </div>
         <Player.Name small={small} loading={loading}>{placeholder ? 'TBD' : (player && player.playerName) }</Player.Name>
       </Player>
