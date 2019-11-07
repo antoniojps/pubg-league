@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'services/GlobalStyle';
 import NProgress from 'nprogress';
 import Router from 'next/router';
+import registerGoogleTracking from 'services/ga-tracking';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -13,6 +14,14 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 class MyApp extends App {
+  componentDidMount() {
+    this.unregisterGoogleTracking = registerGoogleTracking(this.props.router);
+  }
+
+  componentWillUnmount() {
+    this.unregisterGoogleTracking();
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
