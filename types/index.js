@@ -37,24 +37,9 @@ export const teamsType = arrayOf([shape({
 
 export const contentType = shape({
   title: string,
-  action: {
-    href: string,
-    style: oneOf(['success', '', 'warning', 'danger']),
-    title: string,
-  },
+  action: actionType,
   cgs: string,
-  teams: arrayOf([shape({
-    slot: number,
-    team: shape({
-      logo: shape({
-        asset: shape({
-          url: string,
-        }),
-      }),
-      name: string,
-      tag: string,
-    }),
-  })]),
+  teams: teamsType,
 });
 
 export const contentDefaults = {
