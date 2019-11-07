@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Spacer, Icon, TeamLogo } from 'components/atoms';
+import { Icon, TeamLogo } from 'components/atoms';
 import { below, above } from 'services/breakpoints';
 
 const PlayerCard = ({
-  player, filter, small, className,
+  player, filter, small, className, loading, placeholder,
 }) => {
   const [isExtended, setExtended] = useState(false);
 
@@ -123,13 +123,14 @@ const PlayerCard = ({
     };
   }, [player]);
 
+
   return (
     <Card className={`zi-card ${className}`} small={small}>
       <Player small={small}>
         <div className="logo">
-          <TeamLogo src={team.logo} name={team.name} tag={team.tag} />
+          <TeamLogo src={team.logo} name={team.name} tag={team.tag && (loading ? '...' : null)} />
         </div>
-        <Player.Name small={small}>{(player && player.playerName) || 'TBD' }</Player.Name>
+        <Player.Name small={small} loading={loading}>{placeholder ? 'TBD' : (player && player.playerName) }</Player.Name>
       </Player>
       <StatWrapper>
         {
@@ -149,14 +150,14 @@ const PlayerCard = ({
         ) : (
 
           <Stat large={!small}>
-            <Stat.Value large={!small} medium={!!small}>{highlighted.value}</Stat.Value>
-            <Stat.Description large={!small}>{highlighted.label}</Stat.Description>
+            <Stat.Value large={!small} medium={!!small} loading={loading}>{highlighted.value}</Stat.Value>
+            <Stat.Description large={!small} loading={loading}>{highlighted.label}</Stat.Description>
           </Stat>
         )
         }
-        <Spacer top="xs2">
+        <Action loading={loading}>
           <button className="zi-btn mini" onClick={() => setExtended(!isExtended)} type="button">{computedBtnMessage}</button>
-        </Spacer>
+        </Action>
       </StatWrapper>
     </Card>
   );
@@ -186,28 +187,47 @@ const Player = styled.div`
   }
   ${above.md((props) => css`
     .logo {
-      padding-bottom: ${props.small ? props.theme.spacing.xs3 : 0};
+      padding-bottom: ${props.theme.spacing.xs3};
     }
   `)}
 `;
-Player.Name = styled.div`
-  font-size: ${(props) => (props.small ? props.theme.sizes.l : props.theme.sizes.xl3)};
-  font-weight: ${(props) => props.theme.weight.base};
-  padding-left: ${(props) => props.theme.spacing.xs3};
-`;
+Player.Name = styled.div((props) => css`
+  font-size: ${props.small ? props.theme.sizes.l : props.theme.sizes.xl3};
+  font-weight: ${props.theme.weight.base};
+  padding-left: ${props.theme.spacing.xs3};
+  ${props.loading && css`
+    padding-left: 0;
+    margin-left: ${props.theme.spacing.xs3};
+    width: 100%;
+    border-radius: ${props.theme.values.radius};
+    background-color: ${props.theme.colors.border};
+    color: ${props.theme.colors.border};
+
+  `}
+`);
 
 PlayerCard.propTypes = {
   player: PropTypes.shape({}).isRequired,
   filter: PropTypes.oneOf(['kd', 'kills', 'damage', 'adr', 'dbnos', 'wins', 'alive']),
   small: PropTypes.bool,
+  loading: PropTypes.bool,
+  placeholder: PropTypes.bool,
   className: PropTypes.string,
 };
 
 PlayerCard.defaultProps = {
   filter: 'kills',
   small: false,
+  loading: false,
+  placeholder: false,
   className: '',
 };
+
+const Action = styled.div((props) => css`
+  margin-top: ${props.theme.spacing.xs2};
+  transition: all .3s ease;
+  opacity: ${props.loading ? 0 : 1};
+`);
 
 const Stat = styled.div`
   display: flex;
@@ -216,20 +236,35 @@ const Stat = styled.div`
   justify-content: center;
   align-items: center;
 `;
-Stat.Value = styled.div`
-  font-size: ${(props) => (props.large ? props.theme.sizes.xl4 : props.theme.sizes.base)};
-  font-size: ${(props) => (props.medium && props.theme.sizes.xl)};
-  font-size: ${(props) => (props.small && props.theme.sizes.xs)};
+Stat.Value = styled.div((props) => css`
+  font-size: ${(props.large ? props.theme.sizes.xl4 : props.theme.sizes.base)};
+  font-size: ${(props.medium && props.theme.sizes.xl)};
+  font-size: ${(props.small && props.theme.sizes.xs)};
   font-weight: 700;
-  color: ${(props) => (props.great && props.theme.colors.red) || (props.good && props.theme.colors.orange)};
+  color: ${(props.great && props.theme.colors.red) || (props.good && props.theme.colors.orange)};
   text-align: center;
-`;
 
-Stat.Description = styled.div`
-  font-size: ${(props) => (props.large ? props.theme.sizes.base : props.theme.sizes.xs)};
+  ${props.loading && css`
+    border-radius: 5px;
+    height: ${(props.large ? props.theme.sizes.xl3 : props.theme.sizes.s)};
+    height: ${(props.medium && props.theme.sizes.x)};
+    height: ${(props.small && props.theme.sizes.xs2)};
+    width: ${(props.large ? props.theme.sizes.xl3 : props.theme.sizes.s)};
+    width: ${(props.medium && props.theme.sizes.x)};
+    width: ${(props.small && props.theme.sizes.xs2)};
+    padding: 0 24px 10px 24px;
+    background-color: ${props.theme.colors.border};
+    color: rgba(0,0,0,0);
+  `}
+`);
+
+Stat.Description = styled.div((props) => css`
+  font-size: ${(props.large ? props.theme.sizes.base : props.theme.sizes.xs)};
   text-transform: uppercase;
-  font-weight: ${(props) => props.theme.weight.light};
-`;
+  font-weight: ${props.theme.weight.light};
+  transition: all .3s ease;
+  opacity: ${props.loading ? 0 : 1};
+`);
 
 const StatGrid = styled.div`
   display: grid;

@@ -85,6 +85,7 @@ const values = {
     l: '100',
     superBig: '9999',
   },
+  radius: '5px',
 };
 
 const theme = {

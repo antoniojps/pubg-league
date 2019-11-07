@@ -6,11 +6,13 @@ import { Table, TeamLogo, Spacer } from 'components/atoms';
 import dataPlaceholder from 'data/leaderboard-teams-placeholder.json';
 import { teamsType } from 'types';
 
-const LeaderboardTeams = ({ teamStats, qualified, teams }) => {
+const LeaderboardTeams = ({
+  teamStats, qualified, teams, loading,
+}) => {
   const isQualifier = useMemo(() => typeof qualified === 'number', [qualified]);
 
   const teamsStatsComputed = useMemo(() => {
-    if (teamStats.length > 0) {
+    if (!loading && teamStats.length > 0) {
       return teamStats.map((team) => {
         const teamReference = teams.find(({ slot }) => team.teamId === slot);
         let teamData = {};
@@ -32,7 +34,7 @@ const LeaderboardTeams = ({ teamStats, qualified, teams }) => {
       });
     }
     return dataPlaceholder;
-  }, [teamStats, teams]);
+  }, [teamStats, teams, loading]);
 
   return (
     <TableTeams isQualifier={isQualifier} qualified={qualified}>
@@ -60,9 +62,11 @@ const LeaderboardTeams = ({ teamStats, qualified, teams }) => {
                     {ref && ref.name ? (
                       <>
                         <Spacer right="xs3">
-                          <TeamLogo src={ref.logo} name={ref.name} tag={ref.tag} />
+                          <TeamLogo src={ref.logo} name={ref.name} tag={ref.tag} loading={loading} />
                         </Spacer>
-                        {ref.name}
+                        <TeamName loading={loading || teamStats.length === 0}>
+                          {ref.name}
+                        </TeamName>
                       </>
                     ) : (
                       <TeamMembers>
@@ -71,9 +75,9 @@ const LeaderboardTeams = ({ teamStats, qualified, teams }) => {
                     )}
 
                   </td>
-                  <td>{rankPoints}</td>
-                  <td>{killPoints}</td>
-                  <td className="points">{rankPoints + killPoints}</td>
+                  <td>{loading ? <Points /> : rankPoints}</td>
+                  <td>{loading ? <Points /> : killPoints}</td>
+                  <td className="points">{loading ? <Points /> : rankPoints + killPoints}</td>
                 </tr>
               ))
               }
@@ -114,7 +118,7 @@ const TableTeams = styled.div`
 
     td {
       &.team {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         text-align: left;
       }
@@ -124,6 +128,31 @@ const TableTeams = styled.div`
     }
   }
 `;
+
+const Points = styled.div((props) => css`
+    background-color: ${props.theme.colors.bgInverse};
+    color: ${props.theme.colors.bgInverse};
+    font-size: 10px;
+    opacity: 0.1;
+    border-radius: ${props.theme.values.radius};
+    width: 12px;
+    height: 14px;
+    margin-left: auto;
+    margin-right: auto;
+`);
+
+const TeamName = styled.div((props) => css`
+  opacity: 1;
+  transition: opacity .3s ease;
+  ${props.loading && css`
+    background-color: ${props.theme.colors.bgInverse};
+    color: ${props.theme.colors.bgInverse};
+    font-size: 10px;
+    opacity: 0.1;
+    border-radius: ${props.theme.values.radius};
+    min-width: 150px;
+  `}
+`);
 
 const TeamMembers = styled.div((props) => css`
   font-size: ${props.theme.sizes.xs};
@@ -136,12 +165,14 @@ LeaderboardTeams.propTypes = {
   teamStats: PropTypes.arrayOf(PropTypes.shape({})),
   qualified: PropTypes.number,
   teams: teamsType,
+  loading: PropTypes.bool,
 };
 
 LeaderboardTeams.defaultProps = {
   teamStats: dataPlaceholder,
   qualified: false,
   teams: [],
+  loading: false,
 };
 
 export default LeaderboardTeams;

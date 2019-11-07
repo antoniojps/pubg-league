@@ -6,7 +6,11 @@
     "killPoints": 0,
     "rank": 1,
     "rankPoints": 0,
-    "teamMember": ["..."]
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
   },
   {
     "teamId": 2,
@@ -15,7 +19,11 @@
     "killPoints": 0,
     "rank": 2,
     "rankPoints": 0,
-    "teamMember": ["..."]
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
   },
   {
     "teamId": 3,
@@ -24,6 +32,179 @@
     "killPoints": 0,
     "rank": 3,
     "rankPoints": 0,
-    "teamMember": ["..."]
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 4,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 4,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 5,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 5,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 6,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 6,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 7,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 7,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 8,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 8,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 9,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 9,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 10,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 10,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 11,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 11,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 12,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 12,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 13,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 13,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 14,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 14,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 15,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 15,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
+  },
+  {
+    "teamId": 16,
+    "teamName": "",
+    "kills": 0,
+    "killPoints": 0,
+    "rank": 16,
+    "rankPoints": 0,
+    "teamMember": ["..."],
+    "ref": {
+      "name": "Team Name",
+      "tag": "..."
+    }
   }
 ]

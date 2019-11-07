@@ -11,7 +11,7 @@ const TournamentContainer = ({
 }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const requestCgs = async () => {
@@ -40,25 +40,20 @@ const TournamentContainer = ({
     console.log({ data, loading, error });
   }, [data, loading, error]);
 
-  if (loading) return 'Loading';
-  if (data && !loading) {
-    return (
-      <Tournament
-        tournament={data && data.tournament}
-        teamStats={data && data.teamStats}
-        playerSummaries={data && data.playerSummaries}
-        qualified={8}
-        action={action}
-        teams={teams}
-        title={title}
-        loading
-      >
-        {children}
-      </Tournament>
-    );
-  }
-
-  return 'No data';
+  return (
+    <Tournament
+      tournament={data ? data.tournament : null}
+      teamStats={data ? data.teamStats : []}
+      playerSummaries={data ? data.playerSummaries : []}
+      qualified={8}
+      action={action}
+      teams={teams}
+      title={title}
+      loading={loading}
+    >
+      {children}
+    </Tournament>
+  );
 };
 
 TournamentContainer.propTypes = {

@@ -12,7 +12,9 @@ const filters = {
   adr: 'adr',
 };
 
-const PlayerHighlights = ({ playerSummaries, filter, onFilterChange }) => {
+const PlayerHighlights = ({
+  playerSummaries, filter, onFilterChange, loading,
+}) => {
   const topPlayers = useMemo(() => {
     const orderedByFilterTopPlayers = playerSummaries.sort((playerA, playerB) => {
       let statA = playerA[filter];
@@ -54,12 +56,19 @@ const PlayerHighlights = ({ playerSummaries, filter, onFilterChange }) => {
     onFilterChange(newFilter);
   };
 
-  const hasData = useMemo(() => playerSummaries.length > 0, [playerSummaries]);
+  const hasData = useMemo(() => !loading && playerSummaries.length > 0, [playerSummaries, loading]);
 
   return (
     <Wrapper>
       <PlayerStart>
-        <PlayerCard className="stretch" player={hasData ? topOnePlayer : null} filter={filter} stretch />
+        <PlayerCard
+          className="stretch"
+          player={hasData ? topOnePlayer : null}
+          filter={filter}
+          loading={loading}
+          placeholder={playerSummaries.length === 0}
+          stretch
+        />
       </PlayerStart>
       <PlayerEnd>
         <h3>Melhores jogadores</h3>
@@ -71,11 +80,30 @@ const PlayerHighlights = ({ playerSummaries, filter, onFilterChange }) => {
         </div>
         <PlayerList>
           {hasData
-            ? restTopPlayers.map((player) => <PlayerCard key={player.playerName} className="card" player={player} filter={filter} small />)
-            : placeholderData.map((player) => <PlayerCard key={player.playerName} className="card" player={player} filter={filter} small />)}
+            ? restTopPlayers.map((player) => (
+              <PlayerCard
+                key={player.playerName}
+                loading={loading}
+                className="card"
+                player={player}
+                filter={filter}
+                small
+              />
+            ))
+            : placeholderData.map((player) => (
+              <PlayerCard
+                key={player.playerName}
+                loading={loading}
+                className="card"
+                player={player}
+                filter={filter}
+                placeholder
+                small
+              />
+            ))}
         </PlayerList>
-        {!hasData && (
-          <p className="zi-comment">Dados disponíveis após um jogo.</p>
+        {(!hasData && !loading) && (
+        <p className="zi-comment">Dados disponíveis após um jogo.</p>
         )}
       </PlayerEnd>
     </Wrapper>
@@ -162,12 +190,14 @@ PlayerHighlights.propTypes = {
   playerSummaries: PropTypes.arrayOf(PropTypes.shape({})),
   filter: PropTypes.oneOf([...Object.keys(filters)]),
   onFilterChange: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 PlayerHighlights.defaultProps = {
   playerSummaries: [],
   filter: filters.kills,
   onFilterChange: () => null,
+  loading: false,
 };
 
 export default PlayerHighlights;

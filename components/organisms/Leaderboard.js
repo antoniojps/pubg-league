@@ -10,7 +10,14 @@ const filters = {
 };
 
 const Leaderboard = ({
-  teamStats, playerSummaries, tournament, filter, qualified, onFilterChange, teams,
+  teamStats,
+  playerSummaries,
+  tournament,
+  filter,
+  qualified,
+  onFilterChange,
+  teams,
+  loading,
 }) => {
   const handleFilterChange = (newFilter) => {
     if (newFilter === filter) return;
@@ -44,7 +51,7 @@ const Leaderboard = ({
           {computedGamesCounterMessage}
         </GamesCounter>
       </TableHeader>
-      {filter === filters.table && <LeaderboardTeams teams={teams} teamStats={teamStats} qualified={qualified} />}
+      {filter === filters.table && <LeaderboardTeams teams={teams} teamStats={teamStats} qualified={qualified} loading={loading} />}
       { filter === filters.players && <LeaderboardPlayers playerSummaries={playerSummaries} />}
     </>
   );
@@ -91,6 +98,7 @@ Leaderboard.propTypes = {
   onFilterChange: PropTypes.func,
   tournament: PropTypes.shape({}),
   teams: teamsType,
+  loading: PropTypes.bool,
 };
 
 Leaderboard.defaultProps = {
@@ -99,6 +107,7 @@ Leaderboard.defaultProps = {
   onFilterChange: () => null,
   tournament: null,
   teams: [],
+  loading: false,
 };
 
 export default Leaderboard;
