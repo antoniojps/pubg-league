@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Tournament } from 'components/organisms';
-import { below } from 'services/breakpoints';
 import { teamsType, actionType } from 'types';
 import CGS_DATA_PLACEHOLDER from '../data/cgs-placeholder.json';
 
@@ -35,10 +33,6 @@ const TournamentContainer = ({
     };
     requestCgs();
   }, [cgs]);
-
-  useEffect(() => {
-    console.log({ data, loading, error });
-  }, [data, loading, error]);
 
   return (
     <Tournament

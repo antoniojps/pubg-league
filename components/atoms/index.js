@@ -7,3 +7,4 @@ export { default as Table } from './Table';
 export { default as Clamp } from './Clamp';
 export { default as TeamLogo } from './TeamLogo';
 export { default as Loader } from './Loader';
+export { default as PlayerItem } from './PlayerItem';

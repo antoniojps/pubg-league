@@ -2,7 +2,12 @@ import React, { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
-import { Table, TeamLogo, Spacer } from 'components/atoms';
+import {
+  Table, TeamLogo, Spacer,
+} from 'components/atoms';
+import {
+  TeamTableRow,
+} from 'components/molecules';
 import dataPlaceholder from 'data/leaderboard-teams-placeholder.json';
 import { teamsType } from 'types';
 
@@ -50,37 +55,21 @@ const LeaderboardTeams = ({
         </thead>
         <tbody>
           {
-              teamsStatsComputed.map(({
-                rank, ref, teamId, rankPoints, killPoints, teamMember,
-              }) => (
-                <tr key={teamId}>
-                  <td>
-                      #
-                    {rank}
-                  </td>
-                  <td className="team">
-                    {ref && ref.name ? (
-                      <>
-                        <Spacer right="xs3">
-                          <TeamLogo src={ref.logo} name={ref.name} tag={ref.tag} loading={loading} />
-                        </Spacer>
-                        <TeamName loading={loading || teamStats.length === 0}>
-                          {ref.name}
-                        </TeamName>
-                      </>
-                    ) : (
-                      <TeamMembers>
-                        {teamMember.join(', ')}
-                      </TeamMembers>
-                    )}
-
-                  </td>
-                  <td>{loading ? <Points /> : rankPoints}</td>
-                  <td>{loading ? <Points /> : killPoints}</td>
-                  <td className="points">{loading ? <Points /> : rankPoints + killPoints}</td>
-                </tr>
-              ))
-              }
+            teamsStatsComputed.map(({
+              rank, ref, teamId, rankPoints, killPoints, teamMember,
+            }) => (
+              <TeamTableRow
+                rank={rank}
+                teamRef={ref}
+                teamId={teamId}
+                rankPoints={rankPoints}
+                killPoints={killPoints}
+                teamMember={teamMember}
+                loading={loading}
+                teamStats={teamStats}
+              />
+            ))
+            }
         </tbody>
       </Table>
       {isQualifier && (
@@ -121,6 +110,7 @@ const TableTeams = styled.div`
         display: inline-flex;
         align-items: center;
         text-align: left;
+        width: 100%;
       }
       &.points {
         color: ${(props) => props.theme.colors.orange};
@@ -128,38 +118,6 @@ const TableTeams = styled.div`
     }
   }
 `;
-
-const Points = styled.div((props) => css`
-    background-color: ${props.theme.colors.bgInverse};
-    color: ${props.theme.colors.bgInverse};
-    font-size: 10px;
-    opacity: 0.1;
-    border-radius: ${props.theme.values.radius};
-    width: 12px;
-    height: 14px;
-    margin-left: auto;
-    margin-right: auto;
-`);
-
-const TeamName = styled.div((props) => css`
-  opacity: 1;
-  transition: opacity .3s ease;
-  ${props.loading && css`
-    background-color: ${props.theme.colors.bgInverse};
-    color: ${props.theme.colors.bgInverse};
-    font-size: 10px;
-    opacity: 0.1;
-    border-radius: ${props.theme.values.radius};
-    min-width: 150px;
-  `}
-`);
-
-const TeamMembers = styled.div((props) => css`
-  font-size: ${props.theme.sizes.xs};
-  font-weight: ${props.theme.weight.light};
-  display: flex;
-  align-items: center;
-`);
 
 LeaderboardTeams.propTypes = {
   teamStats: PropTypes.arrayOf(PropTypes.shape({})),
