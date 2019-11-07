@@ -12,4 +12,7 @@ module.exports = withCSS({
     config.resolve.alias['types'] = path.join(__dirname, 'types');
     return config;
   },
+  env: {
+    GA_TRACKING_ID: process.env.GA_TRACKING_ID,
+  },
 });
