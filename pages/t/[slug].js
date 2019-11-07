@@ -50,6 +50,7 @@ const TournementDetail = ({
     <>
       <Seo
         title={title}
+        generateImgFromTitle
       />
       <Tournament tournament={tournament} teamStats={teamStats} playerSummaries={playerSummaries} qualified={8} action={action} teams={teams} title={title}>
         <TournamentMenu className="zi-layout">
