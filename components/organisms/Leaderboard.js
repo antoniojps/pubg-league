@@ -51,7 +51,7 @@ const Leaderboard = ({
           {computedGamesCounterMessage}
         </GamesCounter>
       </TableHeader>
-      {filter === filters.table && <LeaderboardTeams teams={teams} teamStats={teamStats} qualified={qualified} loading={loading} />}
+      {filter === filters.table && <LeaderboardTeams teams={teams} teamStats={teamStats} qualified={qualified} loading={loading} playerSummaries={playerSummaries} />}
       { filter === filters.players && <LeaderboardPlayers playerSummaries={playerSummaries} />}
     </>
   );

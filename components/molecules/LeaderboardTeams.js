@@ -1,24 +1,26 @@
 import React, { useMemo } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import {
-  Table, TeamLogo, Spacer,
+  Table,
 } from 'components/atoms';
 import {
   TeamTableRow,
 } from 'components/molecules';
 import dataPlaceholder from 'data/leaderboard-teams-placeholder.json';
 import { teamsType } from 'types';
+import { findTeamIndividualStatsFromSummaries } from 'services/generators';
 
 const LeaderboardTeams = ({
-  teamStats, qualified, teams, loading,
+  teamStats, qualified, teams, loading, playerSummaries,
 }) => {
   const isQualifier = useMemo(() => typeof qualified === 'number', [qualified]);
 
   const teamsStatsComputed = useMemo(() => {
     if (!loading && teamStats.length > 0) {
       return teamStats.map((team) => {
+        const teamMemberStats = findTeamIndividualStatsFromSummaries({ teamMembers: team.teamMember, playerSummaries });
         const teamReference = teams.find(({ slot }) => team.teamId === slot);
         let teamData = {};
         let restTeamData = {};
@@ -31,6 +33,7 @@ const LeaderboardTeams = ({
         }
         return {
           ...team,
+          teamMemberStats,
           ref: {
             ...restTeamData,
             logo: teamLogo,
@@ -56,7 +59,7 @@ const LeaderboardTeams = ({
         <tbody>
           {
             teamsStatsComputed.map(({
-              rank, ref, teamId, rankPoints, killPoints, teamMember,
+              rank, ref, teamId, rankPoints, killPoints, teamMember, teamMemberStats,
             }) => (
               <TeamTableRow
                 rank={rank}
@@ -65,6 +68,7 @@ const LeaderboardTeams = ({
                 rankPoints={rankPoints}
                 killPoints={killPoints}
                 teamMember={teamMember}
+                teamMemberStats={teamMemberStats}
                 loading={loading}
                 teamStats={teamStats}
               />
@@ -124,6 +128,7 @@ LeaderboardTeams.propTypes = {
   qualified: PropTypes.number,
   teams: teamsType,
   loading: PropTypes.bool,
+  playerSummaries: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 LeaderboardTeams.defaultProps = {
@@ -131,6 +136,7 @@ LeaderboardTeams.defaultProps = {
   qualified: false,
   teams: [],
   loading: false,
+  playerSummaries: [],
 };
 
 export default LeaderboardTeams;

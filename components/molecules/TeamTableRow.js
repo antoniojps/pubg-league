@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import useToggle from 'hooks/useToggle';
 
 const TeamTableRow = ({
-  rank, teamRef, teamId, rankPoints, killPoints, teamMember, loading, teamStats,
+  rank, teamRef, teamId, rankPoints, killPoints, teamMember, loading, teamStats, teamMemberStats,
 }) => {
   const [isOpen, toggle] = useToggle();
 
@@ -41,10 +41,10 @@ const TeamTableRow = ({
         <td>{loading ? <Points /> : killPoints}</td>
         <td className="points">{loading ? <Points /> : rankPoints + killPoints}</td>
       </tr>
-      {isOpen && (
+      {true && teamMemberStats && teamMemberStats.length > 0 && (
         <tr>
           <Players colSpan="6">
-            {teamMember.map((player) => (
+            {teamMemberStats.map((player) => (
               <PlayerItem player={player} />
             ))}
           </Players>
@@ -56,7 +56,7 @@ const TeamTableRow = ({
 
 const Players = styled.td((props) => css`
   width: 100%;
-  padding: ${props.theme.spacing.xs3};
+  padding: ${props.theme.spacing.xs};
   text-align: left !important;
 `);
 
