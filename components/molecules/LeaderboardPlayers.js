@@ -91,7 +91,7 @@ const LeaderboardPlayers = ({ playerSummaries }) => {
 
 
 const TablePlayers = styled.div`
-  overflow: scroll;
+  overflow-x: auto;
   table {
     tbody tr {
       &:first-child {

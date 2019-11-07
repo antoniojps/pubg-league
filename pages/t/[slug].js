@@ -9,9 +9,19 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { below } from 'services/breakpoints';
 import { contentType, contentDefaults } from 'types';
-import APP_DATA from '../../app.json';
 import CGS_DATA_PLACEHOLDER from '../../data/cgs-placeholder.json';
 import sanity from '../../services/sanity';
+
+const qualifiers = [
+  {
+    slug: 'qualificador-a',
+    title: 'Qualificador 1',
+  },
+  {
+    slug: 'qualificador-b',
+    title: 'Qualificador 2',
+  },
+];
 
 const TournementDetail = ({
   tournament, playerSummaries, teamStats, content: {
@@ -29,13 +39,10 @@ const TournementDetail = ({
     }, `/t/${value}`);
   };
 
-  const options = useMemo(() => {
-    const { qualifiers } = APP_DATA;
-    return qualifiers.map(({ slug: qualifierSlug, title: label }) => ({
-      label,
-      value: qualifierSlug,
-    }));
-  }, []);
+  const options = useMemo(() => qualifiers.map(({ slug: qualifierSlug, title: label }) => ({
+    label,
+    value: qualifierSlug,
+  })), []);
 
   if (!tournament) return <Error statusCode={404} />;
 
