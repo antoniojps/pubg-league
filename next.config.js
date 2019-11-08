@@ -1,11 +1,11 @@
 /* eslint-disable dot-notation */
-const path = require('path');
 const withCSS = require('@zeit/next-css');
+const path = require('path');
 
 require('dotenv').config();
 
 module.exports = withCSS({
-  webpack(config) {
+  webpack: (config) => {
     config.resolve.alias['components'] = path.join(__dirname, 'components');
     config.resolve.alias['services'] = path.join(__dirname, 'services');
     config.resolve.alias['data'] = path.join(__dirname, 'data');
