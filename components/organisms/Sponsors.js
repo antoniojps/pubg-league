@@ -1,42 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { below } from 'services/breakpoints';
 
-const Sponsors = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  return (
-    <Wrapper>
-      <Inner className="zi-layout zi-dark-theme">
-        <p className="title">
+const Sponsors = () => (
+  <Wrapper>
+    <Inner className="zi-layout zi-dark-theme">
+      <p className="title">
           sponsors
-        </p>
-        <SponsorList>
-          <Sponsor href="https://www.globaldata.pt/?q=noblechairs" target="_blank" rel="noopener noreferrer">
-            <img src="/noblechairs.svg" alt="Noblechairs logo" />
-          </Sponsor>
-          <Sponsor href="https://www.globaldata.pt/rato-gamer-endgame-gear-xm1-xm1" target="_blank" rel="noopener noreferrer">
-            <img src="/endgame-gear.svg" alt="Endgame gear logo" />
-          </Sponsor>
-          <Sponsor href="https://discordapp.com/invite/Jnr2wfC" target="_blank" rel="noopener noreferrer">
-            <img src="/pubg-pt.png" alt="PUBG PT logo" />
-          </Sponsor>
-        </SponsorList>
-      </Inner>
-      <Character className={imageLoaded ? 'show' : ''}>
-        <img
-          src="/character.png"
-          onLoad={() => setImageLoaded(true)}
-          onError={(e) => {
-            e.target.src = '/character.png';
-            setImageLoaded(true);
-          }}
-          alt="PUBG main character with helmet level 3."
-        />
-      </Character>
-    </Wrapper>
-  );
-};
+      </p>
+      <SponsorList>
+        <Sponsor href="https://www.globaldata.pt/?q=noblechairs" target="_blank" rel="noopener noreferrer">
+          <img src="/noblechairs.svg" alt="Noblechairs logo" />
+        </Sponsor>
+        <Sponsor href="https://www.globaldata.pt/rato-gamer-endgame-gear-xm1-xm1" target="_blank" rel="noopener noreferrer">
+          <img src="/endgame-gear.svg" alt="Endgame gear logo" />
+        </Sponsor>
+        <Sponsor href="https://discordapp.com/invite/Jnr2wfC" target="_blank" rel="noopener noreferrer">
+          <img src="/pubg-pt.png" alt="PUBG PT logo" />
+        </Sponsor>
+      </SponsorList>
+    </Inner>
+    <Character>
+      <img
+        src="/character.png"
+        alt="PUBG main character with helmet level 3."
+      />
+    </Character>
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   width: 100%;
@@ -54,10 +45,7 @@ const Character = styled.div`
   height: 100%;
   margin-right: 15%;
   transition: 2s opacity;
-  opacity: 0;
-  &.show {
-    opacity: 0.2;
-  }
+  opacity: 0.2;
 `;
 
 const Inner = styled.div`

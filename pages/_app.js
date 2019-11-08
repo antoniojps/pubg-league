@@ -6,7 +6,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import registerGoogleTracking from 'services/ga-tracking';
 import App from 'next/app';
-import { Nav } from 'components/organisms';
+import { Nav, Sponsors } from 'components/organisms';
 import '@zeit-ui/style/dist/style.css';
 
 Router.events.on('routeChangeStart', () => {
@@ -17,9 +17,6 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps, router }) {
   useEffect(() => {
-    console.log('app mounted');
-    console.log('env', process.env.GA_TRACKING_ID);
-    console.log(router);
     const unregisterGoogleTracking = registerGoogleTracking(router);
     return unregisterGoogleTracking();
   }, []);
@@ -28,6 +25,7 @@ function MyApp({ Component, pageProps, router }) {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Nav />
+      <Sponsors />
       <Component {...pageProps} />
     </ThemeProvider>
   );

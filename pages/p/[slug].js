@@ -28,7 +28,7 @@ const Post = ({
   return (
     <>
       <Seo title={title} generateImgFromTitle />
-      <Layout header={() => <Sponsors />}>
+      <Layout>
         <Aside>
           <Aside.Inner>
             <h1>{title}</h1>

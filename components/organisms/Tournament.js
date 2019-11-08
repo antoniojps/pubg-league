@@ -47,7 +47,7 @@ const Tournament = ({
 
   return (
     <Wrapper>
-      <Layout header={() => <Sponsors />}>
+      <Layout>
         <Header>
           <Title>
 Resultados
