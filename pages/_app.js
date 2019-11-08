@@ -1,11 +1,13 @@
-import React from 'react';
-import App from 'next/app';
-import theme from 'services/theme';
+import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
+import theme from 'services/theme';
 import GlobalStyle from 'services/GlobalStyle';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import registerGoogleTracking from 'services/ga-tracking';
+import App from 'next/app';
+import { Nav } from 'components/organisms';
+import '@zeit-ui/style/dist/style.css';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -13,24 +15,49 @@ Router.events.on('routeChangeStart', () => {
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-class MyApp extends App {
-  componentDidMount() {
-    this.unregisterGoogleTracking = registerGoogleTracking(this.props.router);
-  }
+function MyApp({ Component, pageProps, router }) {
+  useEffect(() => {
+    console.log('app mounted');
+    console.log('env', process.env.GA_TRACKING_ID);
+    console.log(router);
+    const unregisterGoogleTracking = registerGoogleTracking(router);
+    return unregisterGoogleTracking();
+  }, []);
 
-  componentWillUnmount() {
-    this.unregisterGoogleTracking();
-  }
-
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    );
-  }
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Nav />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext);
+
+  return { ...appProps };
+};
+
+// class MyApp extends App {
+//   componentDidMount() {
+//     this.unregisterGoogleTracking = registerGoogleTracking(this.props.router)
+//   }
+
+//   componentWillUnmount() {
+//     this.unregisterGoogleTracking()
+//   }
+
+//   render() {
+//     const { Component, pageProps } = this.props
+//     return (
+//       <ThemeProvider theme={theme}>
+//         <GlobalStyle />
+//         <Component {...pageProps} />
+//       </ThemeProvider>
+//     )
+//   }
+// }
 
 export default MyApp;

@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '@zeit-ui/style';
 import styled from 'styled-components';
 import { applyStyleModifiers } from 'styled-components-modifiers';
 import { modifiersType } from 'types';
-import Nav from './Nav';
 
 const LAYOUT_MODIFIERS = {
   stretch: () => `
@@ -15,7 +13,6 @@ const LAYOUT_MODIFIERS = {
 
 const Layout = ({ children, modifiers, header: Header }) => (
   <Styles modifiers={modifiers}>
-    <Nav />
     <Header />
     <div className="zi-layout">{children}</div>
   </Styles>
