@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import useToggle from 'hooks/useToggle';
 
 const TeamTableRow = ({
-  rank, teamRef, teamId, rankPoints, killPoints, teamMember, loading, teamStats, teamMemberStats,
+  rank, teamRef, teamId, rankPoints, killPoints, teamMember, loading, teamStats, teamMemberStats, qualified,
 }) => {
   const [isOpen, toggle] = useToggle();
 
@@ -14,7 +14,7 @@ const TeamTableRow = ({
 
   return (
     <>
-      <tr key={teamId} onClick={handleRowClick} className="team-row">
+      <tr key={teamId} onClick={handleRowClick} className={(qualified && rank > qualified) ? 'team-row disqualified' : 'team-row'}>
         <td>
                         #
           {rank}
@@ -71,11 +71,6 @@ const TeamTableRow = ({
     </>
   );
 };
-
-const Players = styled.td((props) => css`
-  width: 100%;
-  text-align: left !important;
-`);
 
 const TeamName = styled.div((props) => css`
   opacity: 1;

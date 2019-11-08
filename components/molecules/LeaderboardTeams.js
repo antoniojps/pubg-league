@@ -73,6 +73,7 @@ const LeaderboardTeams = ({
                 teamMemberStats={teamMemberStats}
                 loading={loading}
                 teamStats={teamStats}
+                qualified={qualified}
               />
             ))
             }
@@ -107,6 +108,9 @@ const TableTeams = styled.div`
 
   table {
     tbody tr {
+      &.disqualified {
+        background-color: ${(props) => lighten(0.45, props.theme.colors.red)} !important;
+      }
     }
 
     td {
