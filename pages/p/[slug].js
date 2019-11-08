@@ -55,7 +55,7 @@ Post.getInitialProps = async (context) => {
 Post.propTypes = {
   _id: PropTypes.string,
   title: PropTypes.string,
-  body: PropTypes.arrayOf([PropTypes.shape({})]),
+  body: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 Post.defaultProps = {

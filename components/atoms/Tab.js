@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-const Tab = ({ title, to, active }) => {
+const Tab = ({
+  title, active, as, pathname,
+}) => {
   const linkClass = useMemo(() => (active ? 'active' : ''), [active]);
   return (
     <TabStyle>
-      <Link href={to}>
+      <Link href={pathname} as={as}>
         <a className={linkClass}>{title}</a>
       </Link>
     </TabStyle>
@@ -30,12 +32,16 @@ const TabStyle = styled.div`
 Tab.propTypes = {
   title: PropTypes.string,
   to: PropTypes.string,
+  as: PropTypes.string,
+  pathname: PropTypes.string,
   active: PropTypes.bool,
 };
 
 Tab.defaultProps = {
   title: '',
   to: '/',
+  as: '/',
+  pathname: '/',
   active: false,
 };
 

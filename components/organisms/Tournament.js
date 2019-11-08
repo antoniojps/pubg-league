@@ -8,7 +8,6 @@ import {
   Layout, PlayerHighlights, Leaderboard, Sponsors,
 } from 'components/organisms';
 import styled from 'styled-components';
-import prettyMilliseconds from 'pretty-ms';
 import { actionType, teamsType } from 'types';
 import { computedPlayerSummariesWithTeam } from 'services/generators';
 
@@ -16,11 +15,14 @@ const tabs = [
   {
     title: 'Liga',
     to: '/',
+    as: '/',
+    pathname: '/',
   },
   {
     title: 'Qualificadores',
+    as: '/t/qualificador-a',
+    to: '/t?slug=qualificador-a',
     pathname: '/t/[slug]',
-    to: '/t/qualificador-a',
   },
 ];
 

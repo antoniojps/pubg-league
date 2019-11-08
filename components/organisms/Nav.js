@@ -18,13 +18,13 @@ const NavDesktop = () => {
           <Link href="/">
             <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
           </Link>
-          <Link href="/p/calendario">
+          <Link href="/p/[slug]" as="/p/calendario">
             <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
           </Link>
-          <Link href="/p/sobre">
+          <Link href="/p/[slug]" as="/p/sobre">
             <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
           </Link>
-          <Link href="/p/info">
+          <Link href="/p/[slug]" as="/p/info">
             <a title="Informação">Info</a>
           </Link>
         </Navigation.Links>
@@ -147,13 +147,13 @@ const NavMobile = () => {
           <Link href="/">
             <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
           </Link>
-          <Link href="/p/calendario">
+          <Link href="/p/[slug]" as="/p/calendario">
             <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
           </Link>
-          <Link href="/p/sobre">
+          <Link href="/p/[slug]" as="/p/sobre">
             <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
           </Link>
-          <Link href="/p/info">
+          <Link href="/p/[slug]" as="/p/info">
             <a title="Sobre a Liga Nacional de PUBG">Info</a>
           </Link>
         </NavMob.Categories>

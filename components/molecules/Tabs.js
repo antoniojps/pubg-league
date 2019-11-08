@@ -9,8 +9,10 @@ const Tabs = ({ tabs }) => {
   return (
     <>
       <TabsList className="zi-layout">
-        {tabs.map(({ title, to, pathname: tabPathname }) => (
-          <Tab key={title} title={title} to={to} active={pathname === to || pathname === tabPathname} />
+        {tabs.map(({
+          title, to, as, pathname: tabPathname,
+        }) => (
+          <Tab key={title} title={title} to={to} as={as} pathname={tabPathname} active={pathname === to || pathname === tabPathname} />
         ))}
       </TabsList>
       <Line />

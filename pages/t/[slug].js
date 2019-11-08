@@ -31,7 +31,7 @@ const TournementDetail = ({
   const handleOnSelect = (value) => {
     setQualifier(value);
     push({
-      pathname: '/t',
+      pathname: '/t/[slug]',
       query: { slug: value },
     }, `/t/${value}`);
   };
