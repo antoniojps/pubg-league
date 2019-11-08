@@ -40,24 +40,4 @@ MyApp.getInitialProps = async (appContext) => {
   return { ...appProps };
 };
 
-// class MyApp extends App {
-//   componentDidMount() {
-//     this.unregisterGoogleTracking = registerGoogleTracking(this.props.router)
-//   }
-
-//   componentWillUnmount() {
-//     this.unregisterGoogleTracking()
-//   }
-
-//   render() {
-//     const { Component, pageProps } = this.props
-//     return (
-//       <ThemeProvider theme={theme}>
-//         <GlobalStyle />
-//         <Component {...pageProps} />
-//       </ThemeProvider>
-//     )
-//   }
-// }
-
 export default MyApp;
