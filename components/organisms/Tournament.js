@@ -20,8 +20,8 @@ const tabs = [
   },
   {
     title: 'Qualificadores',
-    as: '/t/qualificador-a',
-    to: '/t?slug=qualificador-a',
+    as: '/t/qualifier-a',
+    to: '/t?slug=qualifier-a',
     pathname: '/t/[slug]',
   },
 ];

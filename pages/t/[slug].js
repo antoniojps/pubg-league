@@ -11,11 +11,11 @@ import sanity from '../../services/sanity';
 
 const qualifiers = [
   {
-    slug: 'qualificador-a',
+    slug: 'qualifier-a',
     title: 'Qualificador 1',
   },
   {
-    slug: 'qualificador-b',
+    slug: 'qualifier-b',
     title: 'Qualificador 2',
   },
 ];
