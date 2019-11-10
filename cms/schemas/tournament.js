@@ -92,6 +92,12 @@ export default {
       title: 'Extra information',
       type: 'blockContent',
     },
+    {
+      title: 'Refetch toggle',
+      name: 'refetch',
+      description: 'Ao mudar este valor irá ser feito um pedido ao cgs para atualizar os dados em tempo real.',
+      type: 'boolean',
+    },
   ],
   initialValue: {
     action: {
@@ -100,5 +106,6 @@ export default {
       style: 'success',
       href: 'https://www.twitch.com/shootsgud',
     },
+    refetch: false,
   },
 };
