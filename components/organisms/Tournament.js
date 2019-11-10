@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Title, Spacer, Loader } from 'components/atoms';
 import { Tabs } from 'components/molecules';
 import {
-  Layout, PlayerHighlights, Leaderboard, Sponsors,
+  Layout, PlayerHighlights, Leaderboard,
 } from 'components/organisms';
 import styled from 'styled-components';
 import { actionType, teamsType } from 'types';

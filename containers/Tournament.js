@@ -5,7 +5,7 @@ import { teamsType, actionType } from 'types';
 import CGS_DATA_PLACEHOLDER from '../data/cgs-placeholder.json';
 
 const TournamentContainer = ({
-  teams, action, title, cgs, children,
+  teams, action, title, cgs, children, refetchToggle,
 }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -32,7 +32,7 @@ const TournamentContainer = ({
       }
     };
     requestCgs();
-  }, [cgs]);
+  }, [cgs, refetchToggle]);
 
   return (
     <Tournament
@@ -56,6 +56,7 @@ TournamentContainer.propTypes = {
   cgs: PropTypes.string,
   teams: teamsType,
   children: PropTypes.node,
+  refetchToggle: PropTypes.bool,
 };
 
 TournamentContainer.defaultProps = {
@@ -68,6 +69,7 @@ TournamentContainer.defaultProps = {
   teams: [],
   title: 'Tournament',
   children: null,
+  refetchToggle: false,
 };
 
 
