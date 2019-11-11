@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { lighten, transparentize } from 'polished';
 import {
   Table,
+  TableHeader,
 } from 'components/atoms';
 import {
   TeamTableRow,
@@ -12,11 +13,25 @@ import dataPlaceholder from 'data/leaderboard-teams-placeholder.json';
 import { teamsType } from 'types';
 import { findTeamIndividualStatsFromSummaries } from 'services/generators';
 
+const filters = {
+  rank: 'rank',
+  rankPoints: 'rankPoints',
+  killPoints: 'killPoints',
+  totalPoints: 'totalPoints',
+};
+
+const orders = {
+  asc: 'asc',
+  desc: 'desc',
+};
+
 
 const LeaderboardTeams = ({
   teamStats, qualified, teams, loading, playerSummaries,
 }) => {
   const isQualifier = useMemo(() => typeof qualified === 'number', [qualified]);
+  const [filter, setFilter] = useState(filters.rank);
+  const [order, setOrder] = useState(orders.desc);
 
   const teamsStatsComputed = useMemo(() => {
     if (!loading && teamStats.length > 0) {
@@ -45,21 +60,73 @@ const LeaderboardTeams = ({
     return dataPlaceholder;
   }, [teamStats, teams, loading]);
 
+  const teamStatsReordered = useMemo(() => teamsStatsComputed.sort((teamA, teamB) => {
+    let statA = teamA[filter];
+    let statB = teamB[filter];
+
+    if (filter === filters.totalPoints) {
+      const { rankPoints: rankPointsA, killPoints: killPointsA } = teamA;
+      const { rankPoints: rankPointsB, killPoints: killPointsB } = teamB;
+      statA = rankPointsA + killPointsA;
+      statB = rankPointsB + killPointsB;
+    }
+    if (order === orders.asc) {
+      if (statA < statB) return 1;
+      if (statA > statB) return -1;
+    }
+    if (order === orders.desc) {
+      if (statA < statB) return -1;
+      if (statA > statB) return 1;
+    }
+    return 0;
+  }), [teamsStatsComputed, filter, order]);
+
+  const handleHeaderClick = (nextFilter) => {
+    const nextOrder = order === orders.asc ? orders.desc : orders.asc;
+    setFilter(nextFilter);
+    setOrder(nextOrder);
+  };
+
   return (
     <TableTeams isQualifier={isQualifier} qualified={qualified}>
       <Table className="zi-table">
         <thead>
           <tr>
-            <th>Lugar</th>
+            <TableHeader
+              onClick={() => handleHeaderClick(filters.rank)}
+              active={filter === filters.rank}
+              order={order}
+            >
+Lugar
+            </TableHeader>
             <th className="team">Equipa</th>
-            <th>PTS Colocação</th>
-            <th>PTS Kills</th>
-            <th>PTS Totais</th>
+            <TableHeader
+              onClick={() => handleHeaderClick(filters.rankPoints)}
+              active={filter === filters.rankPoints}
+              order={order}
+            >
+PTS Colocação
+            </TableHeader>
+            <TableHeader
+              onClick={() => handleHeaderClick(filters.killPoints)}
+              active={filter === filters.killPoints}
+              order={order}
+            >
+              PTS Kills
+
+            </TableHeader>
+            <TableHeader
+              onClick={() => handleHeaderClick(filters.totalPoints)}
+              active={filter === filters.totalPoints}
+              order={order}
+            >
+PTS Totais
+            </TableHeader>
           </tr>
         </thead>
         <tbody>
           {
-            teamsStatsComputed.map(({
+            teamStatsReordered.map(({
               rank, ref, teamId, rankPoints, killPoints, teamMember, teamMemberStats,
             }) => (
               <TeamTableRow
