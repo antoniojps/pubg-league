@@ -105,13 +105,73 @@ const Icon = ({
           />
         </svg>
       );
+    case 'sort':
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={getWidth(18, 12, height)}
+          height={height}
+          viewBox="0 0 18 22"
+        >
+          <g fill="none" fillRule="evenodd">
+            <path d="M-3-1h24v24H-3z" />
+            <path
+              fill={iconColor}
+              fillRule="nonzero"
+              d="M5.04 22h-.72c-.596 0-1.08-.462-1.08-1.031V5.5H1.082C.12 5.5-.361 4.387.317 3.74l3.6-3.438a1.116 1.116 0 011.527 0l3.6 3.438c.675.645.202 1.76-.764 1.76H6.12v15.469c0 .57-.483 1.031-1.08 1.031zm6.84-20.969V16.5H9.72c-.959 0-1.443 1.111-.764 1.76l3.6 3.438a1.116 1.116 0 001.527 0l3.6-3.438c.676-.645.2-1.76-.764-1.76h-2.16V1.031C14.76.461 14.277 0 13.68 0h-.72c-.596 0-1.08.462-1.08 1.031z"
+            />
+          </g>
+        </svg>
+      );
+    case 'desc':
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={getWidth(18, 12, height)}
+          height={height}
+          viewBox="0 0 18 12"
+        >
+          <g fill="none" fillRule="evenodd">
+            <path d="M-3-6h24v24H-3z" />
+            <path
+              fill={iconColor}
+              fillRule="nonzero"
+              d="M0 0h6v2H0V0zm0 12v-2h18v2H0zm0-7h12v2H0V5z"
+            />
+          </g>
+        </svg>
+      );
+    case 'asc':
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={getWidth(18, 12, height)}
+          height={height}
+          viewBox="0 0 18 12"
+        >
+          <g
+            fill="none"
+            fillRule="evenodd"
+            stroke="none"
+            strokeWidth="1"
+            transform="translate(-91 -210) translate(88 204)"
+          >
+            <path d="M0 0L24 0 24 24 0 24z" />
+            <path
+              fill={iconColor}
+              fillRule="nonzero"
+              d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"
+            />
+          </g>
+        </svg>
+      );
     default:
       return 'Invalid Icon';
   }
 };
 
 Icon.propTypes = {
-  icon: PropTypes.oneOf(['expand-more', 'expand-less', 'twitter', 'discord', 'twitch', 'facebook'])
+  icon: PropTypes.oneOf(['expand-more', 'expand-less', 'twitter', 'discord', 'twitch', 'facebook', 'sort'])
     .isRequired,
   color: PropTypes.string,
   height: PropTypes.number,
