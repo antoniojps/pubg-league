@@ -88,6 +88,16 @@ export default {
       type: 'datetime',
     },
     {
+      name: 'startsAt',
+      title: 'Start date',
+      type: 'datetime',
+    },
+    {
+      name: 'endsAt',
+      title: 'End date',
+      type: 'datetime',
+    },
+    {
       name: 'information',
       title: 'Extra information',
       type: 'blockContent',

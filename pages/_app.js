@@ -7,6 +7,8 @@ import Router from 'next/router';
 import registerGoogleTracking from 'services/ga-tracking';
 import App from 'next/app';
 import { Nav, Sponsors } from 'components/organisms';
+import { ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '@zeit-ui/style/dist/style.css';
 
 Router.events.on('routeChangeStart', () => {
@@ -24,6 +26,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <ToastContainer transition={Zoom} />
       <Nav />
       <Sponsors />
       <Component {...pageProps} />

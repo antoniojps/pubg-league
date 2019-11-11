@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tournament } from 'components/organisms';
 import { teamsType, actionType } from 'types';
+import usePrevious from 'hooks/usePrevious';
+import { toast } from 'react-toastify';
 import CGS_DATA_PLACEHOLDER from '../data/cgs-placeholder.json';
 
 const TournamentContainer = ({
@@ -10,6 +12,8 @@ const TournamentContainer = ({
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const prevRefetchToggle = usePrevious(refetchToggle);
+  const [toastId, setToastId] = useState(null);
 
   useEffect(() => {
     const requestCgs = async () => {
@@ -33,6 +37,19 @@ const TournamentContainer = ({
     };
     requestCgs();
   }, [cgs, refetchToggle]);
+
+  // notify on refetch
+  useEffect(() => {
+    if (toastId) toast.dismiss(toastId);
+
+    if (refetchToggle !== prevRefetchToggle && typeof prevRefetchToggle === 'boolean') {
+      const newToastId = toast('Estatísticas atualizadas!', {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: false,
+      });
+      setToastId(newToastId);
+    }
+  }, [refetchToggle]);
 
   return (
     <Tournament
