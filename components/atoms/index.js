@@ -8,3 +8,4 @@ export { default as Clamp } from './Clamp';
 export { default as TeamLogo } from './TeamLogo';
 export { default as Loader } from './Loader';
 export { default as BadgeStat } from './BadgeStat';
+export { default as TableHeader } from './TableHeader';
