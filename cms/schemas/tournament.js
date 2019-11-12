@@ -98,9 +98,21 @@ export default {
       type: 'datetime',
     },
     {
-      name: 'information',
-      title: 'Extra information',
-      type: 'blockContent',
+      name: 'faq',
+      title: 'FAQ',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          {
+            title: 'Question', name: 'question', type: 'string', validation: (Rule) => Rule.required(),
+          },
+          {
+            title: 'Answer', name: 'answer', type: 'blockContent', validation: (Rule) => Rule.required(),
+          },
+        ],
+      }],
+      validator: (Rule) => Rule.unique(),
     },
     {
       title: 'Refetch toggle',
