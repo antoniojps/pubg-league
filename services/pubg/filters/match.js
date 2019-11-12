@@ -24,24 +24,25 @@ const computePoints = (rank) => {
 /**
  * filters array of matches to correct GraphQL Type PubgMatch
  * @param {object} - match data
+ * @param {boolean} - bolean: summary or full match data
  * @returns {object}
  */
-function filterArr(matchesArr) {
-  const filteredMatchesArr = matchesArr.map((match) => filter(match));
+function filterArr(matchesArr, summary = false) {
+  const filteredMatchesArr = matchesArr.map((match) => filter(match, summary));
   return filteredMatchesArr;
 }
 
 /**
  * filters match data to correct GraphQL Type PubgMatch
  * @param {object} - match data
+ * @param {boolean} - bolean: summary or full match data
  * @returns {object}
  */
-function filter(obj) {
+function filter(obj, summary = false) {
   const match = obj.data;
   const { attributes } = match;
   const rosters = getRosters(obj);
-
-  return {
+  const matchSummary = {
     matchId: match.id,
     gameMode: attributes.gameMode,
     createdAt: attributes.createdAt,
@@ -50,6 +51,12 @@ function filter(obj) {
     duration: attributes.duration,
     server: attributes.shardId,
     totalParticipants: getParticipants(obj).length,
+  };
+
+  if (summary) return matchSummary;
+
+  return {
+    ...matchSummary,
     rosters: filterRosters({ rosters, match: obj }),
   };
 }
