@@ -20,7 +20,8 @@ const colorsSemantic = {
   bgDarkerS: colors.greyLighterAlt,
   bgInverse: colors.black,
   bgDarker: colors.grey,
-  bgDarkerGradient: 'linear-gradient(180deg, #031B23 0%, #041D25 42%, #041D25 100%)',
+  bgDarkerGradient:
+    'linear-gradient(180deg, #031B23 0%, #041D25 42%, #041D25 100%)',
   border: colors.greyLigther,
 };
 
@@ -31,6 +32,7 @@ const weight = {
   xbase: 400,
   base: 500,
   bold: 600,
+  xbold: 700,
 };
 
 const sizes = {

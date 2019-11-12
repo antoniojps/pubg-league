@@ -51,6 +51,7 @@ function filter(obj, summary = false) {
     duration: attributes.duration,
     server: attributes.shardId,
     totalParticipants: getParticipants(obj).length,
+    totalTeams: rosters.length,
   };
 
   if (summary) return matchSummary;
