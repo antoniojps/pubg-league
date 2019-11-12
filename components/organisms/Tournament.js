@@ -10,6 +10,8 @@ import {
 import styled from 'styled-components';
 import { actionType, teamsType } from 'types';
 import { computedPlayerSummariesWithTeam } from 'services/generators';
+import BlockContent from '@sanity/block-content-to-react';
+import sanity from '../../services/sanity';
 
 const tabs = [
   {
@@ -27,7 +29,7 @@ const tabs = [
 ];
 
 const Tournament = ({
-  tournament, playerSummaries, teamStats, children, qualified, action, teams, loading,
+  tournament, playerSummaries, teamStats, children, qualified, action, teams, loading, info,
 }) => {
   const [topFilter, setTopFilter] = useState('kills');
   const [tableFilter, setTableFilter] = useState('table');
@@ -72,7 +74,7 @@ Resultados
             loading={loading}
           />
         </Spacer>
-        <Spacer bottom="xl4">
+        <Spacer bottom="xs">
           <Leaderboard
             teams={teams}
             filter={tableFilter}
@@ -83,6 +85,15 @@ Resultados
             onFilterChange={(newFilter) => setTableFilter(newFilter)}
             loading={loading}
           />
+        </Spacer>
+        <Spacer bottom="xl4">
+          {info && info.length > 0 && (
+            <>
+              <Spacer top="m">
+                <BlockContent blocks={info} imageOptions={{ w: 900, fit: 'max' }} {...sanity.config()} />
+              </Spacer>
+            </>
+          )}
         </Spacer>
       </div>
     </Wrapper>
@@ -98,6 +109,7 @@ Tournament.propTypes = {
   action: actionType,
   teams: teamsType,
   loading: PropTypes.bool,
+  info: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 Tournament.defaultProps = {
@@ -113,6 +125,7 @@ Tournament.defaultProps = {
   },
   teams: [],
   loading: false,
+  info: [],
 };
 
 const Header = styled.div`

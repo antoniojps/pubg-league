@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import CGS_DATA_PLACEHOLDER from '../data/cgs-placeholder.json';
 
 const TournamentContainer = ({
-  teams, action, title, cgs, children, refetchToggle,
+  teams, action, title, cgs, children, refetchToggle, info,
 }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -61,6 +61,7 @@ const TournamentContainer = ({
       teams={teams}
       title={title}
       loading={loading}
+      info={info}
     >
       {children}
     </Tournament>
@@ -74,6 +75,7 @@ TournamentContainer.propTypes = {
   teams: teamsType,
   children: PropTypes.node,
   refetchToggle: PropTypes.bool,
+  info: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 TournamentContainer.defaultProps = {
@@ -87,6 +89,7 @@ TournamentContainer.defaultProps = {
   title: 'Tournament',
   children: null,
   refetchToggle: false,
+  info: [],
 };
 
 

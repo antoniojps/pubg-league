@@ -35,7 +35,7 @@ const qualifiers = [
 
 const TournementDetail = ({
   content: {
-    teams, action, title, cgs, _id,
+    teams, action, title, cgs, _id, information: info,
   },
 }) => {
   const { push, query: { slug } } = useRouter();
@@ -85,7 +85,14 @@ const TournementDetail = ({
         title={title}
         generateImgFromTitle
       />
-      <Tournament cgs={cgs} action={action} teams={teams} title={title} refetchToggle={state.refetchToggle}>
+      <Tournament
+        cgs={cgs}
+        action={action}
+        teams={teams}
+        title={title}
+        info={info}
+        refetchToggle={state.refetchToggle}
+      >
         <TournamentMenu className="zi-layout">
           <h3>{title}</h3>
           <Select
@@ -109,6 +116,7 @@ TournementDetail.getInitialProps = async (context) => {
       title,
       cgs,
       action,
+      information,
       teams[]{
         slot,
         team->{slot,name,tag,logo{asset->{url}}}
