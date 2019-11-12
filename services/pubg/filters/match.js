@@ -2,6 +2,25 @@
 Utils for match data filtering
 */
 
+const points = {
+  1: 10,
+  2: 6,
+  3: 5,
+  4: 4,
+  5: 3,
+  6: 2,
+  7: 1,
+  8: 1,
+  default: 0,
+};
+
+const computePoints = (rank) => {
+  if (typeof rank === 'number' && rank < 9 && rank > 0) {
+    return points[rank];
+  }
+  return points.default;
+};
+
 /**
  * filters array of matches to correct GraphQL Type PubgMatch
  * @param {object} - match data
@@ -23,7 +42,7 @@ function filter(obj) {
   const rosters = getRosters(obj);
 
   return {
-    id: match.id,
+    matchId: match.id,
     gameMode: attributes.gameMode,
     createdAt: attributes.createdAt,
     map: attributes.mapName,
@@ -53,7 +72,9 @@ function filterRosters({ rosters, match }) {
     const stats = {
       won: roster.attributes.won === 'true',
       rank: roster.attributes.stats.rank,
+      rankPoints: computePoints(roster.attributes.stats.rank),
       kills: getRosterKills(rosterParticipantsData),
+      killPoints: getRosterKills(rosterParticipantsData),
       damage: getRosterDamage(rosterParticipantsData),
       dbnos: getRosterDbnos(rosterParticipantsData),
     };
@@ -62,9 +83,9 @@ function filterRosters({ rosters, match }) {
 
     return {
       id: roster.id,
-      slot: roster.attributes.stats.teamId,
-      stats,
-      participants,
+      teamId: roster.attributes.stats.teamId,
+      ...stats,
+      playerSummaries: participants,
     };
   });
 
@@ -77,7 +98,12 @@ function filterRosters({ rosters, match }) {
  * @returns {object}
  */
 function filterRosterParticipants(rosterParticipantsData) {
-  const participants = rosterParticipantsData.map((participant) => participant);
+  const participants = rosterParticipantsData.map((participant) => ({
+    id: participant.id,
+    actor: participant.attributes.actor,
+    shardId: participant.attributes.shardId,
+    ...participant.attributes.stats,
+  }));
   return participants;
 }
 
