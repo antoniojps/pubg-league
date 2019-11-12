@@ -89,8 +89,7 @@ Resultados
         <Spacer bottom="xl4">
           {faq && faq.length > 0 && (
             <div className="zi-card">
-              <h3>FAQ</h3>
-              <p>Perguntas frequentemente questionadas.</p>
+              <p className="zi-subtitle">FAQ</p>
               {faq.map(({ answer, question }) => (
                 <Collapse question={question}>
                   <BlockContent blocks={answer} imageOptions={{ w: 900, fit: 'max' }} {...sanity.config()} />
