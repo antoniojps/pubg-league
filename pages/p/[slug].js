@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Layout, Sponsors } from 'components/organisms';
+import { Layout } from 'components/organisms';
 import BlockContent from '@sanity/block-content-to-react';
 import Error from 'next/error';
 import { Seo } from 'containers';
