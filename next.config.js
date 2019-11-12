@@ -16,5 +16,6 @@ module.exports = withCSS({
   },
   env: {
     GA_TRACKING_ID: process.env.GA_TRACKING_ID,
+    PUBG_APIKEY: process.env.PUBG_APIKEY,
   },
 });
