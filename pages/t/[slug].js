@@ -35,7 +35,7 @@ const qualifiers = [
 
 const TournementDetail = ({
   content: {
-    teams, action, title, cgs, _id, information: info,
+    teams, action, title, cgs, _id, faq,
   },
 }) => {
   const { push, query: { slug } } = useRouter();
@@ -90,7 +90,7 @@ const TournementDetail = ({
         action={action}
         teams={teams}
         title={title}
-        info={info}
+        faq={faq}
         refetchToggle={state.refetchToggle}
       >
         <TournamentMenu className="zi-layout">
@@ -116,7 +116,7 @@ TournementDetail.getInitialProps = async (context) => {
       title,
       cgs,
       action,
-      information,
+      faq,
       teams[]{
         slot,
         team->{slot,name,tag,logo{asset->{url}}}

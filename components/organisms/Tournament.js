@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { Title, Spacer, Loader } from 'components/atoms';
-import { Tabs } from 'components/molecules';
+import { Tabs, Collapse } from 'components/molecules';
 import {
   Layout, PlayerHighlights, Leaderboard,
 } from 'components/organisms';
@@ -29,7 +29,7 @@ const tabs = [
 ];
 
 const Tournament = ({
-  tournament, playerSummaries, teamStats, children, qualified, action, teams, loading, info,
+  tournament, playerSummaries, teamStats, children, qualified, action, teams, loading, faq,
 }) => {
   const [topFilter, setTopFilter] = useState('kills');
   const [tableFilter, setTableFilter] = useState('table');
@@ -87,12 +87,16 @@ Resultados
           />
         </Spacer>
         <Spacer bottom="xl4">
-          {info && info.length > 0 && (
-            <>
-              <Spacer top="m">
-                <BlockContent blocks={info} imageOptions={{ w: 900, fit: 'max' }} {...sanity.config()} />
-              </Spacer>
-            </>
+          {faq && faq.length > 0 && (
+            <div className="zi-card">
+              <h3>FAQ</h3>
+              <p>Perguntas frequentemente questionadas.</p>
+              {faq.map(({ answer, question }) => (
+                <Collapse question={question}>
+                  <BlockContent blocks={answer} imageOptions={{ w: 900, fit: 'max' }} {...sanity.config()} />
+                </Collapse>
+              ))}
+            </div>
           )}
         </Spacer>
       </div>
@@ -109,7 +113,7 @@ Tournament.propTypes = {
   action: actionType,
   teams: teamsType,
   loading: PropTypes.bool,
-  info: PropTypes.arrayOf(PropTypes.shape({})),
+  faq: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 Tournament.defaultProps = {
@@ -125,7 +129,7 @@ Tournament.defaultProps = {
   },
   teams: [],
   loading: false,
-  info: [],
+  faq: [],
 };
 
 const Header = styled.div`
