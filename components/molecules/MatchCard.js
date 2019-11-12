@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, withTheme } from 'styled-components';
+import { Icon, Spacer } from 'components/atoms';
 import PropTypes from 'prop-types';
 import { pt } from 'date-fns/locale';
-import { format, formatDistance } from 'date-fns';
+import { format } from 'date-fns';
+import prettyMilliseconds from 'pretty-ms';
 
 const mapKeys = ['Baltic_Main', 'Savage_Main', 'Desert_Main', 'Erangel_Main'];
 
@@ -10,22 +12,30 @@ const maps = [
   {
     key: 'Savage_Main',
     name: 'Sanhok',
+    icon: 'sanhok',
     image: '/sanhok-banner.png',
+    color: 'green',
   },
   {
     key: 'Desert_Main',
     name: 'Miramar',
+    icon: 'miramar',
     image: '/miramar-banner.png',
+    color: 'yellow',
   },
   {
     key: 'Baltic_Main',
     name: 'Erangel',
+    icon: 'erangel',
     image: '/erangel-banner.png',
+    color: 'green',
   },
   {
     key: 'Erangel_Main',
     name: 'Erangel',
+    icon: 'erangel',
     image: '/erangel-banner.png',
+    color: 'green',
   },
 ];
 
@@ -37,6 +47,8 @@ const MatchCard = ({
   duration,
   totalParticipants,
   totalTeams,
+  number,
+  theme,
 }) => {
   const mapData = useMemo(() => maps.find(({ key }) => key === map), [map]);
   const createdDateWords = useMemo(() => {
@@ -48,7 +60,8 @@ const MatchCard = ({
     const min = format(createdDate, 'mm');
     return `${date}, ${hour}h${min}min`;
   }, [createdAt]);
-
+  const matchDuration = useMemo(() => prettyMilliseconds(duration * 1000, { unitCount: 2 }), [duration]);
+  const color = useMemo(() => theme.colors[mapData.color], [map, theme, mapData]);
   return (
     <Card className="zi-card">
       <Card.Top bg={mapData.image}>
@@ -58,11 +71,34 @@ const MatchCard = ({
         </Team>
       </Card.Top>
       <Card.Bottom>
-        <p>
-          Iniciou a 
-{' '}
-<span className="bold">{createdDateWords}</span>
-        </p>
+        <Card.BottomTop>
+          <p>
+            {createdDateWords}
+             :
+            {matchDuration}
+          </p>
+          <p>
+            {totalTeams}
+            {' '}
+equipas,
+            {' '}
+            {totalParticipants}
+            {' '}
+jogadores
+          </p>
+        </Card.BottomTop>
+        <Card.Actions>
+          <Card.Legend color={color}>
+          #
+            {number}
+            {' '}
+            {mapData.name}
+            <Spacer left="xs4">
+              <Icon icon="arrow-forward" height={12} color={color} />
+            </Spacer>
+          </Card.Legend>
+          <Icon icon={mapData.icon} height={16} color={color} />
+        </Card.Actions>
       </Card.Bottom>
     </Card>
   );
@@ -116,6 +152,16 @@ const Card = styled.div(
   `,
 );
 
+Card.BottomTop = styled.div((props) => css`
+  margin-bottom: ${props.theme.spacing.xs};
+`);
+
+Card.Legend = styled.div((props) => css`
+  display: flex;
+  align-items: center;
+  color: ${props.color || props.theme.colors.primary};
+`);
+
 Card.Top = styled.div(
   (props) => css`
     background-color: ${props.theme.colors.bgInverse};
@@ -141,9 +187,28 @@ Card.Top = styled.div(
 Card.Bottom = styled.div(
   (props) => css`
     padding: ${props.theme.spacing.xs2};
-    span.bold {
-      font-weight: ${props.theme.weight.bold};
+
+    p {
+      margin: 0;
+      margin-bottom: ${props.theme.spacing.xs};
+      font-size: ${props.theme.sizes.xs} !important;
+      line-height: ${props.theme.sizes.xs} !important;
+      margin-bottom: ${props.theme.spacing.xs4};
+      font-weight: ${props.theme.weight.light};
+      color: ${props.theme.colors.grey};
     }
+  `,
+);
+
+Card.Actions = styled.div(
+  (props) => css`
+    text-transform: uppercase;
+    font-weight: ${props.theme.weight.bold};
+    font-size: ${props.theme.sizes.s};
+    color: ${props.theme.colors.primary};
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
   `,
 );
 
@@ -152,13 +217,15 @@ MatchCard.propTypes = {
   teamName: PropTypes.string.isRequired,
   teamLogo: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  duration: PropTypes.string.isRequired,
-  totalTeams: PropTypes.string.isRequired,
-  totalParticipants: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
+  totalTeams: PropTypes.number.isRequired,
+  totalParticipants: PropTypes.number.isRequired,
+  number: PropTypes.number.isRequired,
+  theme: PropTypes.oneOfType([PropTypes.shape({})]),
 };
 
 MatchCard.defaultProps = {
   map: mapKeys[0],
 };
 
-export default MatchCard;
+export default withTheme(MatchCard);

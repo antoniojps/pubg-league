@@ -10,6 +10,7 @@ const colors = {
   greyLighterAlt: '#f6f6f6',
   red: '#c8311e',
   orange: '#ed7900',
+  green: '#50e3c2',
 };
 
 const colorsSemantic = {
