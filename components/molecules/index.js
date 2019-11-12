@@ -5,3 +5,4 @@ export { default as LeaderboardPlayers } from './LeaderboardPlayers';
 export { default as TwitchChannel } from './TwitchChannel';
 export { default as TeamTableRow } from './TeamTableRow';
 export { default as More } from './More';
+export { default as Collapse } from './Collapse';
