@@ -1,0 +1,9 @@
+{
+  "build": {
+    "env": {
+      "API": "@api",
+      "PUBG_APIKEY": "@pubg_apikey",
+      "GA_TRACKING_ID": "@ga_tracking_id"
+    }
+  }
+}
