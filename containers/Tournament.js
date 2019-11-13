@@ -50,7 +50,7 @@ const TournamentContainer = ({
     if (toastId) toast.dismiss(toastId);
 
     if (refetchToggle !== prevRefetchToggle && typeof prevRefetchToggle === 'boolean') {
-      const newToastId = toast('Estatísticas atualizadas!', {
+      const newToastId = toast('Updated', {
         position: toast.POSITION.BOTTOM_CENTER,
         autoClose: false,
       });
