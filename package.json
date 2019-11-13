@@ -25,7 +25,9 @@
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-ga": "^2.7.0",
+    "react-slick": "^0.25.2",
     "react-toastify": "^5.4.1",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^4.4.1",
     "styled-components-modifiers": "^1.2.5"
   },
