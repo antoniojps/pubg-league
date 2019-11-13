@@ -4,6 +4,7 @@ import React, {
 import { Tournament, Seo } from 'containers';
 import { Select } from 'components/atoms';
 import styled from 'styled-components';
+import { isDev } from 'services/constants';
 
 import Error from 'next/error';
 import { useRouter } from 'next/router';
@@ -57,26 +58,26 @@ const TournementDetail = ({
   })), []);
 
   useEffect(() => {
-    if (!_id) return () => null;
-    if (process.env.DEV === 'true') return () => null;
-    const query = `
+    if (!isDev && _id) {
+      const query = `
       *[_type == "tournament" && slug.current == $slug][0]{
         title,
       }
     `;
-    const params = { slug };
+      const params = { slug };
 
-    const subscription = sanity.listen(query, params)
-      .subscribe((event) => {
-        if (event.type === 'mutation' && event.transition === 'update') {
-          dispatch({ type: 'toggle' });
-        }
-      });
+      const subscription = sanity.listen(query, params)
+        .subscribe((event) => {
+          if (event.type === 'mutation' && event.transition === 'update') {
+            dispatch({ type: 'toggle' });
+          }
+        });
 
-    // to unsubscribe later on
-    return () => {
-      subscription.unsubscribe();
-    };
+      // to unsubscribe later on
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
   }, [_id]);
 
   if (!_id) return <Error statusCode={404} />;
@@ -110,7 +111,7 @@ const TournementDetail = ({
 
 TournementDetail.getInitialProps = async (context) => {
   const { slug: slugQuery } = context.query;
-  if (process.env.DEV === 'true') return { content: tournamentData };
+  if (isDev) return { content: tournamentData };
   try {
     const content = await sanity.fetch(`
     *[_type == "tournament" && slug.current == $slug][0]{

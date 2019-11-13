@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Icon } from 'components/atoms';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { isDev } from 'services/constants';
 
 const TwitchChannel = ({ channelId }) => {
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
-    if (process.env.DEV === 'true') return () => null;
     const requestTwitch = async () => {
       const result = await fetch(
         `https://api.twitch.tv/helix/streams?user_id=${channelId}`,
@@ -24,7 +24,7 @@ const TwitchChannel = ({ channelId }) => {
         setIsLive(false);
       }
     };
-    requestTwitch();
+    if (!isDev) requestTwitch();
   }, []);
 
   return (

@@ -39,7 +39,7 @@ const NavDesktop = () => {
         <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/HCn4FvT">
           <Icon icon="discord" color="#7289DA" />
         </a>
-        <TwitchChannel channelId={147255356} />
+        <TwitchChannel channelId="147255356" />
       </Navigation.End>
     </NavigationDesktop>
   );
@@ -139,7 +139,7 @@ const NavMobile = () => {
           <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/HCn4FvT">
             <Icon icon="discord" color="#7289DA" />
           </a>
-          <TwitchChannel channelId={147255356} />
+          <TwitchChannel channelId="147255356" />
         </NavMob.Links>
       </NavMob.Top>
       <NavMob.Bottom>

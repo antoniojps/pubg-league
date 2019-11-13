@@ -4,7 +4,9 @@ import { Tournament } from 'components/organisms';
 import { teamsType, actionType } from 'types';
 import usePrevious from 'hooks/usePrevious';
 import { toast } from 'react-toastify';
+import { isDev } from 'services/constants';
 import CGS_DATA_PLACEHOLDER from '../data/cgs-placeholder.json';
+import CGS_DATA_PLACEHOLDER_DUMMY from '../data/cgs-placeholder-dummy.json';
 
 const TournamentContainer = ({
   teams, action, title, cgs, children, refetchToggle, faq,
@@ -19,19 +21,19 @@ const TournamentContainer = ({
     const requestCgs = async () => {
       try {
         setLoading(true);
-        if (process.env.DEV === 'true') {
-          setData(CGS_DATA_PLACEHOLDER);
+        if (isDev) {
+          setData(CGS_DATA_PLACEHOLDER_DUMMY);
           setLoading(false);
-          return () => null;
+        } else {
+          if (!cgs) throw Error('Invalid cgs');
+          const res = await fetch(
+            `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,
+          );
+          if (!res.ok) throw Error(res.status);
+          const json = await res.json();
+          setData(json);
+          setLoading(false);
         }
-        if (!cgs) throw Error('Invalid cgs');
-        const res = await fetch(
-          `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,
-        );
-        if (!res.ok) throw Error(res.status);
-        const json = await res.json();
-        setData(json);
-        setLoading(false);
       } catch (err) {
         let { message } = err;
         if (message === '404') message = 'Error fetching tournament stats';
