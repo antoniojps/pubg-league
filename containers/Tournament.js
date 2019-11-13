@@ -19,6 +19,11 @@ const TournamentContainer = ({
     const requestCgs = async () => {
       try {
         setLoading(true);
+        if (process.env.DEV === 'true') {
+          setData(CGS_DATA_PLACEHOLDER);
+          setLoading(false);
+          return () => null;
+        }
         if (!cgs) throw Error('Invalid cgs');
         const res = await fetch(
           `https://api.cgs.gg/mono-service/api/v2/tournament/${cgs}/summary`,

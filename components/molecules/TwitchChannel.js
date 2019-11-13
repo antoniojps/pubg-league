@@ -7,6 +7,7 @@ const TwitchChannel = ({ channelId }) => {
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
+    if (process.env.DEV === 'true') return () => null;
     const requestTwitch = async () => {
       const result = await fetch(
         `https://api.twitch.tv/helix/streams?user_id=${channelId}`,
@@ -27,7 +28,7 @@ const TwitchChannel = ({ channelId }) => {
   }, []);
 
   return (
-    <TwitchAnchor target="_blank" rel="noopener noreferrer" href="https://www.twitch.tv/shootsgud">
+    <TwitchAnchor target="_blank" rel="noopener noreferrer" href="https://www.twitch.tv/goinghyped">
       <Icon icon="twitch" color="#8E24AA" />
       {isLive && (
         <Live>

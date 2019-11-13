@@ -1,5 +1,5 @@
 import React, {
-  useState, useRef, useMemo, useEffect, useReducer,
+  useState, useMemo, useEffect, useReducer,
 } from 'react';
 import { Tournament, Seo } from 'containers';
 import { Select } from 'components/atoms';
@@ -9,6 +9,7 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { below } from 'services/breakpoints';
 import { contentType, contentDefaults } from 'types';
+import tournamentData from 'data/tournament-placeholder.json';
 import sanity from '../../services/sanity';
 
 const initialState = { refetchToggle: false };
@@ -56,13 +57,14 @@ const TournementDetail = ({
   })), []);
 
   useEffect(() => {
-    if (!_id) return null;
+    if (!_id) return () => null;
+    if (process.env.DEV === 'true') return () => null;
     const query = `
       *[_type == "tournament" && slug.current == $slug][0]{
         title,
       }
     `;
-    const params = { slug: 'example' };
+    const params = { slug };
 
     const subscription = sanity.listen(query, params)
       .subscribe((event) => {
@@ -108,7 +110,7 @@ const TournementDetail = ({
 
 TournementDetail.getInitialProps = async (context) => {
   const { slug: slugQuery } = context.query;
-
+  if (process.env.DEV === 'true') return { content: tournamentData };
   try {
     const content = await sanity.fetch(`
     *[_type == "tournament" && slug.current == $slug][0]{

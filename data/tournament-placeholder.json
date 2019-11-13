@@ -1,0 +1,856 @@
+{
+  "_id":"fDOLlTLScw9kMkHEHqMylu",
+  "action":{
+     "href":"https://www.twitch.tv/shootsgud",
+     "style":"warning",
+     "title":"Até Quarta!"
+  },
+  "cgs":"sml-qualifiers-a",
+  "faq":[
+     {
+        "_key":"17578642b390",
+        "answer":[
+           {
+              "_key":"c63372d37973",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"c63372d379730",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"2"
+                 },
+                 {
+                    "_key":"c63372d379731",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - Blue Atlantis"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"f5bb2e1f57d6",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"f5bb2e1f57d60",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"3"
+                 },
+                 {
+                    "_key":"f5bb2e1f57d61",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - ORO"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"83f81f92572a",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"83f81f92572a0",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"4"
+                 },
+                 {
+                    "_key":"83f81f92572a1",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - EGN"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"8c973035f1ed",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"8c973035f1ed0",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"5 "
+                 },
+                 {
+                    "_key":"8c973035f1ed1",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"- teamWhite"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"9fcec2e63948",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"9fcec2e639480",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"6 "
+                 },
+                 {
+                    "_key":"9fcec2e639481",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"- Tempest Gaming"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"d233123f1cc0",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"d233123f1cc00",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"7 "
+                 },
+                 {
+                    "_key":"d233123f1cc01",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"- 22 Esports"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"b1d8885ac57e",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"b1d8885ac57e0",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"8 "
+                 },
+                 {
+                    "_key":"b1d8885ac57e1",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"- GTZ BULLS"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"d8e4ab7766d4",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"d8e4ab7766d40",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"9 "
+                 },
+                 {
+                    "_key":"d8e4ab7766d41",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"- Team Satire"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"9d3cc262737e",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"9d3cc262737e0",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"10"
+                 },
+                 {
+                    "_key":"9d3cc262737e1",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - 22 eSpots EVO"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"20de1aee0360",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"20de1aee03600",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"11 "
+                 },
+                 {
+                    "_key":"20de1aee03601",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"- VR Gaming"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"a0aaef7ada18",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"a0aaef7ada180",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"12 "
+                 },
+                 {
+                    "_key":"a0aaef7ada181",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"- XL E-Sports"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"ccb4eaa45839",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"ccb4eaa458390",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"13"
+                 },
+                 {
+                    "_key":"ccb4eaa458391",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - BaeconGG"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"76a176f40d3f",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"76a176f40d3f0",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"14"
+                 },
+                 {
+                    "_key":"76a176f40d3f1",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - YouClap eSports"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"7043c12ba835",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"7043c12ba8350",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"15"
+                 },
+                 {
+                    "_key":"7043c12ba8351",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - Revolta dos tremoços"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"df6e9fdd6135",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"df6e9fdd61350",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"16"
+                 },
+                 {
+                    "_key":"df6e9fdd61351",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - Ridersontheroad"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"0e8548681475",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"0e85486814750",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"17"
+                 },
+                 {
+                    "_key":"0e85486814751",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - Only Good Vibes"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"63b974fe4251",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"63b974fe42510",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"18"
+                 },
+                 {
+                    "_key":"63b974fe42511",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - SAMCLAN ESPORTS"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"f7ecb99fc75a",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"f7ecb99fc75a0",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"19"
+                 },
+                 {
+                    "_key":"f7ecb99fc75a1",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" - CUCURUU"
+                 }
+              ],
+              "level":1,
+              "listItem":"bullet",
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           }
+        ],
+        "question":"Quais são os slots das equipas?"
+     },
+     {
+        "_key":"f30e8c3c479b",
+        "answer":[
+           {
+              "_key":"8b97f58e9a30",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"8b97f58e9a300",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"Para obter os dados de cada lobby deve obter a role de jogador no "
+                 },
+                 {
+                    "_key":"8b97f58e9a301",
+                    "_type":"span",
+                    "marks":[
+                       "strong",
+                       "3e2700a63ba0"
+                    ],
+                    "text":"discord"
+                 },
+                 {
+                    "_key":"8b97f58e9a302",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":": "
+                 },
+                 {
+                    "_key":"8b97f58e9a303",
+                    "_type":"span",
+                    "marks":[
+                       "95a9a235ffbe"
+                    ],
+                    "text":"https://discord.gg/SJgyeuR"
+                 },
+                 {
+                    "_key":"8b97f58e9a304",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":", para tal tem de entrar na sala "
+                 },
+                 {
+                    "_key":"8b97f58e9a305",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"#acesso "
+                 },
+                 {
+                    "_key":"8b97f58e9a306",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"e clicar no ícone (devem retirar e voltar a clicar caso já tenha clicado no passado)."
+                 }
+              ],
+              "markDefs":[
+                 {
+                    "_key":"3e2700a63ba0",
+                    "_type":"link",
+                    "href":"https://discord.gg/SJgyeuR"
+                 },
+                 {
+                    "_key":"95a9a235ffbe",
+                    "_type":"link",
+                    "href":"https://discord.gg/SJgyeuR"
+                 }
+              ],
+              "style":"normal"
+           },
+           {
+              "_key":"deed58b7cb1c",
+              "_type":"block",
+              "children":[
+                 {
+                    "_key":"deed58b7cb1c0",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":"As informações do lobby serão disponibilizadas na sala "
+                 },
+                 {
+                    "_key":"deed58b7cb1c1",
+                    "_type":"span",
+                    "marks":[
+                       "strong"
+                    ],
+                    "text":"#lobby_pubg"
+                 },
+                 {
+                    "_key":"deed58b7cb1c2",
+                    "_type":"span",
+                    "marks":[
+
+                    ],
+                    "text":" onde já terá acesso."
+                 }
+              ],
+              "markDefs":[
+
+              ],
+              "style":"normal"
+           }
+        ],
+        "question":"Onde serão informados os dados dos lobbies?"
+     }
+  ],
+  "teams":[
+     {
+        "slot":2,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/6d9cb73c021b1bb34e00fdcd432dbab8466f0f51-512x512.png"
+              }
+           },
+           "name":"Blue Atlantis",
+           "tag":"BA"
+        }
+     },
+     {
+        "slot":3,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/5737f6205386efb00bb9955d806e95f8aec09ee4-512x512.png"
+              }
+           },
+           "name":"ORO ESPORTS",
+           "tag":"ORO"
+        }
+     },
+     {
+        "slot":4,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/5d2163d869fa008cd8a80edf07495c00c7a416b6-512x512.png"
+              }
+           },
+           "name":"EGN Esports",
+           "tag":"EGN"
+        }
+     },
+     {
+        "slot":5,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/7401e8952a5ffbccef59ff669d5087808cacdeb3-400x400.png"
+              }
+           },
+           "name":"Team White",
+           "tag":"TW"
+        }
+     },
+     {
+        "slot":6,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/1170967ce28b8b3bd4def18216247f86e2a0cc64-150x171.png"
+              }
+           },
+           "name":"Tempest Gaming",
+           "tag":"TG"
+        }
+     },
+     {
+        "slot":7,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/21497ce44f8def4de1a5dc5b7609b1c0ad1dec1f-512x512.png"
+              }
+           },
+           "name":"22 Esports",
+           "tag":"22"
+        }
+     },
+     {
+        "slot":8,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/29efc7cc440ae7af0ce092e0a12db6fbba59260a-512x512.png"
+              }
+           },
+           "name":"GTZ BULLS",
+           "tag":"BULLS"
+        }
+     },
+     {
+        "slot":9,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/bd655da60b5f6d8ba43e1187cda7b35f7307cf4d-512x512.png"
+              }
+           },
+           "name":"Team Satire",
+           "tag":"Satire"
+        }
+     },
+     {
+        "slot":10,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/b8fbb2530ea9236a73c0431d7693266e2e5c653b-512x512.png"
+              }
+           },
+           "name":"22 Esports EVO",
+           "tag":"22evo"
+        }
+     },
+     {
+        "slot":11,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/e9c2b3a997b9b6e5f5ad4ec97c7bd28e37bc32b5-3508x2480.jpg"
+              }
+           },
+           "name":"VR Gaming",
+           "tag":"VR"
+        }
+     },
+     {
+        "slot":12,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/27f50bfbb2f0cb62699676ff94afda7c430dde2b-512x512.png"
+              }
+           },
+           "name":"XL Esports",
+           "tag":"XL"
+        }
+     },
+     {
+        "slot":13,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/5a88052156b95acf6bddb98c3cf76352933534bb-512x512.png"
+              }
+           },
+           "name":"BaeconGG",
+           "tag":"BaeconGG"
+        }
+     },
+     {
+        "slot":14,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/f3ce8deee17e310139ab5fb5dcdfdcb530e5d636-960x960.jpg"
+              }
+           },
+           "name":"YouClap eSports",
+           "tag":"YC"
+        }
+     },
+     {
+        "slot":15,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/b2375d38154e3d0bc9350d8fa457749cb6056914-754x394.jpg"
+              }
+           },
+           "name":"Revolta dos tremoços",
+           "tag":"RT"
+        }
+     },
+     {
+        "slot":16,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/7403fc8714d69c23ce280f8b674f640344c47e76-512x512.png"
+              }
+           },
+           "name":"RidersOnTheRoad",
+           "tag":"ROR"
+        }
+     },
+     {
+        "slot":17,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/263b1b8c121f575c66f0256de31c6dabb1f59e7b-270x270.png"
+              }
+           },
+           "name":"Only Good Vibes",
+           "tag":"OGV"
+        }
+     },
+     {
+        "slot":18,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/e7b38ce2d974c34352837f7a21b5fc03993a0b58-1992x1262.png"
+              }
+           },
+           "name":"SAM CLAN ESPORTS",
+           "tag":"SAM"
+        }
+     },
+     {
+        "slot":19,
+        "team":{
+           "logo":{
+              "asset":{
+                 "url":"https://cdn.sanity.io/images/4sveemsz/production/18404a7bb1f843f4e2ecf52903729a08ba8ded7c-512x512.png"
+              }
+           },
+           "name":"CUCURUU",
+           "tag":"CUR"
+        }
+     }
+  ],
+  "title":"1º Qualificador"
+}

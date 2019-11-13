@@ -5,8 +5,11 @@ import PropTypes from 'prop-types';
 import { Title, Spacer, Loader } from 'components/atoms';
 import { Tabs, Collapse } from 'components/molecules';
 import {
-  Layout, PlayerHighlights, Leaderboard,
+  Layout,
+  PlayerHighlights,
+  Leaderboard,
 } from 'components/organisms';
+import { Matches } from 'containers';
 import styled from 'styled-components';
 import { actionType, teamsType } from 'types';
 import { computedPlayerSummariesWithTeam } from 'services/generators';
@@ -47,6 +50,11 @@ const Tournament = ({
   }),
   [playerSummaries]);
 
+  const matchIds = useMemo(() => {
+    if (!tournament || !tournament.tournamentMatches) return [];
+    return tournament.tournamentMatches.map(({ matchId }) => matchId);
+  }, [tournament]);
+
   return (
     <Wrapper>
       <Layout>
@@ -74,6 +82,9 @@ Resultados
             loading={loading}
           />
         </Spacer>
+        <Spacer bottom="m">
+          <Matches matchIds={matchIds} teams={teams} />
+        </Spacer>
         <Spacer bottom="xs">
           <Leaderboard
             teams={teams}
@@ -90,8 +101,8 @@ Resultados
           {faq && faq.length > 0 && (
             <div className="zi-card">
               <p className="zi-subtitle">FAQ</p>
-              {faq.map(({ answer, question }) => (
-                <Collapse question={question}>
+              {faq.map(({ answer, question, _key }) => (
+                <Collapse key={_key} question={question}>
                   <BlockContent blocks={answer} imageOptions={{ w: 900, fit: 'max' }} {...sanity.config()} />
                 </Collapse>
               ))}
