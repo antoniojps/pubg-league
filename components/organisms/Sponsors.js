@@ -15,6 +15,9 @@ const Sponsors = () => (
         <Sponsor href="https://www.globaldata.pt/rato-gamer-endgame-gear-xm1-xm1" target="_blank" rel="noopener noreferrer">
           <img src="/endgame-gear.svg" alt="Endgame gear logo" />
         </Sponsor>
+        <Sponsor href="https://www.prozis.com/pt/pt" target="_blank" rel="noopener noreferrer">
+          <img src="/prozis.svg" alt="Prozis logo" />
+        </Sponsor>
         <Sponsor href="https://discordapp.com/invite/Jnr2wfC" target="_blank" rel="noopener noreferrer">
           <img src="/pubg-pt.png" alt="PUBG PT logo" />
         </Sponsor>
@@ -82,6 +85,10 @@ const Sponsor = styled.a`
 const SponsorList = styled.div`
   display: flex;
   z-index: ${(props) => props.theme.values.zIndex.l};
+  width: 80%;
+  ${below.sm`
+    width: 100%;
+  `}
 `;
 
 export default Sponsors;
