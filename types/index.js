@@ -4,6 +4,7 @@
 */
 
 import PropTypes from 'prop-types';
+import { mapKeys } from 'components/molecules/MatchCard';
 
 const {
   string,
@@ -52,3 +53,14 @@ export const contentDefaults = {
   teams: [],
   title: 'Tournament',
 };
+
+export const matchType = shape({
+  map: oneOf(mapKeys),
+  teamName: string,
+  teamLogo: string,
+  createdAt: string,
+  duration: number,
+  totalTeams: number,
+  totalParticipants: number,
+  number: number,
+})

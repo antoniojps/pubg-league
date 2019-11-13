@@ -42,6 +42,9 @@ function filter(obj, summary = false) {
   const match = obj.data;
   const { attributes } = match;
   const rosters = getRosters(obj);
+  const rostersFiltered = filterRosters({ rosters, match: obj });
+
+  const winner = getWinnerRoster(rostersFiltered);
   const matchSummary = {
     matchId: match.id,
     gameMode: attributes.gameMode,
@@ -52,13 +55,14 @@ function filter(obj, summary = false) {
     server: attributes.shardId,
     totalParticipants: getParticipants(obj).length,
     totalTeams: rosters.length,
+    winner,
   };
 
   if (summary) return matchSummary;
 
   return {
     ...matchSummary,
-    rosters: filterRosters({ rosters, match: obj }),
+    rosters: rostersFiltered,
   };
 }
 
@@ -127,6 +131,14 @@ function getRosters(obj) {
       (obj1, obj2) => obj1.attributes.stats.rank - obj2.attributes.stats.rank,
     );
   return rosters;
+}
+
+/**
+ * gets winner team
+ */
+function getWinnerRoster(rosters) {
+  const winner = rosters.find((team) => team.won);
+  return winner;
 }
 
 /**

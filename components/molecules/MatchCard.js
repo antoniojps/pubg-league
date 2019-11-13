@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import styled, { css, withTheme } from 'styled-components';
-import { Icon, Spacer } from 'components/atoms';
+import { Icon, Loader } from 'components/atoms';
 import PropTypes from 'prop-types';
 import { pt } from 'date-fns/locale';
 import { format } from 'date-fns';
 import prettyMilliseconds from 'pretty-ms';
 
-const mapKeys = ['Baltic_Main', 'Savage_Main', 'Desert_Main', 'Erangel_Main'];
+export const mapKeys = ['Baltic_Main', 'Savage_Main', 'Desert_Main', 'Erangel_Main'];
 
 const maps = [
   {
@@ -39,6 +39,11 @@ const maps = [
   },
 ];
 
+const loadingMap = {
+  name: 'Map',
+};
+
+
 const MatchCard = ({
   map,
   teamName,
@@ -49,9 +54,11 @@ const MatchCard = ({
   totalTeams,
   number,
   theme,
+  loading,
 }) => {
-  const mapData = useMemo(() => maps.find(({ key }) => key === map), [map]);
+  const mapData = useMemo(() => (loading ? loadingMap : maps.find(({ key }) => key === map)), [map, loading]);
   const createdDateWords = useMemo(() => {
+    if (!createdAt) return '';
     const createdDate = new Date(createdAt);
     const date = format(createdDate, 'LL MMM Y', {
       locale: pt,
@@ -60,8 +67,8 @@ const MatchCard = ({
     const min = format(createdDate, 'mm');
     return `${date}, ${hour}h${min}min`;
   }, [createdAt]);
-  const matchDuration = useMemo(() => prettyMilliseconds(duration * 1000, { unitCount: 2 }), [duration]);
-  const color = useMemo(() => theme.colors[mapData.color], [map, theme, mapData]);
+  const matchDuration = useMemo(() => duration && prettyMilliseconds(duration * 1000, { unitCount: 2 }), [duration]);
+  const color = useMemo(() => (loading ? theme.colors.border : theme.colors[mapData.color]), [map, theme, mapData, loading]);
   return (
     <Card className="zi-card">
       <Card.Top bg={mapData.image}>
@@ -70,21 +77,21 @@ const MatchCard = ({
           <Team.Name>{teamName}</Team.Name>
         </Team>
       </Card.Top>
-      <Card.Bottom>
+      <Card.Bottom loading={loading}>
         <Card.BottomTop>
           <p>
             {createdDateWords}
-             :
+                       :
             {matchDuration}
           </p>
           <p>
             {totalTeams}
             {' '}
-equipas,
+          equipas,
             {' '}
             {totalParticipants}
             {' '}
-jogadores
+          jogadores
           </p>
         </Card.BottomTop>
         <Card.Actions>
@@ -93,11 +100,17 @@ jogadores
             {number}
             {' '}
             {mapData.name}
-            <Spacer left="xs4">
+            {/* <Spacer left="xs4">
               <Icon icon="arrow-forward" height={12} color={color} />
-            </Spacer>
+            </Spacer> */}
           </Card.Legend>
-          <Icon icon={mapData.icon} height={16} color={color} />
+          <Card.Map>
+            {loading ? (
+              <Loader size="14px" />
+            ) : (
+              <Icon icon={mapData.icon} height={16} color={color} />
+            )}
+          </Card.Map>
         </Card.Actions>
       </Card.Bottom>
     </Card>
@@ -118,7 +131,7 @@ Team.Logo = styled.div(
   (props) => css`
     width: 80px;
     height: 80px;
-    background: url(${props.logo || '/erangel-banner.png'});
+    background: url(${props.logo});
     background-repeat: no-repeat;
     background-size: 100% 100%;
     position: absolute;
@@ -142,13 +155,8 @@ Team.Name = styled.div(
 
 const Card = styled.div(
   (props) => css`
-    width: 300px;
-    padding: 0px;
-    transition: box-shadow 0.2s ease 0s;
-    cursor: pointer;
-    &:hover {
-      box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.12) !important;
-    }
+    padding: 0;
+    cursor: grab;
   `,
 );
 
@@ -160,7 +168,21 @@ Card.Legend = styled.div((props) => css`
   display: flex;
   align-items: center;
   color: ${props.color || props.theme.colors.primary};
+  ${props.loading && css`
+    width: 70%;
+    border-radius: ${props.theme.values.radius};
+    background-color: ${props.theme.colors.border};
+    color: ${props.theme.colors.border};
+    p {
+      color: ${props.theme.colors.border} !important;
+    }
+  `}
 `);
+
+Card.Map = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
 
 Card.Top = styled.div(
   (props) => css`
@@ -174,8 +196,9 @@ Card.Top = styled.div(
     &:after {
       content: '';
       background: url(${props.bg || '/erangel-banner.png'});
-      opacity: 0.4;
       top: 0;
+      transition: opacity 0.2s ease;
+      opacity: ${props.bg ? 0.4 : 0.1};
       left: 0;
       bottom: 0;
       right: 0;
@@ -196,6 +219,11 @@ Card.Bottom = styled.div(
       margin-bottom: ${props.theme.spacing.xs4};
       font-weight: ${props.theme.weight.light};
       color: ${props.theme.colors.grey};
+      ${props.loading && css`
+        border-radius: ${props.theme.values.radius};
+        background-color: ${props.theme.colors.border};
+        color: ${props.theme.colors.border};
+      `}
     }
   `,
 );
@@ -214,18 +242,28 @@ Card.Actions = styled.div(
 
 MatchCard.propTypes = {
   map: PropTypes.oneOf(mapKeys),
-  teamName: PropTypes.string.isRequired,
-  teamLogo: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  duration: PropTypes.number.isRequired,
-  totalTeams: PropTypes.number.isRequired,
-  totalParticipants: PropTypes.number.isRequired,
-  number: PropTypes.number.isRequired,
+  teamName: PropTypes.string,
+  teamLogo: PropTypes.string,
+  createdAt: PropTypes.string,
+  duration: PropTypes.number,
+  totalTeams: PropTypes.number,
+  totalParticipants: PropTypes.number,
+  number: PropTypes.number,
   theme: PropTypes.oneOfType([PropTypes.shape({})]),
+  loading: PropTypes.bool,
 };
 
 MatchCard.defaultProps = {
   map: mapKeys[0],
+  loading: true,
+  teamName: '',
+  teamLogo: null,
+  createdAt: null,
+  duration: 0,
+  totalTeams: 0,
+  totalParticipants: 0,
+  number: 0,
+  theme: {},
 };
 
 export default withTheme(MatchCard);
