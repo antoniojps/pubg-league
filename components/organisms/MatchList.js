@@ -42,30 +42,28 @@ const MatchList = ({ matches, loading, teams }) => {
     return computed;
   }), [matchesOrdered, teams]);
 
-  const sliderSettings = useMemo(() => {
-    return {
-      infinite: false,
-      arrows: false,
-      slidesToShow: 3,
-      initialSlide: matches.length - 3,
-      responsive: [
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            initialSlide: matches.length - 2,
-          },
+  const sliderSettings = useMemo(() => ({
+    infinite: false,
+    arrows: false,
+    slidesToShow: matches.length >= 3 ? 3 : 1,
+    initialSlide: matches.length > 1 ? matches.length - 3 : 1,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: matches.length >= 2 ? 2 : 1,
+          initialSlide: matches.length - 2,
         },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            initialSlide: matches.length - 1,
-          },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          initialSlide: matches.length > 1 ? matches.length - 1 : 1,
         },
-      ],
-    };
-  }, [matches]);
+      },
+    ],
+  }), [matches]);
   return (
     <div>
       <h4>Jogos</h4>

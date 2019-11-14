@@ -137,6 +137,7 @@ Team.Logo = styled.div(
     position: absolute;
     top: -8%;
     left: ${props.theme.spacing.xs2};
+    border-radius: 50%;
   `,
 );
 
@@ -196,6 +197,9 @@ Card.Top = styled.div(
     &:after {
       content: '';
       background: url(${props.bg || '/erangel-banner.png'});
+      background-repeat: no-repeat;
+      background-size: 100%;
+      filter: blur(1px);
       top: 0;
       transition: opacity 0.2s ease;
       opacity: ${props.bg ? 0.4 : 0.1};
