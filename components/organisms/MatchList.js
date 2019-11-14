@@ -45,8 +45,8 @@ const MatchList = ({ matches, loading, teams }) => {
   const sliderSettings = useMemo(() => ({
     infinite: false,
     arrows: false,
-    slidesToShow: matches.length >= 3 ? 3 : 1,
-    initialSlide: matches.length > 1 ? matches.length - 3 : 1,
+    slidesToShow: matches.length >= 3 ? 3 : matches.length,
+    initialSlide: matches.length >= 3 ? matches.length - 3 : 1,
     responsive: [
       {
         breakpoint: 600,
