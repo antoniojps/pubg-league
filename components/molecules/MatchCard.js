@@ -72,7 +72,7 @@ const MatchCard = ({
   return (
     <Card className="zi-card">
       <Card.Top bg={mapData.image}>
-        <Team>
+        <Team loading={loading}>
           {teamLogo && <Team.Logo logo={teamLogo} />}
           <Team.Name>{teamName}</Team.Name>
         </Team>
@@ -124,6 +124,10 @@ const Team = styled.div(
     z-index: 100;
     align-items: center;
     padding: ${props.theme.spacing.xs2};
+    opacity: 1;
+    ${props.loading && css`
+      opacity: 0;
+    `}
   `,
 );
 

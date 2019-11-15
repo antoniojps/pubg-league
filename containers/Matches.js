@@ -4,10 +4,10 @@ import { getMatches } from 'services/requests';
 import { teamsType } from 'types';
 import PropTypes from 'prop-types';
 
-const Matches = ({ matchIds, teams }) => {
+const Matches = ({ matchIds, teams, loading }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingMatches, setLoading] = useState(true);
 
   useEffect(() => {
     const request = async () => {
@@ -34,18 +34,20 @@ const Matches = ({ matchIds, teams }) => {
   }, [matchIds]);
 
   return (
-    <MatchList loading={loading} matches={data} teams={teams} />
+    <MatchList loading={loading || loadingMatches} matches={data} teams={teams} />
   );
 };
 
 Matches.propTypes = {
   matchIds: PropTypes.arrayOf(PropTypes.string),
   teams: teamsType,
+  loading: PropTypes.bool,
 };
 
 Matches.defaultProps = {
   matchIds: [],
   teams: [],
+  loading: true,
 };
 
 export default Matches;

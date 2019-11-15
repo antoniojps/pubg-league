@@ -83,7 +83,7 @@ Resultados
           />
         </Spacer>
         <Spacer bottom="m">
-          <Matches matchIds={matchIds} teams={teams} />
+          <Matches matchIds={matchIds} teams={teams} loading={loading} />
         </Spacer>
         <Spacer bottom="xs">
           <Leaderboard

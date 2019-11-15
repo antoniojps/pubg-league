@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 import { matchType, teamsType } from 'types';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
-import useBreakpoints from 'hooks/useBreakpoints';
 
 const MatchList = ({ matches, loading, teams }) => {
   const matchesOrdered = useMemo(() => matches.sort((matchA, matchB) => {
