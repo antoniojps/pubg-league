@@ -1,10 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'components/atoms';
+import { Icon, Popover } from 'components/atoms';
 import { TwitchChannel } from 'components/molecules';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { below, above } from 'services/breakpoints';
+
+const aboutLinks = [
+  {
+    href: '/p/[slug]',
+    as: '/p/sobre',
+    title: 'Sobre a Liga Nacional de PUBG',
+    text: 'Sobre',
+  },
+  {
+    href: '/p/[slug]',
+    as: '/p/info',
+    title: 'Informação',
+    text: 'Info',
+  },
+  {
+    href: '/p/[slug]',
+    as: '/p/calendario',
+    title: 'Calendário da Shootsgud Major League',
+    text: 'Calendário',
+  },
+  {
+    href: '/sml_rulebook1.0.pdf',
+    title: 'Regulamento',
+    text: 'Regulamento',
+    isExternal: true,
+  },
+];
 
 const NavDesktop = () => {
   const { push } = useRouter();
@@ -18,14 +45,11 @@ const NavDesktop = () => {
           <Link href="/">
             <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
           </Link>
-          <Link href="/p/[slug]" as="/p/calendario">
-            <a title="Calendário da Liga Nacional de PUBG">Calendário</a>
-          </Link>
-          <Link href="/p/[slug]" as="/p/sobre">
+          <Popover links={aboutLinks}>
             <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
-          </Link>
-          <Link href="/p/[slug]" as="/p/info">
-            <a title="Informação">Info</a>
+          </Popover>
+          <Link href="/blog">
+            <a title="Blog">Blog</a>
           </Link>
         </Navigation.Links>
       </Navigation.Start>
