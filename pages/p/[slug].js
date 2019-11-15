@@ -1,15 +1,13 @@
 import { useMemo } from 'react';
 import { Layout } from 'components/organisms';
-import BlockContent from '@sanity/block-content-to-react';
 import Error from 'next/error';
-import { Seo } from 'containers';
+import { Seo, PortableText } from 'containers';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pt } from 'date-fns/locale';
 import { format, formatDistance } from 'date-fns';
 
 import sanity from '../../services/sanity';
-
 
 const Post = ({
   _id, title, body, publishedAt,
@@ -36,7 +34,7 @@ const Post = ({
           </Aside.Inner>
         </Aside>
         <ReadingContainer>
-          <BlockContent blocks={body} imageOptions={{ w: 900, fit: 'max' }} {...sanity.config()} />
+          <PortableText body={body} />
         </ReadingContainer>
       </Layout>
     </>
