@@ -1,10 +1,7 @@
 import React, { useMemo } from 'react';
 import styled, { css, withTheme } from 'styled-components';
-import { Icon, Loader } from 'components/atoms';
+import { Icon, Loader, BadgeStat } from 'components/atoms';
 import PropTypes from 'prop-types';
-import { pt } from 'date-fns/locale';
-import { format } from 'date-fns';
-import prettyMilliseconds from 'pretty-ms';
 
 export const mapKeys = ['Baltic_Main', 'Savage_Main', 'Desert_Main', 'Erangel_Main'];
 
@@ -55,20 +52,18 @@ const MatchCard = ({
   number,
   theme,
   loading,
+  winner,
 }) => {
   const mapData = useMemo(() => (loading ? loadingMap : maps.find(({ key }) => key === map)), [map, loading]);
-  const createdDateWords = useMemo(() => {
-    if (!createdAt) return '';
-    const createdDate = new Date(createdAt);
-    const date = format(createdDate, 'LL MMM Y', {
-      locale: pt,
-    });
-    const hour = format(createdDate, 'H');
-    const min = format(createdDate, 'mm');
-    return `${date}, ${hour}h${min}min`;
-  }, [createdAt]);
-  const matchDuration = useMemo(() => duration && prettyMilliseconds(duration * 1000, { unitCount: 2 }), [duration]);
+  const kills = useMemo(() => winner && winner.kills, [winner]);
   const color = useMemo(() => (loading ? theme.colors.border : theme.colors[mapData.color]), [map, theme, mapData, loading]);
+  const playerKills = useMemo(() => {
+    if (!winner) return '';
+    const players = winner.playerSummaries;
+    const playerWithKills = players.map(({ kills, name }) => `${name} - ${kills} kills`);
+    return playerWithKills.join(', ');
+  }, [winner]);
+
   return (
     <Card className="zi-card">
       <Card.Top bg={mapData.image}>
@@ -79,20 +74,13 @@ const MatchCard = ({
       </Card.Top>
       <Card.Bottom loading={loading}>
         <Card.BottomTop>
-          <p>
-            {createdDateWords}
-                       :
-            {matchDuration}
-          </p>
-          <p>
-            {totalTeams}
-            {' '}
-          equipas,
-            {' '}
-            {totalParticipants}
-            {' '}
-          jogadores
-          </p>
+          <BadgeStat
+            label="kills"
+            value={kills}
+            great={kills >= 15}
+            good={kills >= 10}
+          />
+          <p>{playerKills}</p>
         </Card.BottomTop>
         <Card.Actions>
           <Card.Legend color={color}>
@@ -167,6 +155,9 @@ const Card = styled.div(
 
 Card.BottomTop = styled.div((props) => css`
   margin-bottom: ${props.theme.spacing.xs};
+  p {
+    line-height: 1rem !important;
+  }
 `);
 
 Card.Legend = styled.div((props) => css`
@@ -180,6 +171,7 @@ Card.Legend = styled.div((props) => css`
     color: ${props.theme.colors.border};
     p {
       color: ${props.theme.colors.border} !important;
+      line-height: 1rem;
     }
   `}
 `);
@@ -223,7 +215,7 @@ Card.Bottom = styled.div(
       margin: 0;
       margin-bottom: ${props.theme.spacing.xs};
       font-size: ${props.theme.sizes.xs} !important;
-      line-height: ${props.theme.sizes.xs} !important;
+      line-height: ${props.theme.sizes.m} !important;
       margin-bottom: ${props.theme.spacing.xs4};
       font-weight: ${props.theme.weight.light};
       color: ${props.theme.colors.grey};
