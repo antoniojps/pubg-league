@@ -46,7 +46,7 @@ const NavDesktop = () => {
             <a title="Resultados dos Qualificadores e Jornadas">Resultados</a>
           </Link>
           <Popover links={aboutLinks}>
-            <a title="Sobre a Liga Nacional de PUBG">Sobre</a>
+            <a title="Sobre a Shootsgud Major League">Liga</a>
           </Popover>
           <Link href="/blog">
             <a title="Blog">Blog</a>
