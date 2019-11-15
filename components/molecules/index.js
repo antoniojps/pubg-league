@@ -7,3 +7,4 @@ export { default as TeamTableRow } from './TeamTableRow';
 export { default as More } from './More';
 export { default as Collapse } from './Collapse';
 export { default as MatchCard } from './MatchCard';
+export { default as PostCard } from './PostCard';
