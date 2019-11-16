@@ -180,6 +180,9 @@ const NavMobile = () => {
           <Link href="/p/[slug]" as="/p/info">
             <a title="Sobre a Liga Nacional de PUBG">Info</a>
           </Link>
+          <Link href="/blog">
+            <a title="Blog">Blog</a>
+          </Link>
         </NavMob.Categories>
       </NavMob.Bottom>
     </NavMob>
