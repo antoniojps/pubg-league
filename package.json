@@ -12,6 +12,7 @@
     "@sanity/client": "^0.144.0",
     "@zeit-ui/style": "^0.9.3",
     "@zeit/next-css": "^1.0.1",
+    "apollo-server-micro": "^2.9.9",
     "axios": "^0.19.0",
     "date-fns": "^2.6.0",
     "dotenv": "^8.2.0",
