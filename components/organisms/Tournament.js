@@ -82,9 +82,6 @@ Resultados
             loading={loading}
           />
         </Spacer>
-        <Spacer bottom="m">
-          <Matches matchIds={matchIds} teams={teams} loading={loading} />
-        </Spacer>
         <Spacer bottom="xs">
           <Leaderboard
             teams={teams}
